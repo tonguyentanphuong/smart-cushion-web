@@ -12,8 +12,8 @@ const products = [
 
 const features = [
   {
-    title: "AI Posture Detection",
-    description: "Our proprietary machine learning model analyzes 16 sensor points to provide pinpoint accuracy in real-time.",
+    title: "9-Posture Recognition",
+    description: "Our advanced AI analyzes data from a high-precision 3x3 sensor matrix to accurately identify 9 distinct sitting postures.",
     icon: Brain,
     color: "text-blue-500",
     glow: "rgba(59, 130, 246, 0.5)"
@@ -26,8 +26,8 @@ const features = [
     glow: "rgba(6, 182, 212, 0.5)"
   },
   {
-    title: "Seamless App Sync",
-    description: "Get real-time feedback and long-term health trends right on your mobile device via Bluetooth 5.0.",
+    title: "Real-time App Feedback",
+    description: "Receive instant posture corrections and long-term health trends directly through our dedicated mobile application.",
     icon: Smartphone,
     color: "text-indigo-500",
     glow: "rgba(99, 102, 241, 0.5)"
