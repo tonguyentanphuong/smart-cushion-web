@@ -5,3 +5,4 @@ dist/
 .DS_Store
 *.log
 index.lock
+node_modules

@@ -71,12 +71,11 @@ export const CircularFeatures = () => {
   });
 
   const totalFeatures = features.length;
-  const itemsCount = totalFeatures + 2; // Slide 0: Vortex Intro, Slide 1: Product Showcase, Slide 2-7: Features
+  const itemsCount = totalFeatures + 2; 
 
   const angleStep = 40; 
   const totalRotation = angleStep * (totalFeatures - 1);
 
-  // Rotation only starts after Slide 1
   const rotation = useTransform(
     smoothProgress, 
     [2 / itemsCount, (totalFeatures + 1) / itemsCount], 
@@ -87,13 +86,13 @@ export const CircularFeatures = () => {
     <div ref={containerRef} className="relative h-[800vh] bg-black">
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
-        {/* Left Side: Rotating Half-Circle (Hidden during Intro) */}
+        {/* Left Side: Rotating Half-Circle */}
         <motion.div 
           style={{ 
             opacity: useTransform(smoothProgress, [1.5/itemsCount, 2/itemsCount, 0.95, 1], [0, 1, 1, 0]),
-            x: useTransform(smoothProgress, [1.5/itemsCount, 2/itemsCount, 0.95, 1], [-50, 0, 0, -50])
+            x: useTransform(smoothProgress, [1.5/itemsCount, 2/itemsCount, 0.95, 1], [-100, 0, 0, -100])
           }}
-          className="absolute left-[-25vw] w-[50vw] h-[50vw] flex items-center justify-center"
+          className="absolute left-[-20vw] w-[50vw] h-[50vw] flex items-center justify-center"
         >
           <motion.div
             style={{ rotate: rotation }}
@@ -101,7 +100,7 @@ export const CircularFeatures = () => {
           >
             {features.map((feature, index) => {
               const angle = index * angleStep;
-              const activePoint = (index + 2) / itemsCount; // Offset by 2 for Intro + Showcase
+              const activePoint = (index + 2) / itemsCount;
               const glowRange = 0.04;
 
               return (
@@ -138,7 +137,7 @@ export const CircularFeatures = () => {
           <div className="absolute right-[-20px] w-20 h-[2px] bg-gradient-to-l from-primary to-transparent z-20" />
         </motion.div>
 
-        {/* Full Screen Area for Content */}
+        {/* Content Area - FIXED LAYOUT */}
         <div className="relative w-full h-full">
           
           {/* 0. Vortex Intro Slide */}
@@ -147,7 +146,7 @@ export const CircularFeatures = () => {
               opacity: useTransform(smoothProgress, [0, 0.1, 0.15], [1, 1, 0]),
               scale: useTransform(smoothProgress, [0, 0.1, 0.15], [1, 1, 1.1]),
             }}
-            className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none"
+            className="absolute inset-0 z-50 flex items-center justify-center"
           >
             <div className="absolute inset-0 z-0">
                <Vortex 
@@ -156,12 +155,13 @@ export const CircularFeatures = () => {
                   containerClassName="w-full h-full"
                   particleCount={300}
                   rangeY={800}
+                  client:load
                />
             </div>
             <div className="relative z-10 text-center px-4 max-w-4xl">
                <motion.p
                  initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
+                 animate={{ opacity: 1, y: 0 }}
                  transition={{ duration: 1 }}
                  className="text-2xl md:text-5xl font-bold text-white leading-relaxed"
                >
@@ -178,23 +178,23 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1. Product Showcase Slide (Color Picker) */}
+          {/* 1. Product Showcase Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.12, 0.18, 0.25], [0, 1, 0]),
-              x: useTransform(smoothProgress, [0.12, 0.18, 0.25], [50, 0, -50]),
+              x: useTransform(smoothProgress, [0.12, 0.18, 0.25], [100, 0, -100]),
             }}
-            className="absolute inset-0 flex items-center justify-center pl-[35vw] pr-20"
+            className="absolute inset-0 flex items-center justify-center pl-[45vw] pr-10 lg:pr-32"
           >
-            <div className="flex flex-col lg:flex-row items-center gap-12 w-full">
-              <div className="flex-1 w-full flex flex-col justify-center">
+            <div className="flex flex-col lg:flex-row items-center gap-16 w-full">
+              <div className="flex-1 w-full">
                 <span className="inline-flex items-center gap-2 text-primary text-xs font-mono uppercase tracking-[0.3em] mb-6">
                   <Sparkles size={14} /> The Masterpiece
                 </span>
-                <h1 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                <h2 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
                   Design <span className="text-primary">DNA</span>
-                </h1>
-                <p className="text-lg text-neutral-400 mb-8 max-w-md">
+                </h2>
+                <p className="text-lg text-neutral-400 mb-8">
                   A perfect blend of aesthetic elegance and technological power. Every curve serves a purpose.
                 </p>
                 <div className="flex gap-4">
@@ -212,7 +212,7 @@ export const CircularFeatures = () => {
                 <p className="mt-4 text-xs font-mono text-neutral-500 uppercase tracking-widest">{selectedProduct.name}</p>
               </div>
 
-              <div className="flex-1 w-full aspect-square rounded-[3rem] bg-neutral-900/30 border border-neutral-800 p-8 relative flex items-center justify-center">
+              <div className="flex-1 w-full max-w-md aspect-square rounded-[3rem] bg-neutral-900/30 border border-neutral-800 p-8 flex items-center justify-center">
                  <AnimatePresence mode="wait">
                    <motion.div
                       key={selectedProduct.id}
@@ -223,22 +223,20 @@ export const CircularFeatures = () => {
                       style={{ backgroundColor: selectedProduct.color + "44" }}
                    >
                      <Sparkles className="text-white/20 w-32 h-32" />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                     <p className="absolute bottom-6 font-mono text-[10px] text-white/40 tracking-[0.5em] uppercase">Smart Cushion</p>
                    </motion.div>
                  </AnimatePresence>
               </div>
             </div>
           </motion.div>
 
-          {/* 2-n. Features Slides */}
-          <div className="absolute inset-0 pl-[35vw] pr-20">
+          {/* 2-n. Features Slides - SHIFTED RIGHT */}
+          <div className="absolute inset-0 pl-[45vw] pr-10 lg:pr-32">
             {features.map((feature, index) => {
               const activePoint = (index + 2) / itemsCount;
               const range = 0.08;
 
               const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
-              const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [40, 0, -40]);
+              const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [50, 0, -50]);
 
               return (
                 <motion.div
@@ -247,9 +245,9 @@ export const CircularFeatures = () => {
                   className="absolute inset-0 flex flex-col justify-center"
                 >
                   <span className={`text-sm font-mono mb-4 ${feature.color}`}>TECH / 0{index + 1}</span>
-                  <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+                  <h3 className="text-4xl lg:text-7xl font-bold text-white mb-6">
                     {feature.title}
-                  </h2>
+                  </h3>
                   <p className="text-xl text-neutral-400 max-w-xl leading-relaxed">
                     {feature.description}
                   </p>
