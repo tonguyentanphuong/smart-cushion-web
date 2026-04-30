@@ -83,11 +83,11 @@ export const CircularFeatures = () => {
     [0, -totalRotation]
   );
 
-  // Global Vortex Opacity Control
+  // Global Vortex Opacity Control (None at Slide 1)
   const vortexOpacity = useTransform(
     smoothProgress,
-    [0, 0.1, 0.15, 0.22, 0.85, 0.95],
-    [1, 1, 0, 0.25, 0.25, 1] // Full at start/end, light in features, none in product showcase
+    [0, 0.08, 0.14, 0.22, 0.85, 0.95],
+    [1, 1, 0, 0.25, 0.25, 1]
   );
 
   return (
@@ -190,32 +190,43 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1. Product Showcase Slide */}
+          {/* 1. Product Showcase Slide - REDESIGNED */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount, 1 / itemsCount + 0.05], [0, 1, 0]),
               pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount, 1 / itemsCount + 0.05], ["none", "auto", "none"])
             }}
-            className="absolute inset-0 flex items-center justify-center pl-[30vw] pr-10 lg:pr-32 z-20"
+            className="absolute inset-0 z-20 flex items-center justify-center px-10 lg:px-32"
           >
-            <div className="flex flex-col lg:flex-row items-center gap-16 w-full">
-              <div className="flex-1 w-full">
-                <span className="inline-flex items-center gap-2 text-primary text-xs font-mono uppercase tracking-[0.3em] mb-6">
-                  <Sparkles size={14} /> The Masterpiece
-                </span>
-                <h2 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-                  Design <span className="text-primary">DNA</span>
-                </h2>
-                <p className="text-lg text-neutral-400 mb-8 max-w-md leading-relaxed">
-                  A perfect blend of aesthetic elegance and technological power. Every curve serves a purpose.
-                </p>
-                <div className="flex gap-4 relative z-50">
+            <div className="relative w-full h-full flex items-center justify-center">
+              {/* CENTERED IMAGE AND COLOR PICKER */}
+              <div className="flex flex-col items-center gap-10">
+                <div className="w-[45vh] h-[45vh] rounded-[3rem] bg-neutral-900/30 border border-neutral-800/50 p-6 flex items-center justify-center backdrop-blur-sm shadow-2xl">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                        key={selectedProduct.id}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1.1 }}
+                        className="w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden"
+                    >
+                      <img 
+                        src={selectedProduct.image} 
+                        alt={selectedProduct.name} 
+                        className="w-full h-full object-contain"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+                
+                {/* COLOR PICKER BELOW IMAGE */}
+                <div className="flex gap-6 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
                   {products.map((p) => (
                     <button
                       key={p.id}
                       onClick={() => setSelectedProduct(p)}
-                      className={`w-10 h-10 rounded-full border-2 transition-all cursor-pointer hover:scale-125 border-white/20 ${
-                        selectedProduct.id === p.id ? "border-primary scale-110" : "border-neutral-800"
+                      className={`w-10 h-10 rounded-full border-2 transition-all cursor-pointer hover:scale-125 ${
+                        selectedProduct.id === p.id ? "border-primary scale-125 shadow-[0_0_15px_rgba(var(--primary),0.5)]" : "border-white/20"
                       }`}
                       style={{ backgroundColor: p.color }}
                       title={p.name}
@@ -223,22 +234,24 @@ export const CircularFeatures = () => {
                   ))}
                 </div>
               </div>
-              <div className="flex-1 w-full max-w-md aspect-square rounded-[3rem] bg-neutral-900/30 border border-neutral-800 p-4 flex items-center justify-center">
-                 <AnimatePresence mode="wait">
-                   <motion.div
-                      key={selectedProduct.id}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.1 }}
-                      className="w-full h-full rounded-2xl flex items-center justify-center relative overflow-hidden"
-                   >
-                     <img 
-                       src={selectedProduct.image} 
-                       alt={selectedProduct.name} 
-                       className="w-full h-full object-contain"
-                     />
-                   </motion.div>
-                 </AnimatePresence>
+
+              {/* RIGHT SIDE TEXT */}
+              <div className="absolute right-0 text-right max-w-md hidden lg:block">
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <span className="inline-flex items-center gap-2 text-primary text-xs font-mono uppercase tracking-[0.3em] mb-6">
+                    <Sparkles size={14} /> The Masterpiece
+                  </span>
+                  <h2 className="text-6xl font-bold text-white mb-6 leading-tight">
+                    Design <span className="text-primary italic">DNA</span>
+                  </h2>
+                  <p className="text-xl text-neutral-400 leading-relaxed">
+                    A perfect blend of aesthetic elegance and technological power. Every curve serves a purpose.
+                  </p>
+                </motion.div>
               </div>
             </div>
           </motion.div>
