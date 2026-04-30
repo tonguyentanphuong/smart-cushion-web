@@ -5,7 +5,7 @@ const team = [
   {
     name: "To Nguyen Tan Phuong",
     role: "Hardware & Edge Engineer",
-    image: "/member1.png",
+    image: "/Phuong.jpg",
     bg: "bg-blue-500/20",
     description: "Hardware architecture specialist. Phuong focuses on sensor integration, PCB design, and optimizing edge computing performance for zero-latency detection."
   },
@@ -19,14 +19,14 @@ const team = [
   {
     name: "Dong Boi Thi",
     role: "Cloud & Dashboard Developer",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=3000&auto=format&fit=crop",
+    image: "/Thi.jpg",
     bg: "bg-emerald-500/20",
     description: "Specializes in cloud backend frameworks and real-time data visualization systems, ensuring seamless data flow and accessible user dashboards."
   },
   {
     name: "Hoang Mai Vu",
     role: "Mobile App Developer",
-    image: "/member4.png",
+    image: "/Vu.jpg",
     bg: "bg-orange-500/20",
     description: "Designs clear, elegant mobile experiences, blending visual storytelling with empathetic user research to help users track their health goals."
   }
