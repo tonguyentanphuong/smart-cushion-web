@@ -161,9 +161,9 @@ export const SolutionsScroll = () => {
               <p className="text-xl text-neutral-400 max-w-xl mb-10">
                 Join thousands of office professionals who have already reclaimed their spinal health.
               </p>
-              <button className="px-12 py-5 bg-white text-black rounded-full font-bold text-xl hover:bg-primary hover:text-white transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-                Get Started Now
-              </button>
+              <a href="/features" className="px-12 py-5 bg-white text-black rounded-full font-bold text-xl hover:bg-primary hover:text-white transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                View Our Product
+              </a>
             </motion.div>
 
           </div>
