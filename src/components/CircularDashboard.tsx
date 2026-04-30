@@ -68,32 +68,40 @@ export const CircularDashboard = () => {
   });
 
   const totalFeatures = dashboardViews.length;
-  const itemsCount = totalFeatures + 2; 
+  // Intro (0) + 5 Views (1-5) + CTA (6) = 7 sections
+  const sections = Array.from({ length: 7 });
+  const itemsCount = sections.length; 
   const angleStep = 45;
   const totalRotation = angleStep * (totalFeatures - 1);
 
   const rotation = useTransform(
     smoothProgress, 
-    [1.2 / itemsCount, (totalFeatures + 0.2) / itemsCount], 
+    [1 / itemsCount, (totalFeatures) / itemsCount], 
     [0, 180]
   );
 
   return (
-    <div ref={containerRef} className="relative h-[800vh] bg-black">
+    <div ref={containerRef} className="relative h-[700vh] bg-black scroll-snap-container">
+      {/* Invisible Snap Points */}
+      <div className="absolute inset-0 pointer-events-none">
+        {sections.map((_, i) => (
+          <div key={i} className="h-[100vh] w-full" style={{ scrollSnapAlign: "start" }} />
+        ))}
+      </div>
+
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
         {/* Right Side: HALF CIRCLE WITH BORDER */}
         <div className="absolute right-[-19vw] w-[38vw] h-[38vw] flex items-center justify-center">
           
-          {/* External Glowing Ring */}
           <div className="absolute inset-[-2px] rounded-full border border-primary/30 blur-[2px] opacity-50" />
 
           {/* 0. Intro Illustration for Slide 0 */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0, 0.08, 0.12], [1, 1, 0]),
-              scale: useTransform(smoothProgress, [0, 0.1], [1, 0.9]),
-              x: useTransform(smoothProgress, [0, 0.12], [0, 100]),
+              opacity: useTransform(smoothProgress, [0, 0.1, 0.14], [1, 1, 0]),
+              scale: useTransform(smoothProgress, [0, 0.12], [1, 0.9]),
+              x: useTransform(smoothProgress, [0, 0.14], [0, 100]),
             }}
             className="absolute right-[22vw] w-[40vw] flex items-center justify-center"
           >
@@ -107,7 +115,7 @@ export const CircularDashboard = () => {
             </div>
           </motion.div>
 
-          {/* Rotating Half-Circle (REFINED BORDER) */}
+          {/* Rotating Half-Circle */}
           <motion.div 
             style={{ 
               opacity: useTransform(smoothProgress, [0.1, 0.15, 0.95, 1], [0, 1, 1, 0]),
@@ -120,7 +128,7 @@ export const CircularDashboard = () => {
             >
               {dashboardViews.map((view, index) => {
                 const angle = index * -angleStep;
-                const activePoint = (index + 1.2) / itemsCount;
+                const activePoint = (index + 1) / itemsCount;
                 const glowRange = 0.04;
 
                 return (
@@ -165,8 +173,9 @@ export const CircularDashboard = () => {
             {/* Intro Slide */}
             <motion.div
               style={{
-                opacity: useTransform(smoothProgress, [0, 0.08, 0.12], [1, 1, 0]),
-                y: useTransform(smoothProgress, [0, 0.08, 0.12], [0, 0, -50]),
+                opacity: useTransform(smoothProgress, [0, 0.1, 0.14], [1, 1, 0]),
+                y: useTransform(smoothProgress, [0, 0.1, 0.14], [0, 0, -50]),
+                pointerEvents: useTransform(smoothProgress, [0, 0.14], ["auto", "none"])
               }}
               className="absolute inset-0 flex flex-col justify-center"
             >
@@ -183,7 +192,7 @@ export const CircularDashboard = () => {
 
             {/* View Slides */}
             {dashboardViews.map((view, index) => {
-              const activePoint = (index + 1.2) / itemsCount;
+              const activePoint = (index + 1) / itemsCount;
               const range = 0.07;
 
               const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
@@ -192,7 +201,11 @@ export const CircularDashboard = () => {
               return (
                 <motion.div
                   key={index}
-                  style={{ opacity, y }}
+                  style={{ 
+                    opacity, 
+                    y,
+                    pointerEvents: useTransform(smoothProgress, [activePoint - range, activePoint + range], ["none", "auto"])
+                  }}
                   className="absolute inset-0 flex flex-col justify-center"
                 >
                   <div className="flex flex-col lg:flex-row-reverse items-center gap-10">
@@ -224,6 +237,7 @@ export const CircularDashboard = () => {
               style={{
                 opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]),
                 y: useTransform(smoothProgress, [0.9, 0.95], [50, 0]),
+                pointerEvents: useTransform(smoothProgress, [0.9], ["none", "auto"])
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center"
             >
@@ -239,6 +253,12 @@ export const CircularDashboard = () => {
           </div>
         </div>
       </div>
+      
+      <style jsx>{`
+        .scroll-snap-container {
+          scroll-snap-type: y mandatory;
+        }
+      `}</style>
     </div>
   );
 };

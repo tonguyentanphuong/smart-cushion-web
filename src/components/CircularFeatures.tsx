@@ -71,7 +71,9 @@ export const CircularFeatures = () => {
   });
 
   const totalFeatures = features.length;
-  const itemsCount = totalFeatures + 3; // Intro + Showcase + 6 Features + CTA
+  // Intro (0) + Showcase (1) + 6 Features (2-7) + CTA (8) = 9 sections
+  const sections = Array.from({ length: 9 });
+  const itemsCount = sections.length; 
 
   const angleStep = 40; 
   const totalRotation = angleStep * (totalFeatures - 1);
@@ -83,20 +85,26 @@ export const CircularFeatures = () => {
   );
 
   return (
-    <div ref={containerRef} className="relative h-[800vh] bg-black">
+    <div ref={containerRef} className="relative h-[900vh] bg-black scroll-snap-container">
+      {/* Invisible Snap Points */}
+      <div className="absolute inset-0 pointer-events-none">
+        {sections.map((_, i) => (
+          <div key={i} className="h-[100vh] w-full" style={{ scrollSnapAlign: "start" }} />
+        ))}
+      </div>
+
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
-        {/* Left Side: TRUE HALF CIRCLE WITH BORDER */}
+        {/* Left Side: TRUE HALF CIRCLE */}
         <motion.div 
           style={{ 
             opacity: useTransform(smoothProgress, [0.15, 0.22, 0.9, 0.95], [0, 1, 1, 0]),
-            x: useTransform(smoothProgress, [0.15, 0.22, 0.9, 0.95], [-100, 0, 0, -100])
+            x: useTransform(smoothProgress, [0.15, 0.22, 0.9, 0.95], [-100, 0, 0, -100]),
+            pointerEvents: "none"
           }}
-          className="absolute left-[-19vw] w-[38vw] h-[38vw] flex items-center justify-center"
+          className="absolute left-[-19vw] w-[38vw] h-[38vw] flex items-center justify-center z-10"
         >
-          {/* External Glowing Ring */}
           <div className="absolute inset-[-2px] rounded-full border border-primary/30 blur-[2px] opacity-50" />
-          
           <motion.div
             style={{ rotate: rotation }}
             className="relative w-full h-full rounded-full border-2 border-primary/20 bg-primary/5 flex items-center justify-center shadow-[inset_0_0_50px_rgba(var(--primary),0.1)]"
@@ -137,8 +145,6 @@ export const CircularFeatures = () => {
               );
             })}
           </motion.div>
-          
-          {/* Connector Line with Glow */}
           <div className="absolute right-[-20px] w-20 h-[3px] bg-gradient-to-l from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
         </motion.div>
 
@@ -149,6 +155,7 @@ export const CircularFeatures = () => {
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0, 0.08, 0.12], [1, 1, 0]),
+              pointerEvents: useTransform(smoothProgress, [0, 0.12], ["auto", "none"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center text-center px-4"
           >
@@ -173,12 +180,13 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1. Product Showcase Slide */}
+          {/* 1. Product Showcase Slide - FIXED CLICKING */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.14, 0.18, 0.22], [0, 1, 0]),
+              pointerEvents: useTransform(smoothProgress, [0.14, 0.18, 0.22], ["none", "auto", "none"])
             }}
-            className="absolute inset-0 flex items-center justify-center pl-[30vw] pr-10 lg:pr-32"
+            className="absolute inset-0 flex items-center justify-center pl-[30vw] pr-10 lg:pr-32 z-20"
           >
             <div className="flex flex-col lg:flex-row items-center gap-16 w-full">
               <div className="flex-1 w-full">
@@ -191,15 +199,19 @@ export const CircularFeatures = () => {
                 <p className="text-lg text-neutral-400 mb-8 max-w-md leading-relaxed">
                   A perfect blend of aesthetic elegance and technological power. Every curve serves a purpose.
                 </p>
-                <div className="flex gap-4">
+                <div className="flex gap-4 relative z-50">
                   {products.map((p) => (
                     <button
                       key={p.id}
-                      onClick={() => setSelectedProduct(p)}
-                      className={`w-10 h-10 rounded-full border-2 transition-all ${
+                      onClick={() => {
+                        console.log("Selected color:", p.id);
+                        setSelectedProduct(p);
+                      }}
+                      className={`w-10 h-10 rounded-full border-2 transition-all cursor-pointer hover:scale-125 ${
                         selectedProduct.id === p.id ? "border-primary scale-110" : "border-neutral-800"
                       }`}
                       style={{ backgroundColor: p.color }}
+                      title={p.name}
                     />
                   ))}
                 </div>
@@ -221,7 +233,7 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 2-n. Features Slides */}
+          {/* 2-7. Features Slides */}
           {features.map((feature, index) => {
             const activePoint = 0.25 + (index * (0.6 / (totalFeatures - 1)));
             const range = 0.05; 
@@ -232,8 +244,12 @@ export const CircularFeatures = () => {
             return (
               <motion.div
                 key={index}
-                style={{ opacity, y }}
-                className="absolute inset-0 flex flex-col justify-center pl-[30vw] pr-10 lg:pr-32 pointer-events-none"
+                style={{ 
+                  opacity, 
+                  y,
+                  pointerEvents: "none" // Features are non-interactive
+                }}
+                className="absolute inset-0 flex flex-col justify-center pl-[30vw] pr-10 lg:pr-32"
               >
                 <span className={`text-sm font-mono mb-4 ${feature.color}`}>TECH / 0{index + 1}</span>
                 <h3 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
@@ -246,12 +262,13 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* FINAL CTA SLIDE (To fill the black space) */}
+          {/* 8. Final CTA Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]),
               scale: useTransform(smoothProgress, [0.9, 0.95], [0.9, 1]),
               y: useTransform(smoothProgress, [0.9, 0.95], [50, 0]),
+              pointerEvents: useTransform(smoothProgress, [0.9, 0.95], ["none", "auto"])
             }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
           >
@@ -268,6 +285,12 @@ export const CircularFeatures = () => {
 
         </div>
       </div>
+      
+      <style jsx>{`
+        .scroll-snap-container {
+          scroll-snap-type: y mandatory;
+        }
+      `}</style>
     </div>
   );
 };
