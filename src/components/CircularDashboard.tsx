@@ -89,7 +89,7 @@ export const CircularDashboard = () => {
 
       <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden">
         
-        {/* Right Side: Circular UI - HIDDEN ON MOBILE */}
+        {/* Right Side: CIRCULAR UI - HIDDEN ON MOBILE */}
         <div className="hidden lg:flex absolute right-[-19vw] w-[38vw] h-[38vw] items-center justify-center">
           <div className="absolute inset-[-2px] rounded-full border border-primary/30 blur-[2px] opacity-50" />
           <motion.div
@@ -131,6 +131,27 @@ export const CircularDashboard = () => {
           <div className="absolute left-[-20px] w-20 h-[3px] bg-gradient-to-r from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
         </div>
 
+        {/* 0. Intro Illustration - NOW SEPARATE AND RESPONSIVE */}
+        <motion.div
+          style={{
+            opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
+            scale: useTransform(smoothProgress, [0, 0.1], [1, 0.9]),
+            x: useTransform(smoothProgress, [0, 0.1], [0, 100]),
+            pointerEvents: "none"
+          }}
+          className="absolute right-0 lg:right-[22vw] w-full lg:w-[40vw] h-[30vh] lg:h-auto flex items-center justify-center top-20 lg:top-auto z-0 opacity-20 lg:opacity-100"
+        >
+          <div className="relative w-[80%] lg:w-full max-w-xl aspect-[4/3] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/20">
+             <img 
+               src="/dashboard-intro.png" 
+               alt="User tracking posture" 
+               className="w-full h-full object-cover"
+             />
+             <div className="absolute inset-0 bg-gradient-to-l from-black/60 via-transparent to-transparent" />
+          </div>
+        </motion.div>
+
+        {/* CONTENT AREA */}
         <div className="w-full h-full relative">
           
           {/* Main Slide Area */}
@@ -144,7 +165,7 @@ export const CircularDashboard = () => {
                   y: useTransform(smoothProgress, [0, 0.05, 0.1], [0, 0, -50]),
                   pointerEvents: useTransform(smoothProgress, [0, 0.1], ["auto", "none"])
                 }}
-                className="absolute inset-0 flex flex-col justify-center text-center lg:text-left"
+                className="absolute inset-0 flex flex-col justify-center text-center lg:text-left z-10"
               >
                 <div className="flex flex-col items-center lg:items-start">
                   <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-xs font-mono uppercase tracking-[0.3em] mb-6">
@@ -212,7 +233,6 @@ export const CircularDashboard = () => {
             }}
             className="absolute inset-0 z-50 flex items-center justify-center bg-black/80"
           >
-             {/* Atmospheric Radiant Effect */}
              <div className="absolute inset-0 -z-10 overflow-hidden hidden md:block">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
                 <motion.div 
