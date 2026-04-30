@@ -51,7 +51,6 @@ export const SolutionsScroll = () => {
     restDelta: 0.001,
   });
 
-  // Increased height to 540vh to reduce sensitivity (90vh per slide)
   const sections = Array.from({ length: 6 });
   const itemsCount = sections.length;
 
@@ -100,7 +99,8 @@ export const SolutionsScroll = () => {
 
             {/* Solution Slides */}
             {solutions.map((item, index) => {
-              const activePoint = (index + 1.2) / itemsCount;
+              // Standardized active points: 1/6, 2/6, 3/6, 4/6
+              const activePoint = (index + 1) / itemsCount;
               const range = 0.08;
 
               const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
@@ -153,11 +153,11 @@ export const SolutionsScroll = () => {
               );
             })}
 
-            {/* Closing Slide */}
+            {/* Closing Slide - Aligned to 5/6 (0.83) */}
             <motion.div
               style={{
-                opacity: useTransform(smoothProgress, [0.85, 0.95], [0, 1]),
-                y: useTransform(smoothProgress, [0.85, 0.95], [50, 0]),
+                opacity: useTransform(smoothProgress, [0.75, 0.83, 0.95], [0, 1, 1]),
+                y: useTransform(smoothProgress, [0.75, 0.83], [50, 0]),
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center"
             >
