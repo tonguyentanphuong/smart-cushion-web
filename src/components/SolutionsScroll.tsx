@@ -51,16 +51,16 @@ export const SolutionsScroll = () => {
     restDelta: 0.001,
   });
 
-  // 1 Intro + 4 Solutions + 1 Closing = 6 sections
+  // Hyper-accelerated height
   const sections = Array.from({ length: 6 });
   const itemsCount = sections.length;
 
   return (
-    <div ref={containerRef} className="relative h-[500vh] bg-neutral-950 scroll-snap-container">
-      {/* Invisible Snap Points */}
+    <div ref={containerRef} className="relative h-[350vh] bg-neutral-950 scroll-snap-container">
+      {/* Invisible Snap Points (Hyper-fast) */}
       <div className="absolute inset-0 pointer-events-none">
         {sections.map((_, i) => (
-          <div key={i} className="h-[calc(500vh/6)] w-full" style={{ scrollSnapAlign: "start" }} />
+          <div key={i} className="h-[calc(350vh/6)] w-full" style={{ scrollSnapAlign: "start" }} />
         ))}
       </div>
 

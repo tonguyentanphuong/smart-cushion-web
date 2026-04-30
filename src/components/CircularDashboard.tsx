@@ -68,7 +68,7 @@ export const CircularDashboard = () => {
   });
 
   const totalFeatures = dashboardViews.length;
-  // Reduced total height for faster scrolling
+  // Hyper-accelerated height
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
   const angleStep = 45;
@@ -81,11 +81,11 @@ export const CircularDashboard = () => {
   );
 
   return (
-    <div ref={containerRef} className="relative h-[500vh] bg-black scroll-snap-container">
-      {/* Invisible Snap Points (Faster spacing) */}
+    <div ref={containerRef} className="relative h-[350vh] bg-black scroll-snap-container">
+      {/* Invisible Snap Points (Hyper-fast) */}
       <div className="absolute inset-0 pointer-events-none">
         {sections.map((_, i) => (
-          <div key={i} className="h-[calc(500vh/7)] w-full" style={{ scrollSnapAlign: "start" }} />
+          <div key={i} className="h-[calc(350vh/7)] w-full" style={{ scrollSnapAlign: "start" }} />
         ))}
       </div>
 

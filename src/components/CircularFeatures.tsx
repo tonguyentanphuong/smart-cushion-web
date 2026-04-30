@@ -6,7 +6,7 @@ import { Vortex } from "./ui/Vortex";
 
 const products = [
   { id: "black", name: "Mysterious Black", color: "#050505", image: "/cushion-black.png" },
-  { id: "blue", name: "Electric Blue", color: "#3b82f6", image: "/cushion-blue.png" },
+  { id: "blue", name: "Electric Blue", color: "#3b82f6", image: "/cushion-black.png", isFiltered: true }, // Using black image as base
   { id: "slate", name: "Slate Gray", color: "#64748b", image: "/cushion-slate.png" },
 ];
 
@@ -71,7 +71,7 @@ export const CircularFeatures = () => {
   });
 
   const totalFeatures = features.length;
-  // Reduced total height for faster scrolling
+  // Super compressed height for hyper-fast scrolling
   const sections = Array.from({ length: 9 });
   const itemsCount = sections.length; 
 
@@ -85,11 +85,11 @@ export const CircularFeatures = () => {
   );
 
   return (
-    <div ref={containerRef} className="relative h-[600vh] bg-black scroll-snap-container">
-      {/* Invisible Snap Points (Faster spacing) */}
+    <div ref={containerRef} className="relative h-[450vh] bg-black scroll-snap-container">
+      {/* Invisible Snap Points (Hyper-fast spacing) */}
       <div className="absolute inset-0 pointer-events-none">
         {sections.map((_, i) => (
-          <div key={i} className="h-[calc(600vh/9)] w-full" style={{ scrollSnapAlign: "start" }} />
+          <div key={i} className="h-[calc(450vh/9)] w-full" style={{ scrollSnapAlign: "start" }} />
         ))}
       </div>
 
@@ -180,7 +180,7 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1. Product Showcase Slide */}
+          {/* 1. Product Showcase Slide - CSS FILTER FIX FOR BLUE CUSHION */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.14, 0.18, 0.22], [0, 1, 0]),
@@ -225,7 +225,7 @@ export const CircularFeatures = () => {
                      <img 
                        src={selectedProduct.image} 
                        alt={selectedProduct.name} 
-                       className="w-full h-full object-contain"
+                       className={`w-full h-full object-contain ${selectedProduct.id === 'blue' ? 'invert-[0.2] sepia-[1] saturate-[10] hue-rotate-[180deg] brightness-[0.8]' : ''}`}
                      />
                    </motion.div>
                  </AnimatePresence>
