@@ -245,9 +245,11 @@ export const CircularDashboard = () => {
                     Take Command of <br/><span className="text-primary italic">Your Wellbeing.</span>
                   </h2>
                   <div className="flex gap-4">
-                    <button className="px-10 py-5 bg-primary text-white rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(var(--primary),0.3)]">
-                      Launch Live Demo
-                    </button>
+                    <a href="/app">
+                      <button className="px-10 py-5 bg-primary text-white rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(var(--primary),0.3)]">
+                        How can I track my health?
+                      </button>
+                    </a>
                   </div>
                </div>
             </motion.div>
