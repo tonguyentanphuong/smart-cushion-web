@@ -81,15 +81,21 @@ export const SolutionsScroll = () => {
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center"
             >
-              <h2 className="text-5xl lg:text-8xl font-bold text-white mb-8 tracking-tighter">
-                A Journey through <br/>
-                <span className="text-primary italic text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-cyan-400">
-                  the Problem.
-                </span>
-              </h2>
-              <p className="text-xl text-neutral-400 max-w-2xl leading-relaxed">
-                Understanding the silent impact of sedentary lifestyles is the first step toward a revolutionary recovery.
-              </p>
+              <motion.div
+                initial={{ opacity: 0, filter: "blur(20px)", scale: 0.8 }}
+                animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+              >
+                <h2 className="text-5xl lg:text-9xl font-bold text-white mb-8 tracking-tighter drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]">
+                  A Journey through <br/>
+                  <span className="text-primary italic bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 animate-pulse">
+                    the Problem.
+                  </span>
+                </h2>
+                <p className="text-xl lg:text-2xl text-neutral-400 max-w-3xl leading-relaxed mx-auto">
+                  Understanding the silent impact of sedentary lifestyles is the first step toward a <span className="text-white font-semibold">revolutionary recovery.</span>
+                </p>
+              </motion.div>
             </motion.div>
 
             {/* Solution Slides */}
