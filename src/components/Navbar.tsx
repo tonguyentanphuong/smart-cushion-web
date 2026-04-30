@@ -46,7 +46,9 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
-          <Button size="sm">Get Started</Button>
+          <Button size="sm" asChild>
+            <a href="/contact">Contact Us</a>
+          </Button>
         </div>
 
         {/* Mobile Menu Toggle */}
