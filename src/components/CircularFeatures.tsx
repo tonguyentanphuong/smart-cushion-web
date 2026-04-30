@@ -77,26 +77,29 @@ export const CircularFeatures = () => {
   const angleStep = 40; 
   const totalRotation = angleStep * (totalFeatures - 1);
 
+  // Aligned rotation with snap points
   const rotation = useTransform(
     smoothProgress, 
-    [0.25, 0.85], 
+    [2 / itemsCount, 7 / itemsCount], 
     [0, -totalRotation]
   );
 
   return (
-    <div ref={containerRef} className="relative h-[450vh] bg-black scroll-snap-container">
-      <div className="absolute inset-0 pointer-events-none">
+    <div ref={containerRef} className="relative h-[450vh] bg-black">
+      {/* Snap Points Container */}
+      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-mandatory">
         {sections.map((_, i) => (
-          <div key={i} className="h-[calc(450vh/9)] w-full" style={{ scrollSnapAlign: "start" }} />
+          <div key={i} className="h-screen w-full snap-start" />
         ))}
       </div>
 
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
+        {/* Left Side: TRUE HALF CIRCLE */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.15, 0.22, 0.9, 0.95], [0, 1, 1, 0]),
-            x: useTransform(smoothProgress, [0.15, 0.22, 0.9, 0.95], [-100, 0, 0, -100]),
+            opacity: useTransform(smoothProgress, [0.1, 0.15, 0.9, 0.95], [0, 1, 1, 0]),
+            x: useTransform(smoothProgress, [0.1, 0.15, 0.9, 0.95], [-100, 0, 0, -100]),
             pointerEvents: "none"
           }}
           className="absolute left-[-19vw] w-[38vw] h-[38vw] flex items-center justify-center z-10"
@@ -108,7 +111,7 @@ export const CircularFeatures = () => {
           >
             {features.map((feature, index) => {
               const angle = index * angleStep;
-              const activePoint = 0.25 + (index * (0.6 / (totalFeatures - 1)));
+              const activePoint = (index + 2) / itemsCount;
               const glowRange = 0.03;
 
               return (
@@ -147,10 +150,11 @@ export const CircularFeatures = () => {
 
         <div className="relative w-full h-full">
           
+          {/* 0. Vortex Intro Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0, 0.04, 0.08], [1, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [0, 0.08], ["auto", "none"])
+              opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
+              pointerEvents: useTransform(smoothProgress, [0, 0.1], ["auto", "none"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center text-center px-4"
           >
@@ -175,10 +179,11 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
+          {/* 1. Product Showcase Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0.14, 0.18, 0.22], [0, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [0.14, 0.18, 0.22], ["none", "auto", "none"])
+              opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount, 1 / itemsCount + 0.05], [0, 1, 0]),
+              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount + 0.05], ["none", "auto", "none"])
             }}
             className="absolute inset-0 flex items-center justify-center pl-[30vw] pr-10 lg:pr-32 z-20"
           >
@@ -227,8 +232,9 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
+          {/* 2-7. Features Slides */}
           {features.map((feature, index) => {
-            const activePoint = 0.25 + (index * (0.6 / (totalFeatures - 1)));
+            const activePoint = (index + 2) / itemsCount;
             const range = 0.05; 
 
             const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
@@ -255,6 +261,7 @@ export const CircularFeatures = () => {
             );
           })}
 
+          {/* 8. Final CTA Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]),
@@ -279,7 +286,7 @@ export const CircularFeatures = () => {
       </div>
       
       <style jsx>{`
-        .scroll-snap-container {
+        .scroll-snap-y-mandatory {
           scroll-snap-type: y mandatory;
         }
       `}</style>

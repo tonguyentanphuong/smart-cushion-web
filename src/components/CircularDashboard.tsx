@@ -68,24 +68,24 @@ export const CircularDashboard = () => {
   });
 
   const totalFeatures = dashboardViews.length;
-  // Hyper-accelerated height
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
   const angleStep = 45;
   const totalRotation = angleStep * (totalFeatures - 1);
 
+  // Aligned rotation with snap points
   const rotation = useTransform(
     smoothProgress, 
-    [1 / itemsCount, (totalFeatures) / itemsCount], 
+    [1 / itemsCount, 5 / itemsCount], 
     [0, 180]
   );
 
   return (
-    <div ref={containerRef} className="relative h-[350vh] bg-black scroll-snap-container">
-      {/* Invisible Snap Points (Hyper-fast) */}
-      <div className="absolute inset-0 pointer-events-none">
+    <div ref={containerRef} className="relative h-[350vh] bg-black">
+      {/* Snap Points Container */}
+      <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-mandatory">
         {sections.map((_, i) => (
-          <div key={i} className="h-[calc(350vh/7)] w-full" style={{ scrollSnapAlign: "start" }} />
+          <div key={i} className="h-screen w-full snap-start" />
         ))}
       </div>
 
@@ -255,7 +255,7 @@ export const CircularDashboard = () => {
       </div>
       
       <style jsx>{`
-        .scroll-snap-container {
+        .scroll-snap-y-mandatory {
           scroll-snap-type: y mandatory;
         }
       `}</style>
