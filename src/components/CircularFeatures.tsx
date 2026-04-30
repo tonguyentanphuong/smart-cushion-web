@@ -71,7 +71,7 @@ export const CircularFeatures = () => {
   });
 
   const totalFeatures = features.length;
-  const sections = Array.from({ length: 12 }); // INCREASED FROM 9 TO 12
+  const sections = Array.from({ length: 12 });
   const itemsCount = sections.length; 
 
   const angleStep = 40; 
@@ -90,7 +90,7 @@ export const CircularFeatures = () => {
   );
 
   return (
-    <div ref={containerRef} className="relative h-[600vh] bg-black"> {/* INCREASED HEIGHT */}
+    <div ref={containerRef} className="relative h-[600vh] bg-black">
       {/* Snap Points Container */}
       <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-proximity lg:scroll-snap-y-mandatory">
         {sections.map((_, i) => (
@@ -117,8 +117,8 @@ export const CircularFeatures = () => {
         {/* Left Side: Circular UI */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.25, 0.3, 0.85, 0.95], [0, 1, 1, 0]),
-            x: useTransform(smoothProgress, [0.25, 0.3, 0.85, 0.95], [-100, 0, 0, -100]),
+            opacity: useTransform(smoothProgress, [0.25, 0.32, 0.88, 0.95], [0, 1, 1, 0]),
+            x: useTransform(smoothProgress, [0.25, 0.32, 0.88, 0.95], [-100, 0, 0, -100]),
             pointerEvents: "none"
           }}
           className="hidden lg:flex absolute left-[-19vw] w-[38vw] h-[38vw] items-center justify-center z-10"
@@ -130,8 +130,8 @@ export const CircularFeatures = () => {
           >
             {features.map((feature, index) => {
               const angle = index * angleStep;
-              const activePoint = (index + 3) / itemsCount; // Adjusted for offset
-              const glowRange = 0.03;
+              const activePoint = (index + 4) / itemsCount; // Offset to start after Design DNA
+              const glowRange = 0.04;
 
               return (
                 <div
@@ -172,8 +172,8 @@ export const CircularFeatures = () => {
           {/* 0. Intro Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0, 0.05, 0.12], [1, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [0, 0.05, 0.12], ["auto", "auto", "none"])
+              opacity: useTransform(smoothProgress, [0, 0.08, 0.14], [1, 1, 0]),
+              pointerEvents: useTransform(smoothProgress, [0, 0.08, 0.14], ["auto", "auto", "none"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center text-center px-6"
           >
@@ -189,18 +189,19 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1-2. Design DNA Slide - SPANS TWO SECTIONS FOR LONGER VIEW */}
+          {/* 1-3. Design DNA Slide - SPANS THREE SECTIONS FOR MAXIMUM DURATION */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1.5 / itemsCount, 2.5 / itemsCount, 3 / itemsCount - 0.05], [0, 1, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1.5 / itemsCount, 2.5 / itemsCount, 3 / itemsCount - 0.05], ["none", "auto", "auto", "none"])
+              opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1.5 / itemsCount, 3.5 / itemsCount, 4 / itemsCount], [0, 1, 1, 0]),
+              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1.5 / itemsCount, 3.5 / itemsCount, 4 / itemsCount], ["none", "auto", "auto", "none"])
             }}
             className="absolute inset-0 z-20 flex items-center justify-center px-6 lg:px-32"
           >
             <div className="relative w-full h-full flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20">
-              {/* CENTERED IMAGE AND COLOR PICKER - LARGER IMAGE */}
               <div className="flex flex-col items-center gap-6 lg:gap-10">
-                <div className="w-[45vh] h-[45vh] lg:w-[60vh] lg:h-[60vh] rounded-[2.5rem] lg:rounded-[4rem] bg-neutral-900/30 border border-neutral-800/50 p-6 lg:p-10 flex items-center justify-center backdrop-blur-sm shadow-2xl">
+                {/* LARGER IMAGE WITH BORDER */}
+                <div className="w-[45vh] h-[45vh] lg:w-[60vh] lg:h-[60vh] rounded-[2.5rem] lg:rounded-[4rem] bg-neutral-900/30 border-2 border-white/10 p-6 lg:p-10 flex items-center justify-center backdrop-blur-sm shadow-[0_0_50px_rgba(255,255,255,0.05)] relative group">
+                  <div className="absolute inset-0 rounded-[2.5rem] lg:rounded-[4rem] border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                   <AnimatePresence mode="wait">
                     <motion.div
                         key={selectedProduct.id}
@@ -212,7 +213,7 @@ export const CircularFeatures = () => {
                       <img 
                         src={selectedProduct.image} 
                         alt={selectedProduct.name} 
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-contain drop-shadow-2xl"
                       />
                     </motion.div>
                   </AnimatePresence>
@@ -248,13 +249,13 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 3-8. Features Slides */}
+          {/* 4-9. Features Slides - ELIMINATED GAPS */}
           {features.map((feature, index) => {
-            const activePoint = (index + 4) / itemsCount; // Offset by 4 sections
-            const range = 0.08; 
+            const activePoint = (index + 4) / itemsCount; 
+            const range = 1 / itemsCount; // Wider range to overlap perfectly
 
-            const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
-            const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [20, 0, -20]);
+            const opacity = useTransform(smoothProgress, [activePoint - 0.1, activePoint, activePoint + 0.1], [0, 1, 0]);
+            const y = useTransform(smoothProgress, [activePoint - 0.1, activePoint, activePoint + 0.1], [20, 0, -20]);
 
             return (
               <motion.div
@@ -262,7 +263,7 @@ export const CircularFeatures = () => {
                 style={{ 
                   opacity, 
                   y,
-                  pointerEvents: useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], ["none", "auto", "none"])
+                  pointerEvents: useTransform(smoothProgress, [activePoint - 0.1, activePoint, activePoint + 0.1], ["none", "auto", "none"])
                 }}
                 className="absolute inset-0 flex flex-col justify-center px-6 lg:pl-[30vw] lg:pr-32 text-center lg:text-left pointer-events-none md:pointer-events-auto"
               >
@@ -282,7 +283,7 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* 9-11. Final CTA Slide */}
+          {/* 10-12. Final CTA Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.88, 0.94, 1], [0, 1, 1]),
