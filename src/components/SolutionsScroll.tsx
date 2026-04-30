@@ -154,21 +154,39 @@ export const SolutionsScroll = () => {
               );
             })}
 
-            {/* Closing Slide - Aligned to 5/6 (0.83) */}
+            {/* Closing Slide - Aligned to 5/6 (0.83) - Enhanced with Radiant Effect */}
             <motion.div
               style={{
                 opacity: useTransform(smoothProgress, [0.75, 0.83, 0.95], [0, 1, 1]),
                 y: useTransform(smoothProgress, [0.75, 0.83], [50, 0]),
               }}
-              className="absolute inset-0 flex flex-col justify-center items-center text-center"
+              className="absolute inset-0 flex flex-col justify-center items-center text-center overflow-hidden"
             >
-              <h2 className="text-4xl lg:text-7xl font-bold text-white mb-6">
-                Check our <br/><span className="text-primary italic">solution.</span>
+              {/* Deep Space Radiant Background */}
+              <div className="absolute inset-0 -z-10">
+                 {/* 3D Perspective Grid Floor */}
+                 <div className="absolute bottom-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_100%,#000_70%,transparent_100%)] opacity-40" 
+                      style={{ transform: 'perspective(1000px) rotateX(75deg) translateY(200px) scale(2)' }}
+                 />
+                 {/* Atmospheric Glows */}
+                 <motion.div 
+                   animate={{
+                     scale: [1, 1.2, 1],
+                     opacity: [0.1, 0.25, 0.1],
+                   }}
+                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[150px] rounded-full"
+                 />
+                 <div className="absolute bottom-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent shadow-[0_0_30px_rgba(var(--primary),0.5)]" />
+              </div>
+
+              <h2 className="text-5xl lg:text-9xl font-bold text-white mb-8 tracking-tighter relative z-10">
+                Check our <br/><span className="text-primary italic font-black">solution.</span>
               </h2>
-              <p className="text-xl text-neutral-400 max-w-xl mb-10">
+              <p className="text-xl lg:text-3xl text-neutral-400 max-w-2xl mb-12 font-medium relative z-10">
                 Join thousands of office professionals who have already reclaimed their spinal health.
               </p>
-              <a href="/features" className="px-12 py-5 bg-white text-black rounded-full font-bold text-xl hover:bg-primary hover:text-white transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+              <a href="/features" className="relative z-10 px-12 py-6 bg-white text-black rounded-full font-bold text-2xl hover:bg-primary hover:text-white transition-all shadow-[0_0_50px_rgba(255,255,255,0.3)] hover:scale-105">
                 View Our Product
               </a>
             </motion.div>
