@@ -77,11 +77,17 @@ export const CircularFeatures = () => {
   const angleStep = 40; 
   const totalRotation = angleStep * (totalFeatures - 1);
 
-  // Aligned rotation with snap points
   const rotation = useTransform(
     smoothProgress, 
     [2 / itemsCount, 7 / itemsCount], 
     [0, -totalRotation]
+  );
+
+  // Global Vortex Opacity Control
+  const vortexOpacity = useTransform(
+    smoothProgress,
+    [0, 0.1, 0.15, 0.22, 0.85, 0.95],
+    [1, 1, 0, 0.25, 0.25, 1] // Full at start/end, light in features, none in product showcase
   );
 
   return (
@@ -95,7 +101,21 @@ export const CircularFeatures = () => {
 
       <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
         
-        {/* Left Side: TRUE HALF CIRCLE */}
+        {/* Background Vortex */}
+        <motion.div 
+          style={{ opacity: vortexOpacity }}
+          className="absolute inset-0 z-0 pointer-events-none"
+        >
+           <Vortex 
+              backgroundColor="black"
+              className="w-full h-full"
+              containerClassName="w-full h-full"
+              particleCount={300}
+              rangeY={800}
+           />
+        </motion.div>
+
+        {/* Left Side: Circular UI */}
         <motion.div 
           style={{ 
             opacity: useTransform(smoothProgress, [0.1, 0.15, 0.9, 0.95], [0, 1, 1, 0]),
@@ -158,15 +178,6 @@ export const CircularFeatures = () => {
             }}
             className="absolute inset-0 z-50 flex items-center justify-center text-center px-4"
           >
-            <div className="absolute inset-0 z-0">
-               <Vortex 
-                  backgroundColor="black"
-                  className="w-full h-full"
-                  containerClassName="w-full h-full"
-                  particleCount={300}
-                  rangeY={800}
-               />
-            </div>
             <div className="relative z-10 max-w-4xl">
                <motion.p
                  initial={{ opacity: 0, y: 20 }}
@@ -183,7 +194,7 @@ export const CircularFeatures = () => {
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount, 1 / itemsCount + 0.05], [0, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount, 1 / itemsCount + 0.05], ["none", "auto", "none"])
+              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount + 0.05], ["none", "auto", "none"])
             }}
             className="absolute inset-0 flex items-center justify-center pl-[30vw] pr-10 lg:pr-32 z-20"
           >
