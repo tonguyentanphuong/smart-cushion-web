@@ -117,7 +117,7 @@ export const CircularDashboard = () => {
           {/* Rotating Half-Circle */}
           <motion.div 
             style={{ 
-              opacity: useTransform(smoothProgress, [0.1, 0.15, 0.85, 1], [0, 1, 1, 0]),
+              opacity: useTransform(smoothProgress, [0.1, 0.15, 0.8, 0.85], [0, 1, 1, 0]),
             }}
             className="w-full h-full flex items-center justify-center"
           >
@@ -165,95 +165,123 @@ export const CircularDashboard = () => {
           </motion.div>
         </div>
 
-        {/* Left Side: Description */}
-        <div className="mr-[25vw] flex-1 pl-10 lg:pl-24">
-          <div className="relative h-[80vh] flex flex-col justify-center">
-            
-            {/* Intro Slide */}
-            <motion.div
-              style={{
-                opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
-                y: useTransform(smoothProgress, [0, 0.05, 0.1], [0, 0, -50]),
-                pointerEvents: useTransform(smoothProgress, [0, 0.1], ["auto", "none"])
-              }}
-              className="absolute inset-0 flex flex-col justify-center"
-            >
-              <span className="inline-flex items-center gap-2 text-primary text-xs font-mono uppercase tracking-[0.3em] mb-6">
-                <Sparkles size={14} /> Control Center
-              </span>
-              <h1 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-                Your Health, <br/><span className="text-primary">Visualized.</span>
-              </h1>
-              <p className="text-xl text-neutral-400 max-w-xl leading-relaxed">
-                The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
-              </p>
-            </motion.div>
+        {/* CONTENT AREA */}
+        <div className="w-full h-full relative">
+          
+          {/* Main Slide Area */}
+          <div className="absolute inset-0 mr-[25vw] pl-10 lg:pl-24">
+            <div className="relative h-full flex flex-col justify-center">
+              
+              {/* Intro Slide */}
+              <motion.div
+                style={{
+                  opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
+                  y: useTransform(smoothProgress, [0, 0.05, 0.1], [0, 0, -50]),
+                  pointerEvents: useTransform(smoothProgress, [0, 0.1], ["auto", "none"])
+                }}
+                className="absolute inset-0 flex flex-col justify-center"
+              >
+                <span className="inline-flex items-center gap-2 text-primary text-xs font-mono uppercase tracking-[0.3em] mb-6">
+                  <Sparkles size={14} /> Control Center
+                </span>
+                <h1 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                  Your Health, <br/><span className="text-primary">Visualized.</span>
+                </h1>
+                <p className="text-xl text-neutral-400 max-w-xl leading-relaxed">
+                  The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
+                </p>
+              </motion.div>
 
-            {/* View Slides */}
-            {dashboardViews.map((view, index) => {
-              const activePoint = (index + 1) / itemsCount;
-              const range = 0.07;
+              {/* View Slides */}
+              {dashboardViews.map((view, index) => {
+                const activePoint = (index + 1) / itemsCount;
+                const range = 0.07;
 
-              const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
-              const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [40, 0, -40]);
+                const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
+                const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [40, 0, -40]);
 
-              return (
-                <motion.div
-                  key={index}
-                  style={{ 
-                    opacity, 
-                    y,
-                    pointerEvents: useTransform(smoothProgress, [activePoint - range, activePoint + range], ["none", "auto"])
-                  }}
-                  className="absolute inset-0 flex flex-col justify-center"
-                >
-                  <div className="flex flex-col lg:flex-row-reverse items-center gap-10">
-                    <div className="flex-1">
-                      <span className={`text-sm font-mono mb-4 block ${view.color}`}>0{index + 1} / DASHBOARD VIEW</span>
-                      <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-                        {view.title}
-                      </h2>
-                      <p className="text-lg text-neutral-400 leading-relaxed mb-8">
-                        {view.description}
-                      </p>
-                    </div>
-                    <div className="flex-1 w-full">
-                      <div className="rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl shadow-primary/10">
-                        <img 
-                          src={view.image} 
-                          alt={view.title} 
-                          className="w-full h-auto object-cover"
-                        />
+                return (
+                  <motion.div
+                    key={index}
+                    style={{ 
+                      opacity, 
+                      y,
+                      pointerEvents: useTransform(smoothProgress, [activePoint - range, activePoint + range], ["none", "auto"])
+                    }}
+                    className="absolute inset-0 flex flex-col justify-center"
+                  >
+                    <div className="flex flex-col lg:flex-row-reverse items-center gap-10">
+                      <div className="flex-1">
+                        <span className={`text-sm font-mono mb-4 block ${view.color}`}>0{index + 1} / DASHBOARD VIEW</span>
+                        <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+                          {view.title}
+                        </h2>
+                        <p className="text-lg text-neutral-400 leading-relaxed mb-8">
+                          {view.description}
+                        </p>
+                      </div>
+                      <div className="flex-1 w-full">
+                        <div className="rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl shadow-primary/10">
+                          <img 
+                            src={view.image} 
+                            alt={view.title} 
+                            className="w-full h-auto object-cover"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
 
-            {/* Final CTA - Aligned to previous slide (starts at 0.8) */}
-            <motion.div
-              style={{
-                opacity: useTransform(smoothProgress, [0.8, 0.88], [0, 1]),
-                y: useTransform(smoothProgress, [0.8, 0.88], [50, 0]),
-                pointerEvents: useTransform(smoothProgress, [0.8, 1], ["none", "auto"])
-              }}
-              className="absolute inset-0 flex flex-col justify-center items-center text-center -ml-[30vw] md:-ml-0 pr-[25vw] md:pr-0"
-            >
-               <div className="max-w-4xl mx-auto flex flex-col items-center">
-                  <h2 className="text-4xl lg:text-7xl font-bold text-white mb-8">
+          {/* FINAL CTA - FULLY CENTERED WITH RADIANT BACKGROUND */}
+          <motion.div
+            style={{
+              opacity: useTransform(smoothProgress, [0.8, 0.88], [0, 1]),
+              scale: useTransform(smoothProgress, [0.8, 0.88], [0.9, 1]),
+              pointerEvents: useTransform(smoothProgress, [0.8, 1], ["none", "auto"])
+            }}
+            className="absolute inset-0 z-50 flex items-center justify-center bg-black/60"
+          >
+             {/* Atmospheric Radiant Effect */}
+             <div className="absolute inset-0 -z-10 overflow-hidden">
+                {/* Digital Grid */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+                
+                {/* Moving Radiant Glows */}
+                <motion.div 
+                   animate={{
+                     scale: [1, 1.2, 1],
+                     opacity: [0.1, 0.2, 0.1],
+                   }}
+                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/20 blur-[120px] rounded-full"
+                />
+             </div>
+
+             <div className="text-center px-6 max-w-4xl">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                >
+                  <h2 className="text-5xl lg:text-8xl font-bold text-white mb-10 tracking-tighter">
                     Take Command of <br/><span className="text-primary italic">Your Wellbeing.</span>
                   </h2>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col items-center gap-6">
                     <a href="/app">
-                      <button className="px-10 py-5 bg-primary text-white rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-[0_0_20px_rgba(var(--primary),0.3)]">
-                        How can I track my health?
+                      <button className="group relative px-12 py-6 bg-white text-black rounded-full font-bold text-2xl hover:bg-primary hover:text-white transition-all shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(var(--primary),0.4)]">
+                         <span className="relative z-10">How can I track my health?</span>
+                         <div className="absolute inset-0 rounded-full bg-primary scale-0 group-hover:scale-100 transition-transform duration-500 -z-0" />
                       </button>
                     </a>
+                    <p className="text-neutral-500 font-mono text-sm tracking-widest uppercase">Start your health journey today</p>
                   </div>
-               </div>
-            </motion.div>
-          </div>
+                </motion.div>
+             </div>
+          </motion.div>
         </div>
       </div>
       
