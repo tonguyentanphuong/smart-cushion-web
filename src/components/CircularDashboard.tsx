@@ -237,7 +237,7 @@ export const CircularDashboard = () => {
               style={{
                 opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]),
                 y: useTransform(smoothProgress, [0.9, 0.95], [50, 0]),
-                pointerEvents: useTransform(smoothProgress, [0.9], ["none", "auto"])
+                pointerEvents: useTransform(smoothProgress, [0.9, 0.95], ["none", "auto"])
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center"
             >
