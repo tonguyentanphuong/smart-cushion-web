@@ -71,7 +71,7 @@ export const CircularFeatures = () => {
   });
 
   const totalFeatures = features.length;
-  const sections = Array.from({ length: 9 });
+  const sections = Array.from({ length: 12 }); // INCREASED FROM 9 TO 12
   const itemsCount = sections.length; 
 
   const angleStep = 40; 
@@ -79,18 +79,18 @@ export const CircularFeatures = () => {
 
   const rotation = useTransform(
     smoothProgress, 
-    [2 / itemsCount, 7 / itemsCount], 
+    [3 / itemsCount, 9 / itemsCount], 
     [0, -totalRotation]
   );
 
   const vortexOpacity = useTransform(
     smoothProgress,
-    [0, 0.08, 0.14, 0.22, 0.82, 0.9],
+    [0, 0.08, 0.14, 0.22, 0.82, 0.95],
     [1, 1, 0, 0.25, 0.25, 1]
   );
 
   return (
-    <div ref={containerRef} className="relative h-[450vh] bg-black">
+    <div ref={containerRef} className="relative h-[600vh] bg-black"> {/* INCREASED HEIGHT */}
       {/* Snap Points Container */}
       <div className="absolute inset-0 pointer-events-none z-50 overflow-y-auto scroll-snap-y-proximity lg:scroll-snap-y-mandatory">
         {sections.map((_, i) => (
@@ -117,8 +117,8 @@ export const CircularFeatures = () => {
         {/* Left Side: Circular UI */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.2, 0.25, 0.85, 0.9], [0, 1, 1, 0]),
-            x: useTransform(smoothProgress, [0.2, 0.25, 0.85, 0.9], [-100, 0, 0, -100]),
+            opacity: useTransform(smoothProgress, [0.25, 0.3, 0.85, 0.95], [0, 1, 1, 0]),
+            x: useTransform(smoothProgress, [0.25, 0.3, 0.85, 0.95], [-100, 0, 0, -100]),
             pointerEvents: "none"
           }}
           className="hidden lg:flex absolute left-[-19vw] w-[38vw] h-[38vw] items-center justify-center z-10"
@@ -130,7 +130,7 @@ export const CircularFeatures = () => {
           >
             {features.map((feature, index) => {
               const angle = index * angleStep;
-              const activePoint = (index + 2) / itemsCount;
+              const activePoint = (index + 3) / itemsCount; // Adjusted for offset
               const glowRange = 0.03;
 
               return (
@@ -172,8 +172,8 @@ export const CircularFeatures = () => {
           {/* 0. Intro Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [0, 0.05, 0.1], ["auto", "auto", "none"])
+              opacity: useTransform(smoothProgress, [0, 0.05, 0.12], [1, 1, 0]),
+              pointerEvents: useTransform(smoothProgress, [0, 0.05, 0.12], ["auto", "auto", "none"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center text-center px-6"
           >
@@ -189,18 +189,18 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1. Product Showcase Slide */}
+          {/* 1-2. Design DNA Slide - SPANS TWO SECTIONS FOR LONGER VIEW */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [1 / itemsCount - 0.08, 1 / itemsCount, 2 / itemsCount - 0.08], [0, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.08, 1 / itemsCount, 2 / itemsCount - 0.08], ["none", "auto", "none"])
+              opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1.5 / itemsCount, 2.5 / itemsCount, 3 / itemsCount - 0.05], [0, 1, 1, 0]),
+              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1.5 / itemsCount, 2.5 / itemsCount, 3 / itemsCount - 0.05], ["none", "auto", "auto", "none"])
             }}
             className="absolute inset-0 z-20 flex items-center justify-center px-6 lg:px-32"
           >
-            <div className="relative w-full h-full flex flex-col lg:flex-row items-center justify-center gap-10">
-              {/* CENTERED IMAGE AND COLOR PICKER */}
+            <div className="relative w-full h-full flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-20">
+              {/* CENTERED IMAGE AND COLOR PICKER - LARGER IMAGE */}
               <div className="flex flex-col items-center gap-6 lg:gap-10">
-                <div className="w-[35vh] h-[35vh] lg:w-[45vh] lg:h-[45vh] rounded-[2rem] lg:rounded-[3rem] bg-neutral-900/30 border border-neutral-800/50 p-4 lg:p-6 flex items-center justify-center backdrop-blur-sm shadow-2xl">
+                <div className="w-[45vh] h-[45vh] lg:w-[60vh] lg:h-[60vh] rounded-[2.5rem] lg:rounded-[4rem] bg-neutral-900/30 border border-neutral-800/50 p-6 lg:p-10 flex items-center justify-center backdrop-blur-sm shadow-2xl">
                   <AnimatePresence mode="wait">
                     <motion.div
                         key={selectedProduct.id}
@@ -219,13 +219,13 @@ export const CircularFeatures = () => {
                 </div>
                 
                 {/* COLOR PICKER */}
-                <div className="flex gap-4 lg:gap-6 p-3 lg:p-4 rounded-xl lg:rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                <div className="flex gap-4 lg:gap-6 p-4 lg:p-5 rounded-2xl lg:rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
                   {products.map((p) => (
                     <button
                       key={p.id}
                       onClick={() => setSelectedProduct(p)}
-                      className={`w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 transition-all cursor-pointer ${
-                        selectedProduct.id === p.id ? "border-primary scale-110 shadow-[0_0_10px_rgba(var(--primary),0.5)]" : "border-white/20"
+                      className={`w-8 h-8 lg:w-12 lg:h-12 rounded-full border-2 transition-all cursor-pointer ${
+                        selectedProduct.id === p.id ? "border-primary scale-110 shadow-[0_0_15px_rgba(var(--primary),0.6)]" : "border-white/20"
                       }`}
                       style={{ backgroundColor: p.color }}
                     />
@@ -234,22 +234,23 @@ export const CircularFeatures = () => {
               </div>
 
               {/* TEXT AREA */}
-              <div className="lg:absolute lg:right-0 text-center lg:text-right max-w-md">
-                <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-xs font-mono uppercase tracking-[0.3em] mb-4">
-                  <Sparkles size={12} /> The Masterpiece
+              <div className="lg:absolute lg:right-0 text-center lg:text-right max-w-lg">
+                <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-sm font-mono uppercase tracking-[0.3em] mb-4">
+                  <Sparkles size={14} /> The Masterpiece
                 </span>
-                <h2 className="text-4xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-                  Design <span className="text-primary italic">DNA</span>
+                <h2 className="text-4xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+                  Design <br/><span className="text-primary italic font-black">DNA</span>
                 </h2>
-                <p className="text-sm lg:text-xl text-neutral-400 leading-relaxed">
+                <p className="text-sm lg:text-2xl text-neutral-400 leading-relaxed font-medium">
                   A perfect blend of aesthetic elegance and technological power.
                 </p>
               </div>
             </div>
           </motion.div>
 
+          {/* 3-8. Features Slides */}
           {features.map((feature, index) => {
-            const activePoint = (index + 2) / itemsCount;
+            const activePoint = (index + 4) / itemsCount; // Offset by 4 sections
             const range = 0.08; 
 
             const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
@@ -266,14 +267,14 @@ export const CircularFeatures = () => {
                 className="absolute inset-0 flex flex-col justify-center px-6 lg:pl-[30vw] lg:pr-32 text-center lg:text-left pointer-events-none md:pointer-events-auto"
               >
                 <div className="flex flex-col items-center lg:items-start">
-                   <div className={`p-4 rounded-2xl bg-white/5 border border-white/10 mb-6 lg:hidden ${feature.color}`}>
-                      <feature.icon size={32} />
+                   <div className={`p-5 rounded-2xl bg-white/5 border border-white/10 mb-8 lg:hidden ${feature.color}`}>
+                      <feature.icon size={40} />
                    </div>
-                   <span className={`text-xs font-mono mb-4 ${feature.color}`}>TECH / 0{index + 1}</span>
-                   <h3 className="text-3xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                   <span className={`text-xs lg:text-sm font-mono mb-6 ${feature.color} uppercase tracking-widest`}>TECH / 0{index + 1}</span>
+                   <h3 className="text-4xl lg:text-8xl font-bold text-white mb-8 leading-tight tracking-tighter">
                      {feature.title}
                    </h3>
-                   <p className="text-base lg:text-xl text-neutral-400 max-w-xl leading-relaxed">
+                   <p className="text-lg lg:text-3xl text-neutral-400 max-w-2xl leading-relaxed">
                      {feature.description}
                    </p>
                 </div>
@@ -281,21 +282,21 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* 8. Final CTA Slide */}
+          {/* 9-11. Final CTA Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0.82, 0.88], [0, 1]),
-              scale: useTransform(smoothProgress, [0.82, 0.88], [0.9, 1]),
-              pointerEvents: useTransform(smoothProgress, [0.82, 0.88, 1], ["none", "auto", "auto"])
+              opacity: useTransform(smoothProgress, [0.88, 0.94, 1], [0, 1, 1]),
+              scale: useTransform(smoothProgress, [0.88, 0.94], [0.9, 1]),
+              pointerEvents: useTransform(smoothProgress, [0.88, 0.94, 1], ["none", "auto", "auto"])
             }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
           >
-            <h2 className="text-4xl lg:text-8xl font-bold text-white mb-8 lg:mb-12 tracking-tighter">
+            <h2 className="text-5xl lg:text-9xl font-bold text-white mb-10 lg:mb-16 tracking-tighter">
               Explore your <br/> 
-              <span className="text-primary italic">Live Dashboard.</span>
+              <span className="text-primary italic font-black">Live Dashboard.</span>
             </h2>
-            <a href="/dashboard" className="px-8 py-4 lg:px-12 lg:py-6 bg-primary text-white rounded-full font-bold text-lg lg:text-2xl hover:scale-105 transition-transform flex items-center gap-3">
-              Analyze My Data <ArrowRight size={20} />
+            <a href="/dashboard" className="px-10 py-5 lg:px-16 lg:py-8 bg-primary text-white rounded-full font-bold text-xl lg:text-3xl hover:scale-105 transition-transform flex items-center gap-4 shadow-2xl shadow-primary/40">
+              Analyze My Data <ArrowRight size={28} />
             </a>
           </motion.div>
 
