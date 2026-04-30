@@ -12,7 +12,7 @@ const team = [
   {
     name: "Tran Viet Nam",
     role: "Fog & Hardware Integration",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=3000&auto=format&fit=crop",
+    image: "/Nam.png",
     bg: "bg-purple-500/20",
     description: "Architects scalable local infrastructures and bridges the gap between hardware sensors and cloud services through advanced Fog nodes."
   },
@@ -57,8 +57,8 @@ export const TeamGrid = () => {
             />
           </div>
 
-          {/* Info */}
-          <div className="space-y-1">
+          {/* Info - Centered */}
+          <div className="space-y-1 text-center">
             <h3 className="text-xl font-bold text-white">{item.name}</h3>
             <p className="text-sm text-neutral-400 font-medium">{item.role}</p>
           </div>
@@ -66,8 +66,8 @@ export const TeamGrid = () => {
           {/* Dashed Separator */}
           <div className="my-6 border-t border-dashed border-neutral-700 w-full" />
 
-          {/* Description */}
-          <p className="text-sm text-neutral-400 leading-relaxed">
+          {/* Description - Centered */}
+          <p className="text-sm text-neutral-400 leading-relaxed text-center">
             {item.description}
           </p>
         </motion.div>
