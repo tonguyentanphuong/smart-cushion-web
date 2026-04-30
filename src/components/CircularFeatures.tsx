@@ -273,8 +273,8 @@ export const CircularFeatures = () => {
             className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
           >
             <h2 className="text-5xl lg:text-8xl font-bold text-white mb-12 tracking-tighter">
-              Experience the Future <br/> 
-              <span className="text-primary italic">of Sitting.</span>
+              See what our <br/> 
+              <span className="text-primary italic">dashboard have.</span>
             </h2>
             <div className="flex gap-6">
               <a href="/dashboard" className="px-12 py-6 bg-primary text-white rounded-full font-bold text-2xl hover:scale-105 transition-transform flex items-center gap-3">

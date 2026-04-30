@@ -156,7 +156,7 @@ export const SolutionsScroll = () => {
               className="absolute inset-0 flex flex-col justify-center items-center text-center"
             >
               <h2 className="text-4xl lg:text-7xl font-bold text-white mb-6">
-                Engineering a <br/><span className="text-primary italic">Painless Future.</span>
+                Check our <br/><span className="text-primary italic">solution.</span>
               </h2>
               <p className="text-xl text-neutral-400 max-w-xl mb-10">
                 Join thousands of office professionals who have already reclaimed their spinal health.
