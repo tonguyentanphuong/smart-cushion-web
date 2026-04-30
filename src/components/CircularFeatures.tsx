@@ -192,8 +192,8 @@ export const CircularFeatures = () => {
           {/* 1. Product Showcase Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount, 1 / itemsCount + 0.05], [0, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount, 1 / itemsCount + 0.05], ["none", "auto", "none"])
+              opacity: useTransform(smoothProgress, [1 / itemsCount - 0.08, 1 / itemsCount, 2 / itemsCount - 0.08], [0, 1, 0]),
+              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.08, 1 / itemsCount, 2 / itemsCount - 0.08], ["none", "auto", "none"])
             }}
             className="absolute inset-0 z-20 flex items-center justify-center px-6 lg:px-32"
           >
@@ -248,10 +248,9 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 2-7. Features Slides */}
           {features.map((feature, index) => {
             const activePoint = (index + 2) / itemsCount;
-            const range = 0.05; 
+            const range = 0.08; 
 
             const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
             const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [20, 0, -20]);
