@@ -83,10 +83,10 @@ export const CircularFeatures = () => {
     [0, -totalRotation]
   );
 
-  // Global Vortex Opacity Control (None at Slide 1)
+  // Global Vortex Opacity Control
   const vortexOpacity = useTransform(
     smoothProgress,
-    [0, 0.08, 0.14, 0.22, 0.85, 0.95],
+    [0, 0.08, 0.14, 0.22, 0.82, 0.9],
     [1, 1, 0, 0.25, 0.25, 1]
   );
 
@@ -118,8 +118,8 @@ export const CircularFeatures = () => {
         {/* Left Side: Circular UI */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.1, 0.15, 0.9, 0.95], [0, 1, 1, 0]),
-            x: useTransform(smoothProgress, [0.1, 0.15, 0.9, 0.95], [-100, 0, 0, -100]),
+            opacity: useTransform(smoothProgress, [0.1, 0.15, 0.85, 0.9], [0, 1, 1, 0]),
+            x: useTransform(smoothProgress, [0.1, 0.15, 0.85, 0.9], [-100, 0, 0, -100]),
             pointerEvents: "none"
           }}
           className="absolute left-[-19vw] w-[38vw] h-[38vw] flex items-center justify-center z-10"
@@ -190,7 +190,7 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* 1. Product Showcase Slide - REDESIGNED */}
+          {/* 1. Product Showcase Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1 / itemsCount, 1 / itemsCount + 0.05], [0, 1, 0]),
@@ -285,23 +285,23 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* 8. Final CTA Slide */}
+          {/* 8. Final CTA Slide - ALIGNED TO PREVIOUS FEATURE (0.85) */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]),
-              scale: useTransform(smoothProgress, [0.9, 0.95], [0.9, 1]),
-              y: useTransform(smoothProgress, [0.9, 0.95], [50, 0]),
-              pointerEvents: useTransform(smoothProgress, [0.9, 0.95], ["none", "auto"])
+              opacity: useTransform(smoothProgress, [0.82, 0.88], [0, 1]),
+              scale: useTransform(smoothProgress, [0.82, 0.88], [0.9, 1]),
+              y: useTransform(smoothProgress, [0.82, 0.88], [50, 0]),
+              pointerEvents: useTransform(smoothProgress, [0.82, 1], ["none", "auto"])
             }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center px-4"
           >
             <h2 className="text-5xl lg:text-8xl font-bold text-white mb-12 tracking-tighter">
-              See what our <br/> 
-              <span className="text-primary italic">dashboard have.</span>
+              Explore your <br/> 
+              <span className="text-primary italic">Live Dashboard.</span>
             </h2>
             <div className="flex gap-6">
               <a href="/dashboard" className="px-12 py-6 bg-primary text-white rounded-full font-bold text-2xl hover:scale-105 transition-transform flex items-center gap-3">
-                Try Live Demo <ArrowRight size={24} />
+                Analyze My Data <ArrowRight size={24} />
               </a>
             </div>
           </motion.div>
