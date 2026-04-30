@@ -68,7 +68,6 @@ export const CircularDashboard = () => {
   });
 
   const totalFeatures = dashboardViews.length;
-  // Increased height slightly to reduce sensitivity (350vh -> 450vh)
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
   const angleStep = 45;
@@ -118,7 +117,7 @@ export const CircularDashboard = () => {
           {/* Rotating Half-Circle */}
           <motion.div 
             style={{ 
-              opacity: useTransform(smoothProgress, [0.1, 0.15, 0.95, 1], [0, 1, 1, 0]),
+              opacity: useTransform(smoothProgress, [0.1, 0.15, 0.85, 1], [0, 1, 1, 0]),
             }}
             className="w-full h-full flex items-center justify-center"
           >
@@ -232,12 +231,12 @@ export const CircularDashboard = () => {
               );
             })}
 
-            {/* Final CTA - NOW FULLY CENTERED */}
+            {/* Final CTA - Aligned to previous slide (starts at 0.8) */}
             <motion.div
               style={{
-                opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]),
-                y: useTransform(smoothProgress, [0.9, 0.95], [50, 0]),
-                pointerEvents: useTransform(smoothProgress, [0.9, 1], ["none", "auto"])
+                opacity: useTransform(smoothProgress, [0.8, 0.88], [0, 1]),
+                y: useTransform(smoothProgress, [0.8, 0.88], [50, 0]),
+                pointerEvents: useTransform(smoothProgress, [0.8, 1], ["none", "auto"])
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center -ml-[30vw] md:-ml-0 pr-[25vw] md:pr-0"
             >
