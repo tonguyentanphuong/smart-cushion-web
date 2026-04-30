@@ -134,7 +134,7 @@ export const CircularDashboard = () => {
             })}
           </motion.div>
           <div className="absolute left-[-20px] w-20 h-[3px] bg-gradient-to-r from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
-        </div>
+        </motion.div>
 
         {/* 0. Intro Illustration - NOW SEPARATE AND RESPONSIVE */}
         <motion.div
@@ -168,7 +168,7 @@ export const CircularDashboard = () => {
                 style={{
                   opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
                   y: useTransform(smoothProgress, [0, 0.05, 0.1], [0, 0, -50]),
-                  pointerEvents: useTransform(smoothProgress, [0, 0.1], ["auto", "none"])
+                  pointerEvents: useTransform(smoothProgress, [0, 0.05, 0.1], ["auto", "auto", "none"])
                 }}
                 className="absolute inset-0 flex flex-col justify-center text-center lg:text-left z-10"
               >
@@ -199,7 +199,7 @@ export const CircularDashboard = () => {
                     style={{ 
                       opacity, 
                       y,
-                      pointerEvents: useTransform(smoothProgress, [activePoint - range, activePoint + range], ["none", "auto"])
+                      pointerEvents: useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], ["none", "auto", "none"])
                     }}
                     className="absolute inset-0 flex flex-col justify-center"
                   >
@@ -234,7 +234,7 @@ export const CircularDashboard = () => {
             style={{
               opacity: useTransform(smoothProgress, [0.8, 0.88], [0, 1]),
               scale: useTransform(smoothProgress, [0.8, 0.88], [0.9, 1]),
-              pointerEvents: useTransform(smoothProgress, [0.8, 1], ["none", "auto"])
+              pointerEvents: useTransform(smoothProgress, [0.8, 0.88, 1], ["none", "auto", "auto"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center bg-black/80"
           >

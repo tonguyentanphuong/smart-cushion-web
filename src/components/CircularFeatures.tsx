@@ -173,7 +173,7 @@ export const CircularFeatures = () => {
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [0, 0.1], ["auto", "none"])
+              pointerEvents: useTransform(smoothProgress, [0, 0.05, 0.1], ["auto", "auto", "none"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center text-center px-6"
           >
@@ -259,8 +259,12 @@ export const CircularFeatures = () => {
             return (
               <motion.div
                 key={index}
-                style={{ opacity, y }}
-                className="absolute inset-0 flex flex-col justify-center px-6 lg:pl-[30vw] lg:pr-32 text-center lg:text-left pointer-events-none"
+                style={{ 
+                  opacity, 
+                  y,
+                  pointerEvents: useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], ["none", "auto", "none"])
+                }}
+                className="absolute inset-0 flex flex-col justify-center px-6 lg:pl-[30vw] lg:pr-32 text-center lg:text-left pointer-events-none md:pointer-events-auto"
               >
                 <div className="flex flex-col items-center lg:items-start">
                    <div className={`p-4 rounded-2xl bg-white/5 border border-white/10 mb-6 lg:hidden ${feature.color}`}>
@@ -283,7 +287,7 @@ export const CircularFeatures = () => {
             style={{
               opacity: useTransform(smoothProgress, [0.82, 0.88], [0, 1]),
               scale: useTransform(smoothProgress, [0.82, 0.88], [0.9, 1]),
-              pointerEvents: useTransform(smoothProgress, [0.82, 1], ["none", "auto"])
+              pointerEvents: useTransform(smoothProgress, [0.82, 0.88, 1], ["none", "auto", "auto"])
             }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center px-6"
           >
