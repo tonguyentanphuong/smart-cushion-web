@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { ArrowRight, Cpu, Zap, Monitor, Cloud, Brain, ArrowRightIcon, Sparkles } from "lucide-react";
 
@@ -56,13 +56,13 @@ export default function Hero() {
                 </a>
                 
                 {/* Environment Toggles */}
-                <div className="flex p-1 bg-white/5 border border-white/10 rounded-full backdrop-blur-md">
+                <div className="flex p-1 bg-white/5 border border-white/10 rounded-full backdrop-blur-md z-50">
                    {environments.map((env) => (
                      <button
                        key={env.id}
                        onClick={() => setActiveEnv(env)}
-                       className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${
-                         activeEnv.id === env.id ? "bg-white text-black shadow-lg" : "text-neutral-400 hover:text-white"
+                       className={`px-6 py-2 rounded-full text-sm font-bold transition-all cursor-pointer relative z-50 ${
+                         activeEnv.id === env.id ? "bg-white text-black shadow-lg scale-105" : "text-neutral-400 hover:text-white"
                        }`}
                      >
                        {env.label}
@@ -115,7 +115,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Content: Product Visualization with Switcher */}
+          {/* Right Content: Product Visualization with Simplified Transition */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -123,33 +123,31 @@ export default function Hero() {
             className="flex-1 relative"
           >
             <div className="relative w-full aspect-square max-w-2xl mx-auto">
-              <div className={`absolute inset-0 bg-gradient-to-br ${activeEnv.color} blur-[150px] rounded-full transition-colors duration-1000`} />
+              {/* Background Glow tied to active environment */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${activeEnv.color} blur-[150px] rounded-full transition-all duration-700`} />
               
               <div className="relative z-10 w-full h-full flex items-center justify-center p-8">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeEnv.id}
-                    initial={{ opacity: 0, x: 20, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, x: -20, filter: "blur(10px)" }}
-                    transition={{ duration: 0.5 }}
-                    className="relative w-full h-full"
-                  >
-                    <img 
-                      src={activeEnv.image} 
-                      alt={activeEnv.label} 
-                      className="w-full h-full object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)]"
-                    />
-                    
-                    {/* Minimalist Tech Status */}
-                    <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-md">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
-                        <span className="text-[10px] font-bold text-white uppercase tracking-widest">System Online</span>
-                      </div>
+                <motion.div
+                  key={activeEnv.id}
+                  initial={{ opacity: 0.5, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative w-full h-full"
+                >
+                  <img 
+                    src={activeEnv.image} 
+                    alt={activeEnv.label} 
+                    className="w-full h-full object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)]"
+                  />
+                  
+                  {/* Status Indicator */}
+                  <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-md">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
+                      <span className="text-[10px] font-bold text-white uppercase tracking-widest">System Online</span>
                     </div>
-                  </motion.div>
-                </AnimatePresence>
+                  </div>
+                </motion.div>
               </div>
             </div>
           </motion.div>
