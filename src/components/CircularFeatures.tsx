@@ -74,7 +74,6 @@ export const CircularFeatures = () => {
   const sections = Array.from({ length: 12 });
   const itemsCount = sections.length; 
 
-  // Sync activeSlide state with scroll position
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const index = Math.round(latest * (itemsCount - 1));
     if (index !== activeSlide) setActiveSlide(index);
@@ -97,20 +96,19 @@ export const CircularFeatures = () => {
 
   const navigateTo = (index: number) => {
     const targetIndex = Math.max(0, Math.min(itemsCount - 1, index));
-    const targetScroll = (targetIndex / (itemsCount - 1)) * (containerRef.current?.scrollHeight || 0 - window.innerHeight);
-    
+    const containerTop = containerRef.current?.offsetTop || 0;
     window.scrollTo({
-      top: (containerRef.current?.offsetTop || 0) + (targetIndex * window.innerHeight),
+      top: containerTop + (targetIndex * window.innerHeight),
       behavior: 'smooth'
     });
   };
 
   return (
     <div ref={containerRef} className="relative h-[1200vh] bg-black">
-      {/* Snap Points Container - Desktop Only */}
-      <div className="absolute inset-0 pointer-events-none z-50 hidden lg:block scroll-snap-y-mandatory">
+      {/* Real Snap Points in flow to fix the "stopping in between" issue */}
+      <div className="absolute inset-0 flex flex-col pointer-events-none">
         {sections.map((_, i) => (
-          <div key={i} className="h-[100dvh] w-full snap-start" />
+          <div key={i} className="h-screen w-full snap-start" />
         ))}
       </div>
 
@@ -293,7 +291,7 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* Final CTA Slide */}
+          {/* Final CTA Slide - Restored to Dashboard Link */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.88, 0.94, 1], [0, 1, 1]),
@@ -321,8 +319,8 @@ export const CircularFeatures = () => {
               Explore your <br/> 
               <span className="text-primary italic font-black">Live Dashboard.</span>
             </h2>
-            <a href="https://smart-cushion-app.vercel.app/" target="_blank" rel="noopener noreferrer" className="px-10 py-5 lg:px-16 lg:py-8 bg-primary text-white rounded-full font-bold text-xl lg:text-3xl hover:scale-105 transition-transform flex items-center gap-4 shadow-2xl shadow-primary/40 relative z-20">
-              Try Demo <ArrowRight size={28} />
+            <a href="/dashboard" className="px-10 py-5 lg:px-16 lg:py-8 bg-primary text-white rounded-full font-bold text-xl lg:text-3xl hover:scale-105 transition-transform flex items-center gap-4 shadow-2xl shadow-primary/40 relative z-20">
+              Analyze My Data <ArrowRight size={28} />
             </a>
           </motion.div>
         </div>

@@ -74,7 +74,6 @@ export const CircularDashboard = () => {
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
 
-  // Sync activeSlide with scroll
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const index = Math.round(latest * (itemsCount - 1));
     if (index !== activeSlide) setActiveSlide(index);
@@ -90,24 +89,25 @@ export const CircularDashboard = () => {
 
   const navigateTo = (index: number) => {
     const targetIndex = Math.max(0, Math.min(itemsCount - 1, index));
+    const containerTop = containerRef.current?.offsetTop || 0;
     window.scrollTo({
-      top: (containerRef.current?.offsetTop || 0) + (targetIndex * window.innerHeight),
+      top: containerTop + (targetIndex * window.innerHeight),
       behavior: 'smooth'
     });
   };
 
   return (
     <div ref={containerRef} className="relative h-[700vh] bg-black">
-      {/* Snap Points Container - Desktop Only */}
-      <div className="absolute inset-0 pointer-events-none z-50 hidden lg:block scroll-snap-y-mandatory">
+      {/* Real Snap Points in flow to fix the "stopping in between" issue */}
+      <div className="absolute inset-0 flex flex-col pointer-events-none">
         {sections.map((_, i) => (
-          <div key={i} className="h-[100dvh] w-full snap-start" />
+          <div key={i} className="h-screen w-full snap-start" />
         ))}
       </div>
 
       <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden touch-none lg:touch-auto">
         
-        {/* Right Side: CIRCULAR UI - HIDDEN ON MOBILE */}
+        {/* Right Side: CIRCULAR UI */}
         <motion.div 
           style={{ 
             opacity: useTransform(smoothProgress, [0.14, 0.18, 0.8, 0.85], [0, 1, 1, 0]),
@@ -154,7 +154,7 @@ export const CircularDashboard = () => {
           <div className="absolute left-[-20px] w-20 h-[3px] bg-gradient-to-r from-primary to-transparent z-20 shadow-[0_0_15px_rgba(var(--primary),0.5)]" />
         </motion.div>
 
-        {/* 0. Intro Illustration */}
+        {/* Intro Illustration */}
         <motion.div
           style={{
             opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
@@ -247,7 +247,7 @@ export const CircularDashboard = () => {
             </div>
           </div>
 
-          {/* FINAL CTA */}
+          {/* FINAL CTA - Try Demo */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.8, 0.88, 1], [0, 1, 1]),
