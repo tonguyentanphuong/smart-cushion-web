@@ -2,11 +2,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
-import { ArrowRight, Cpu, Zap, Monitor, Cloud, Brain, ArrowRightIcon, Sparkles } from "lucide-react";
+import { ArrowRight, Cpu, Zap, Monitor, Cloud, Brain, ArrowRightIcon, Sparkles, Home, School, Briefcase } from "lucide-react";
 
 const environments = [
-  { id: "office", label: "Modern Office", image: "/hero-office.png", color: "from-blue-500/20" },
-  { id: "classroom", label: "Smart Classroom", image: "/hero-classroom.png", color: "from-primary/20" },
+  { id: "office", label: "Modern Office", icon: Briefcase, image: "/hero-office.png", color: "from-blue-500/20" },
+  { id: "classroom", label: "Smart Classroom", icon: School, image: "/hero-classroom.png", color: "from-primary/20" },
+  { id: "home", label: "Home & Living", icon: Home, image: "/hero.png", color: "from-purple-500/20" },
 ];
 
 export default function Hero() {
@@ -54,21 +55,6 @@ export default function Hero() {
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </a>
-                
-                {/* Environment Toggles */}
-                <div className="flex p-1 bg-white/5 border border-white/10 rounded-full backdrop-blur-md z-50">
-                   {environments.map((env) => (
-                     <button
-                       key={env.id}
-                       onClick={() => setActiveEnv(env)}
-                       className={`px-6 py-2 rounded-full text-sm font-bold transition-all cursor-pointer relative z-50 ${
-                         activeEnv.id === env.id ? "bg-white text-black shadow-lg scale-105" : "text-neutral-400 hover:text-white"
-                       }`}
-                     >
-                       {env.label}
-                     </button>
-                   ))}
-                </div>
               </div>
 
               {/* Data Journey Card */}
@@ -118,15 +104,14 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Content: Product Visualization with Simplified Transition */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex-1 relative"
-          >
-            <div className="relative w-full aspect-square max-w-2xl mx-auto">
-              {/* Background Glow tied to active environment */}
+          {/* Right Content: Product Visualization with Switcher Below */}
+          <div className="flex-1 flex flex-col items-center gap-10">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative w-full aspect-square max-w-2xl mx-auto"
+            >
               <div className={`absolute inset-0 bg-gradient-to-br ${activeEnv.color} blur-[150px] rounded-full transition-all duration-700`} />
               
               <div className="relative z-10 w-full h-full flex items-center justify-center p-8">
@@ -140,11 +125,11 @@ export default function Hero() {
                   <img 
                     src={activeEnv.image} 
                     alt={activeEnv.label} 
-                    className="w-full h-full object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)]"
+                    className="w-full h-full object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] rounded-[2rem]"
                   />
                   
                   {/* Status Indicator */}
-                  <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-md">
+                  <div className="absolute top-6 right-6 px-4 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-md">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
                       <span className="text-[10px] font-bold text-white uppercase tracking-widest">System Online</span>
@@ -152,8 +137,32 @@ export default function Hero() {
                   </div>
                 </motion.div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            {/* Environment Toggles - Moved below the image */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex p-1.5 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md shadow-2xl relative z-50"
+            >
+               {environments.map((env) => (
+                 <button
+                   key={env.id}
+                   onClick={() => setActiveEnv(env)}
+                   className={`flex items-center gap-3 px-6 py-3 rounded-2xl text-sm font-bold transition-all cursor-pointer ${
+                     activeEnv.id === env.id 
+                       ? "bg-white text-black shadow-xl scale-105" 
+                       : "text-neutral-400 hover:text-white hover:bg-white/5"
+                   }`}
+                 >
+                   <env.icon size={18} />
+                   <span className="hidden sm:inline">{env.label}</span>
+                   <span className="sm:hidden">{env.id.charAt(0).toUpperCase() + env.id.slice(1)}</span>
+                 </button>
+               ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
