@@ -1,10 +1,17 @@
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
-import { ArrowRight, Cpu, Zap, Layers, Shield, Sparkles, Monitor, Cloud, Brain, ArrowRightIcon } from "lucide-react";
+import { ArrowRight, Cpu, Zap, Monitor, Cloud, Brain, ArrowRightIcon, Sparkles } from "lucide-react";
+
+const environments = [
+  { id: "office", label: "Modern Office", image: "/hero-office.png", color: "from-blue-500/20" },
+  { id: "classroom", label: "Smart Classroom", image: "/hero-classroom.png", color: "from-primary/20" },
+];
 
 export default function Hero() {
+  const [activeEnv, setActiveEnv] = useState(environments[0]);
+
   return (
     <section className="relative min-h-screen pt-32 pb-20 overflow-hidden flex items-center">
       {/* Background Decorative Elements */}
@@ -16,7 +23,7 @@ export default function Hero() {
       <div className="container mx-auto px-6 relative">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           
-          {/* Left Content: Text and CTA */}
+          {/* Left Content */}
           <div className="flex-1 text-center lg:text-left z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -47,19 +54,29 @@ export default function Hero() {
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </a>
-                <Button variant="outline" size="lg" className="rounded-full px-8 h-14 text-lg font-semibold border-white/10 hover:bg-white/5">
-                  Watch Demo
-                </Button>
+                
+                {/* Environment Toggles */}
+                <div className="flex p-1 bg-white/5 border border-white/10 rounded-full backdrop-blur-md">
+                   {environments.map((env) => (
+                     <button
+                       key={env.id}
+                       onClick={() => setActiveEnv(env)}
+                       className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${
+                         activeEnv.id === env.id ? "bg-white text-black shadow-lg" : "text-neutral-400 hover:text-white"
+                       }`}
+                     >
+                       {env.label}
+                     </button>
+                   ))}
+                </div>
               </div>
 
-              {/* Enhanced Tech Stack Card: FROM OFFICE TO CLOUD */}
+              {/* Data Journey Card */}
               <div className="mt-16 flex flex-col items-center lg:items-start w-full">
                 <p className="text-xs font-mono uppercase tracking-[0.3em] text-primary mb-8 font-bold">Data Journey: From Office to Cloud</p>
                 
                 <div className="relative w-full max-w-3xl bg-neutral-900/40 border border-white/5 rounded-[3rem] p-8 md:p-12 flex flex-col items-center justify-center overflow-hidden group hover:border-primary/20 transition-colors backdrop-blur-sm">
-                  {/* Atmospheric Glow */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-blue-500/5" />
-                  <div className="absolute -top-24 -left-24 w-48 h-48 bg-primary/10 blur-[100px] rounded-full group-hover:bg-primary/20 transition-colors" />
                   
                   <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 relative z-10">
                     {[
@@ -84,7 +101,7 @@ export default function Hero() {
                           </motion.div>
                         ) : (
                           <div className="flex flex-col items-center gap-3">
-                            <div className={`p-4 rounded-2xl bg-white/5 border border-white/10 ${step.color} shadow-inner`}>
+                            <div className={`p-4 rounded-2xl bg-white/5 border border-white/10 ${step.color}`}>
                               <step.icon size={28} />
                             </div>
                             <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 font-bold">{step.label}</span>
@@ -98,7 +115,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Content: Product Visualization */}
+          {/* Right Content: Product Visualization with Switcher */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -106,39 +123,33 @@ export default function Hero() {
             className="flex-1 relative"
           >
             <div className="relative w-full aspect-square max-w-2xl mx-auto">
-              {/* Background Glows */}
-              <div className="absolute inset-0 bg-primary/20 blur-[150px] rounded-full animate-pulse" />
+              <div className={`absolute inset-0 bg-gradient-to-br ${activeEnv.color} blur-[150px] rounded-full transition-colors duration-1000`} />
               
-              {/* Main Product Image Container */}
               <div className="relative z-10 w-full h-full flex items-center justify-center p-8">
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-white/10 blur-[100px] rounded-full group-hover:bg-primary/20 transition-all duration-500" />
-                  <img 
-                    src="/hero.png" 
-                    alt="Smart Cushion" 
-                    className="w-full h-auto object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] transform hover:scale-105 transition-transform duration-700"
-                  />
-                  
-                  {/* Floating Tech Labels */}
+                <AnimatePresence mode="wait">
                   <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -top-4 -right-4 px-4 py-2 rounded-2xl bg-black/60 border border-white/10 backdrop-blur-md"
+                    key={activeEnv.id}
+                    initial={{ opacity: 0, x: 20, filter: "blur(10px)" }}
+                    animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, x: -20, filter: "blur(10px)" }}
+                    transition={{ duration: 0.5 }}
+                    className="relative w-full h-full"
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
-                      <span className="text-xs font-bold text-white uppercase tracking-tighter">AI Core Active</span>
+                    <img 
+                      src={activeEnv.image} 
+                      alt={activeEnv.label} 
+                      className="w-full h-full object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)]"
+                    />
+                    
+                    {/* Minimalist Tech Status */}
+                    <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-md">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
+                        <span className="text-[10px] font-bold text-white uppercase tracking-widest">System Online</span>
+                      </div>
                     </div>
                   </motion.div>
-                </div>
-              </div>
-
-              {/* Floating Elements */}
-              <div className="absolute top-1/4 -left-8 w-24 h-24 bg-primary/10 border border-white/5 backdrop-blur-md rounded-3xl -rotate-12 flex items-center justify-center animate-bounce duration-[4000ms]">
-                <Cpu className="text-primary w-10 h-10" />
-              </div>
-              <div className="absolute bottom-1/4 -right-8 w-20 h-20 bg-blue-500/10 border border-white/5 backdrop-blur-md rounded-full rotate-12 flex items-center justify-center animate-bounce duration-[5000ms] delay-500">
-                <Shield className="text-blue-400 w-8 h-8" />
+                </AnimatePresence>
               </div>
             </div>
           </motion.div>
@@ -146,4 +157,4 @@ export default function Hero() {
       </div>
     </section>
   );
-};
+}
