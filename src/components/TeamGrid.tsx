@@ -17,6 +17,13 @@ const team = [
     description: "Architects scalable local infrastructures and bridges the gap between hardware sensors and cloud services."
   },
   {
+    name: "Nguyen Thao Huong",
+    role: "AI Consultant & Model Designer",
+    image: "/Huong.png",
+    bg: "bg-cyan-500/20",
+    description: "AI expert specializing in specialized model design and optimizing neural network architectures for health diagnostics."
+  },
+  {
     name: "Dong Boi Thi",
     role: "Cloud & Dashboard Developer",
     image: "/Thi.jpg",
@@ -34,7 +41,7 @@ const team = [
 
 export const TeamGrid = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 py-4">
       {team.map((item, index) => (
         <motion.div
           key={index}
@@ -60,7 +67,7 @@ export const TeamGrid = () => {
           {/* Info - Centered */}
           <div className="space-y-1 text-center">
             <h3 className="text-lg font-bold text-white line-clamp-1">{item.name}</h3>
-            <p className="text-xs text-primary font-mono uppercase tracking-wider">{item.role}</p>
+            <p className="text-[10px] text-primary font-mono uppercase tracking-wider">{item.role}</p>
           </div>
 
           {/* Dashed Separator - Minimal */}

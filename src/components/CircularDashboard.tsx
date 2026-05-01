@@ -256,11 +256,12 @@ export const CircularDashboard = () => {
                   Take Command of <br/><span className="text-primary italic font-black">Your Wellbeing.</span>
                 </h2>
                 <div className="flex flex-col items-center gap-8">
-                  <a href="/app" className="w-full sm:w-auto">
+                  <a href="https://smart-cushion-app.vercel.app/" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                     <button className="w-full sm:w-auto px-10 py-5 lg:px-16 lg:py-8 bg-white text-black rounded-full font-bold text-xl lg:text-3xl hover:bg-primary hover:text-white transition-all shadow-2xl">
-                       How can I track my health?
+                       Try Demo
                     </button>
                   </a>
+                  <p className="text-neutral-500 font-mono text-xs lg:text-lg tracking-widest uppercase">Experience the live data flow</p>
                 </div>
              </div>
           </motion.div>
