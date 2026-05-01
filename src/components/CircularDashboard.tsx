@@ -73,9 +73,10 @@ export const CircularDashboard = () => {
 
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
+  const denominator = itemsCount - 1; // Correct divisor for scroll segments
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const index = Math.round(latest * (itemsCount - 1));
+    const index = Math.round(latest * denominator);
     if (index !== activeSlide) setActiveSlide(index);
   });
 
@@ -83,7 +84,7 @@ export const CircularDashboard = () => {
 
   const rotation = useTransform(
     smoothProgress, 
-    [1 / itemsCount, 5 / itemsCount], 
+    [1 / denominator, 5 / denominator], 
     [0, 180]
   );
 
@@ -110,7 +111,7 @@ export const CircularDashboard = () => {
         {/* Right Side: CIRCULAR UI */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.14, 0.18, 0.8, 0.85], [0, 1, 1, 0]),
+            opacity: useTransform(smoothProgress, [1 / denominator, 1.5 / denominator, 5 / denominator, 5.5 / denominator], [0, 1, 1, 0]),
           }}
           className="hidden lg:flex absolute right-[-19vw] w-[38vw] h-[38vw] items-center justify-center"
         >
@@ -121,7 +122,7 @@ export const CircularDashboard = () => {
           >
             {dashboardViews.map((view, index) => {
               const angle = index * -angleStep;
-              const activePoint = (index + 1) / itemsCount;
+              const activePoint = (index + 1) / denominator;
               const glowRange = 0.04;
 
               return (
@@ -157,9 +158,9 @@ export const CircularDashboard = () => {
         {/* Intro Illustration */}
         <motion.div
           style={{
-            opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
-            scale: useTransform(smoothProgress, [0, 0.1], [1, 0.9]),
-            x: useTransform(smoothProgress, [0, 0.1], [0, 100]),
+            opacity: useTransform(smoothProgress, [0, 0.05 / denominator, 0.5 / denominator], [1, 1, 0]),
+            scale: useTransform(smoothProgress, [0, 0.5 / denominator], [1, 0.9]),
+            x: useTransform(smoothProgress, [0, 0.5 / denominator], [0, 100]),
             pointerEvents: "none"
           }}
           className="absolute right-0 lg:right-[22vw] w-full lg:w-[40vw] h-[30vh] lg:h-auto flex items-center justify-center top-20 lg:top-auto z-0 opacity-20 lg:opacity-100"
@@ -184,9 +185,9 @@ export const CircularDashboard = () => {
               {/* Intro Slide */}
               <motion.div
                 style={{
-                  opacity: useTransform(smoothProgress, [0, 0.04, 0.08], [1, 1, 0]),
-                  y: useTransform(smoothProgress, [0, 0.04, 0.08], [0, 0, -30]),
-                  pointerEvents: useTransform(smoothProgress, [0, 0.04, 0.08], ["auto", "auto", "none"])
+                  opacity: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], [1, 1, 0]),
+                  y: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], [0, 0, -30]),
+                  pointerEvents: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], ["auto", "auto", "none"])
                 }}
                 className="absolute inset-0 flex flex-col justify-center text-center lg:text-left z-10"
               >
@@ -205,8 +206,8 @@ export const CircularDashboard = () => {
 
               {/* View Slides */}
               {dashboardViews.map((view, index) => {
-                const activePoint = (index + 1) / itemsCount;
-                const range = 0.035; // TIGHTER RANGE for dashboard views
+                const activePoint = (index + 1) / denominator;
+                const range = 0.03;
 
                 const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
                 const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [30, 0, -30]);
@@ -252,9 +253,9 @@ export const CircularDashboard = () => {
           {/* FINAL CTA */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0.8, 0.88, 1], [0, 1, 1]),
-              scale: useTransform(smoothProgress, [0.8, 0.88], [0.9, 1]),
-              pointerEvents: useTransform(smoothProgress, [0.8, 0.88, 1], ["none", "auto", "auto"])
+              opacity: useTransform(smoothProgress, [5.5 / denominator, 6 / denominator, 1], [0, 1, 1]),
+              scale: useTransform(smoothProgress, [5.5 / denominator, 6 / denominator], [0.9, 1]),
+              pointerEvents: useTransform(smoothProgress, [5.5 / denominator, 6 / denominator, 1], ["none", "auto", "auto"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center bg-black/80"
           >
@@ -285,8 +286,8 @@ export const CircularDashboard = () => {
           </button>
           <button 
             onClick={() => navigateTo(activeSlide + 1)}
-            className={`p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-90 transition-all shadow-2xl shadow-primary/40 ${activeSlide === itemsCount - 1 ? "opacity-30" : "opacity-100"}`}
-            disabled={activeSlide === itemsCount - 1}
+            className={`p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-90 transition-all shadow-2xl shadow-primary/40 ${activeSlide === denominator ? "opacity-30" : "opacity-100"}`}
+            disabled={activeSlide === denominator}
           >
             <ChevronRight size={32} />
           </button>

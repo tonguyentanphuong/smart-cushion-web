@@ -73,25 +73,27 @@ export const CircularFeatures = () => {
 
   const sections = Array.from({ length: 12 });
   const itemsCount = sections.length; 
+  const denominator = itemsCount - 1; // Correct divisor for scroll segments
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const index = Math.round(latest * (itemsCount - 1));
+    const index = Math.round(latest * denominator);
     if (index !== activeSlide) setActiveSlide(index);
   });
 
   const angleStep = 40; 
   const totalRotation = angleStep * (features.length - 1);
 
+  // Sync rotation with snap points
   const rotation = useTransform(
     smoothProgress, 
-    [3.5 / itemsCount, 9.5 / itemsCount], 
+    [4 / denominator, 9 / denominator], 
     [0, -totalRotation]
   );
 
   const vortexOpacity = useTransform(
     smoothProgress,
-    [0, 0.08, 0.14, 0.22, 0.85, 0.95],
-    [1, 1, 0, 0.2, 0.2, 1]
+    [0, 1 / denominator, 3 / denominator, 10 / denominator, 1],
+    [1, 0, 0.2, 0.2, 1]
   );
 
   const navigateTo = (index: number) => {
@@ -131,8 +133,8 @@ export const CircularFeatures = () => {
         {/* Left Side: Circular UI */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.32, 0.38, 0.88, 0.94], [0, 1, 1, 0]),
-            x: useTransform(smoothProgress, [0.32, 0.38, 0.88, 0.94], [-100, 0, 0, -100]),
+            opacity: useTransform(smoothProgress, [3.5 / denominator, 4 / denominator, 9 / denominator, 9.5 / denominator], [0, 1, 1, 0]),
+            x: useTransform(smoothProgress, [3.5 / denominator, 4 / denominator, 9 / denominator, 9.5 / denominator], [-100, 0, 0, -100]),
             pointerEvents: "none"
           }}
           className="hidden lg:flex absolute left-[-19vw] w-[38vw] h-[38vw] items-center justify-center z-10"
@@ -144,8 +146,8 @@ export const CircularFeatures = () => {
           >
             {features.map((feature, index) => {
               const angle = index * angleStep;
-              const activePoint = (index + 4) / itemsCount; 
-              const glowRange = 0.03;
+              const activePoint = (index + 4) / denominator; 
+              const glowRange = 0.02;
 
               return (
                 <div
@@ -185,9 +187,9 @@ export const CircularFeatures = () => {
           {/* 0. Intro Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0, 0.06, 0.12], [1, 1, 0]),
-              y: useTransform(smoothProgress, [0, 0.06, 0.12], [0, 0, -50]),
-              pointerEvents: useTransform(smoothProgress, [0, 0.06, 0.12], ["auto", "auto", "none"])
+              opacity: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], [1, 1, 0]),
+              y: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], [0, 0, -50]),
+              pointerEvents: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], ["auto", "auto", "none"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center text-center px-6"
           >
@@ -206,9 +208,9 @@ export const CircularFeatures = () => {
           {/* 1-3. Design DNA Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [1 / itemsCount, 1.5 / itemsCount, 3 / itemsCount, 3.5 / itemsCount], [0, 1, 1, 0]),
-              y: useTransform(smoothProgress, [1 / itemsCount, 1.5 / itemsCount, 3 / itemsCount, 3.5 / itemsCount], [50, 0, 0, -50]),
-              pointerEvents: useTransform(smoothProgress, [1 / itemsCount, 1.5 / itemsCount, 3 / itemsCount, 3.5 / itemsCount], ["none", "auto", "auto", "none"])
+              opacity: useTransform(smoothProgress, [1 / denominator, 1.5 / denominator, 3 / denominator, 3.5 / denominator], [0, 1, 1, 0]),
+              y: useTransform(smoothProgress, [1 / denominator, 1.5 / denominator, 3 / denominator, 3.5 / denominator], [50, 0, 0, -50]),
+              pointerEvents: useTransform(smoothProgress, [1 / denominator, 1.5 / denominator, 3 / denominator, 3.5 / denominator], ["none", "auto", "auto", "none"])
             }}
             className="absolute inset-0 z-20 flex items-center justify-center px-6 lg:px-32"
           >
@@ -263,8 +265,8 @@ export const CircularFeatures = () => {
 
           {/* 4-9. Features Slides */}
           {features.map((feature, index) => {
-            const activePoint = (index + 4) / itemsCount; 
-            const range = 0.04; // TIGHTER RANGE to prevent overlap
+            const activePoint = (index + 4) / denominator; 
+            const range = 0.03; // Even TIGHTER range for perfect alignment
 
             const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
             const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [30, 0, -30]);
@@ -300,9 +302,9 @@ export const CircularFeatures = () => {
           {/* 10-12. Final CTA Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0.88, 0.94, 1], [0, 1, 1]),
-              scale: useTransform(smoothProgress, [0.88, 0.94], [0.9, 1]),
-              pointerEvents: useTransform(smoothProgress, [0.88, 0.94, 1], ["none", "auto", "auto"])
+              opacity: useTransform(smoothProgress, [10 / denominator, 11 / denominator, 1], [0, 1, 1]),
+              scale: useTransform(smoothProgress, [10 / denominator, 11 / denominator], [0.9, 1]),
+              pointerEvents: useTransform(smoothProgress, [10 / denominator, 11 / denominator, 1], ["none", "auto", "auto"])
             }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 overflow-hidden"
           >
@@ -342,8 +344,8 @@ export const CircularFeatures = () => {
           </button>
           <button 
             onClick={() => navigateTo(activeSlide + 1)}
-            className={`p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-90 transition-all shadow-2xl shadow-primary/40 ${activeSlide === itemsCount - 1 ? "opacity-30" : "opacity-100"}`}
-            disabled={activeSlide === itemsCount - 1}
+            className={`p-4 rounded-full bg-primary text-white pointer-events-auto active:scale-90 transition-all shadow-2xl shadow-primary/40 ${activeSlide === denominator ? "opacity-30" : "opacity-100"}`}
+            disabled={activeSlide === denominator}
           >
             <ChevronRight size={32} />
           </button>
