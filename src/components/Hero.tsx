@@ -93,9 +93,12 @@ export default function Hero() {
                       <div key={idx} className="flex items-center gap-4 md:gap-8">
                         {step.isArrow ? (
                           <motion.div
-                            animate={{ x: [0, 5, 0] }}
+                            animate={{ 
+                              x: [0, 5, 0],
+                              opacity: [0.3, 0.6, 0.3]
+                            }}
                             transition={{ duration: 2, repeat: Infinity }}
-                            className="text-neutral-700 hidden sm:block"
+                            className="text-primary/50 px-1 md:px-2"
                           >
                             <step.icon size={16} />
                           </motion.div>
