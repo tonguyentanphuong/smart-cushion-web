@@ -84,14 +84,14 @@ export const CircularFeatures = () => {
 
   const rotation = useTransform(
     smoothProgress, 
-    [3 / itemsCount, 9 / itemsCount], 
+    [3.5 / itemsCount, 9.5 / itemsCount], 
     [0, -totalRotation]
   );
 
   const vortexOpacity = useTransform(
     smoothProgress,
-    [0, 0.08, 0.14, 0.22, 0.82, 0.95],
-    [1, 1, 0, 0.25, 0.25, 1]
+    [0, 0.08, 0.14, 0.22, 0.85, 0.95],
+    [1, 1, 0, 0.2, 0.2, 1]
   );
 
   const navigateTo = (index: number) => {
@@ -105,7 +105,7 @@ export const CircularFeatures = () => {
 
   return (
     <div ref={containerRef} className="relative h-[1200vh] bg-black">
-      {/* Real Snap Points in flow to fix the "stopping in between" issue */}
+      {/* Real Snap Points */}
       <div className="absolute inset-0 flex flex-col pointer-events-none">
         {sections.map((_, i) => (
           <div key={i} className="h-screen w-full snap-start" />
@@ -123,7 +123,7 @@ export const CircularFeatures = () => {
               backgroundColor="black"
               className="w-full h-full"
               containerClassName="w-full h-full"
-              particleCount={300}
+              particleCount={200}
               rangeY={800}
            />
         </motion.div>
@@ -131,8 +131,8 @@ export const CircularFeatures = () => {
         {/* Left Side: Circular UI */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.25, 0.32, 0.88, 0.95], [0, 1, 1, 0]),
-            x: useTransform(smoothProgress, [0.25, 0.32, 0.88, 0.95], [-100, 0, 0, -100]),
+            opacity: useTransform(smoothProgress, [0.32, 0.38, 0.88, 0.94], [0, 1, 1, 0]),
+            x: useTransform(smoothProgress, [0.32, 0.38, 0.88, 0.94], [-100, 0, 0, -100]),
             pointerEvents: "none"
           }}
           className="hidden lg:flex absolute left-[-19vw] w-[38vw] h-[38vw] items-center justify-center z-10"
@@ -145,7 +145,7 @@ export const CircularFeatures = () => {
             {features.map((feature, index) => {
               const angle = index * angleStep;
               const activePoint = (index + 4) / itemsCount; 
-              const glowRange = 0.04;
+              const glowRange = 0.03;
 
               return (
                 <div
@@ -182,11 +182,12 @@ export const CircularFeatures = () => {
         </motion.div>
 
         <div className="relative w-full h-full">
-          {/* Intro Slide */}
+          {/* 0. Intro Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [0, 0.08, 0.14], [1, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [0, 0.08, 0.14], ["auto", "auto", "none"])
+              opacity: useTransform(smoothProgress, [0, 0.06, 0.12], [1, 1, 0]),
+              y: useTransform(smoothProgress, [0, 0.06, 0.12], [0, 0, -50]),
+              pointerEvents: useTransform(smoothProgress, [0, 0.06, 0.12], ["auto", "auto", "none"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center text-center px-6"
           >
@@ -202,11 +203,12 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* Design DNA Slide */}
+          {/* 1-3. Design DNA Slide */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1.5 / itemsCount, 3.5 / itemsCount, 4 / itemsCount], [0, 1, 1, 0]),
-              pointerEvents: useTransform(smoothProgress, [1 / itemsCount - 0.05, 1.5 / itemsCount, 3.5 / itemsCount, 4 / itemsCount], ["none", "auto", "auto", "none"])
+              opacity: useTransform(smoothProgress, [1 / itemsCount, 1.5 / itemsCount, 3 / itemsCount, 3.5 / itemsCount], [0, 1, 1, 0]),
+              y: useTransform(smoothProgress, [1 / itemsCount, 1.5 / itemsCount, 3 / itemsCount, 3.5 / itemsCount], [50, 0, 0, -50]),
+              pointerEvents: useTransform(smoothProgress, [1 / itemsCount, 1.5 / itemsCount, 3 / itemsCount, 3.5 / itemsCount], ["none", "auto", "auto", "none"])
             }}
             className="absolute inset-0 z-20 flex items-center justify-center px-6 lg:px-32"
           >
@@ -259,11 +261,14 @@ export const CircularFeatures = () => {
             </div>
           </motion.div>
 
-          {/* Features Slides */}
+          {/* 4-9. Features Slides */}
           {features.map((feature, index) => {
             const activePoint = (index + 4) / itemsCount; 
-            const opacity = useTransform(smoothProgress, [activePoint - 0.1, activePoint, activePoint + 0.1], [0, 1, 0]);
-            const y = useTransform(smoothProgress, [activePoint - 0.1, activePoint, activePoint + 0.1], [20, 0, -20]);
+            const range = 0.04; // TIGHTER RANGE to prevent overlap
+
+            const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
+            const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [30, 0, -30]);
+            const scale = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0.95, 1, 0.95]);
 
             return (
               <motion.div
@@ -271,9 +276,10 @@ export const CircularFeatures = () => {
                 style={{ 
                   opacity, 
                   y,
-                  pointerEvents: useTransform(smoothProgress, [activePoint - 0.1, activePoint, activePoint + 0.1], ["none", "auto", "none"])
+                  scale,
+                  pointerEvents: useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], ["none", "auto", "none"])
                 }}
-                className="absolute inset-0 flex flex-col justify-center px-6 lg:pl-[30vw] lg:pr-32 text-center lg:text-left pointer-events-none md:pointer-events-auto"
+                className="absolute inset-0 flex flex-col justify-center px-6 lg:pl-[30vw] lg:pr-32 text-center lg:text-left"
               >
                 <div className="flex flex-col items-center lg:items-start">
                    <div className={`p-5 rounded-2xl bg-white/5 border border-white/10 mb-8 lg:hidden ${feature.color}`}>
@@ -291,7 +297,7 @@ export const CircularFeatures = () => {
             );
           })}
 
-          {/* Final CTA Slide - Restored to Dashboard Link */}
+          {/* 10-12. Final CTA Slide */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.88, 0.94, 1], [0, 1, 1]),

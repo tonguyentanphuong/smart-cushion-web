@@ -98,7 +98,7 @@ export const CircularDashboard = () => {
 
   return (
     <div ref={containerRef} className="relative h-[700vh] bg-black">
-      {/* Real Snap Points in flow to fix the "stopping in between" issue */}
+      {/* Real Snap Points */}
       <div className="absolute inset-0 flex flex-col pointer-events-none">
         {sections.map((_, i) => (
           <div key={i} className="h-screen w-full snap-start" />
@@ -184,9 +184,9 @@ export const CircularDashboard = () => {
               {/* Intro Slide */}
               <motion.div
                 style={{
-                  opacity: useTransform(smoothProgress, [0, 0.05, 0.1], [1, 1, 0]),
-                  y: useTransform(smoothProgress, [0, 0.05, 0.1], [0, 0, -50]),
-                  pointerEvents: useTransform(smoothProgress, [0, 0.05, 0.1], ["auto", "auto", "none"])
+                  opacity: useTransform(smoothProgress, [0, 0.04, 0.08], [1, 1, 0]),
+                  y: useTransform(smoothProgress, [0, 0.04, 0.08], [0, 0, -30]),
+                  pointerEvents: useTransform(smoothProgress, [0, 0.04, 0.08], ["auto", "auto", "none"])
                 }}
                 className="absolute inset-0 flex flex-col justify-center text-center lg:text-left z-10"
               >
@@ -206,10 +206,11 @@ export const CircularDashboard = () => {
               {/* View Slides */}
               {dashboardViews.map((view, index) => {
                 const activePoint = (index + 1) / itemsCount;
-                const range = 0.07;
+                const range = 0.035; // TIGHTER RANGE for dashboard views
 
                 const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
-                const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [20, 0, -20]);
+                const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [30, 0, -30]);
+                const scale = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0.95, 1, 0.95]);
 
                 return (
                   <motion.div
@@ -217,6 +218,7 @@ export const CircularDashboard = () => {
                     style={{ 
                       opacity, 
                       y,
+                      scale,
                       pointerEvents: useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], ["none", "auto", "none"])
                     }}
                     className="absolute inset-0 flex flex-col justify-center"
@@ -247,7 +249,7 @@ export const CircularDashboard = () => {
             </div>
           </div>
 
-          {/* FINAL CTA - Try Demo */}
+          {/* FINAL CTA */}
           <motion.div
             style={{
               opacity: useTransform(smoothProgress, [0.8, 0.88, 1], [0, 1, 1]),
