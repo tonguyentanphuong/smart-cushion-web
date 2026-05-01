@@ -73,7 +73,7 @@ export const CircularDashboard = () => {
 
   const sections = Array.from({ length: 7 });
   const itemsCount = sections.length; 
-  const denominator = itemsCount - 1; // Correct divisor for scroll segments
+  const denominator = itemsCount - 1;
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const index = Math.round(latest * denominator);
@@ -98,15 +98,15 @@ export const CircularDashboard = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative h-[700vh] bg-black">
-      {/* Real Snap Points */}
+    <div ref={containerRef} className="relative h-[700vh] bg-black scroll-smooth">
+      {/* Real Snap Points for both Desktop & Mobile */}
       <div className="absolute inset-0 flex flex-col pointer-events-none">
         {sections.map((_, i) => (
           <div key={i} className="h-screen w-full snap-start" />
         ))}
       </div>
 
-      <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden touch-none lg:touch-auto">
+      <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden">
         
         {/* Right Side: CIRCULAR UI */}
         <motion.div 
@@ -207,7 +207,7 @@ export const CircularDashboard = () => {
               {/* View Slides */}
               {dashboardViews.map((view, index) => {
                 const activePoint = (index + 1) / denominator;
-                const range = 0.03;
+                const range = 0.03; 
 
                 const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
                 const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [30, 0, -30]);

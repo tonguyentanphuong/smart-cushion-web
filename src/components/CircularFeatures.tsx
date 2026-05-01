@@ -73,7 +73,7 @@ export const CircularFeatures = () => {
 
   const sections = Array.from({ length: 12 });
   const itemsCount = sections.length; 
-  const denominator = itemsCount - 1; // Correct divisor for scroll segments
+  const denominator = itemsCount - 1;
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const index = Math.round(latest * denominator);
@@ -83,7 +83,6 @@ export const CircularFeatures = () => {
   const angleStep = 40; 
   const totalRotation = angleStep * (features.length - 1);
 
-  // Sync rotation with snap points
   const rotation = useTransform(
     smoothProgress, 
     [4 / denominator, 9 / denominator], 
@@ -106,15 +105,15 @@ export const CircularFeatures = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative h-[1200vh] bg-black">
-      {/* Real Snap Points */}
+    <div ref={containerRef} className="relative h-[1200vh] bg-black scroll-smooth">
+      {/* Real Snap Points for both Desktop & Mobile */}
       <div className="absolute inset-0 flex flex-col pointer-events-none">
         {sections.map((_, i) => (
           <div key={i} className="h-screen w-full snap-start" />
         ))}
       </div>
 
-      <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden touch-none lg:touch-auto">
+      <div className="sticky top-0 h-[100dvh] w-full flex items-center overflow-hidden">
         
         {/* Background Vortex */}
         <motion.div 
@@ -266,7 +265,7 @@ export const CircularFeatures = () => {
           {/* 4-9. Features Slides */}
           {features.map((feature, index) => {
             const activePoint = (index + 4) / denominator; 
-            const range = 0.03; // Even TIGHTER range for perfect alignment
+            const range = 0.03; 
 
             const opacity = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [0, 1, 0]);
             const y = useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], [30, 0, -30]);
@@ -333,7 +332,7 @@ export const CircularFeatures = () => {
           </motion.div>
         </div>
 
-        {/* Mobile Navigation Arrows */}
+        {/* Navigation Arrows - Kept for accessibility */}
         <div className="flex lg:hidden absolute bottom-8 left-0 w-full justify-between px-6 z-[100] pointer-events-none">
           <button 
             onClick={() => navigateTo(activeSlide - 1)}
