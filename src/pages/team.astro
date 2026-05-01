@@ -6,16 +6,24 @@ import { TeamGrid } from '../components/TeamGrid';
 
 <Layout title="Our Team | Smart Cushion">
 	<Navbar client:load />
-	<main class="h-screen bg-black overflow-hidden flex flex-col justify-center pt-20">
+	<main class="h-screen bg-black overflow-hidden flex flex-col justify-center pt-10">
 		<section class="container mx-auto px-4">
-			<div class="text-center mb-8">
-				<h1 class="text-3xl lg:text-5xl font-bold mb-3 text-white tracking-tight">
-					The Minds Behind <br/><span class="text-primary italic">Smart Cushion</span>
+			<motion.div 
+				initial={{ opacity: 0, y: -20 }}
+				animate={{ opacity: 1, y: 0 }}
+				className="text-center mb-12"
+				client:load
+			>
+				<h1 class="text-5xl lg:text-8xl font-black mb-6 text-white tracking-tighter leading-none">
+					The Minds Behind <br/>
+					<span class="bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary bg-[length:200%_auto] animate-gradient-x italic">
+						Smart Cushion
+					</span>
 				</h1>
-				<p class="text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed">
-					Meet the innovators dedicated to revolutionizing ergonomic health through AI and IoT technology.
+				<p class="text-xl lg:text-3xl text-neutral-400 max-w-4xl mx-auto leading-relaxed font-medium">
+					Meet the innovators dedicated to revolutionizing ergonomic health through <span class="text-white">AI and IoT technology.</span>
 				</p>
-			</div>
+			</motion.div>
 
 			<TeamGrid client:load />
 		</section>

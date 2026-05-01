@@ -41,44 +41,62 @@ const team = [
 
 export const TeamGrid = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 py-4">
-      {team.map((item, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          whileHover={{ y: -5, scale: 1.02 }}
-          transition={{ 
-            type: "spring",
-            stiffness: 300,
-            damping: 20
-          }}
-          className="flex flex-col bg-neutral-900/40 border border-neutral-800/50 p-4 rounded-[1.5rem] hover:border-primary/50 transition-colors duration-300 cursor-pointer backdrop-blur-sm"
-        >
-          {/* Image Container - Slightly smaller */}
-          <div className={`relative w-full aspect-square rounded-[1rem] overflow-hidden mb-4 ${item.bg}`}>
-            <img 
-              src={item.image} 
-              alt={item.name} 
-              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-            />
-          </div>
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 py-8">
+        {team.map((item, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            whileHover={{ y: -15, scale: 1.05 }}
+            transition={{ 
+              type: "spring",
+              stiffness: 200,
+              damping: 15,
+              delay: index * 0.1
+            }}
+            className="group relative flex flex-col bg-neutral-900/60 border border-white/10 p-6 rounded-[2.5rem] hover:border-primary/50 transition-all duration-500 cursor-pointer backdrop-blur-md shadow-2xl"
+          >
+            {/* Ambient Background Glow on Hover */}
+            <div className="absolute inset-0 rounded-[2.5rem] bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity blur-2xl -z-10" />
 
-          {/* Info - Centered */}
-          <div className="space-y-1 text-center">
-            <h3 className="text-lg font-bold text-white line-clamp-1">{item.name}</h3>
-            <p className="text-[10px] text-primary font-mono uppercase tracking-wider">{item.role}</p>
-          </div>
+            {/* Image Container */}
+            <div className={`relative w-full aspect-square rounded-[1.8rem] overflow-hidden mb-8 ${item.bg} border border-white/5`}>
+              <img 
+                src={item.image} 
+                alt={item.name} 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
 
-          {/* Dashed Separator - Minimal */}
-          <div className="my-3 border-t border-dashed border-neutral-800 w-full" />
+            {/* Info */}
+            <div className="space-y-3 text-center">
+              <h3 className="text-xl lg:text-2xl font-black text-white leading-tight">{item.name}</h3>
+              <p className="text-xs lg:text-sm text-primary font-mono uppercase tracking-[0.2em] font-bold">{item.role}</p>
+            </div>
 
-          {/* Description - Centered and compact */}
-          <p className="text-xs text-neutral-400 leading-relaxed text-center line-clamp-3">
-            {item.description}
-          </p>
-        </motion.div>
-      ))}
-    </div>
+            {/* Separator */}
+            <div className="my-6 border-t border-white/10 w-full group-hover:border-primary/30 transition-colors" />
+
+            {/* Description */}
+            <p className="text-sm lg:text-base text-neutral-400 leading-relaxed text-center font-medium line-clamp-4 group-hover:text-neutral-200 transition-colors">
+              {item.description}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      <style jsx global>{`
+        @keyframes gradient-x {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-x {
+          animation: gradient-x 5s ease infinite;
+        }
+      `}</style>
+    </>
   );
 };
