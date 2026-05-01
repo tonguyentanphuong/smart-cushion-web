@@ -8,12 +8,7 @@ import { TeamGrid } from '../components/TeamGrid';
 	<Navbar client:load />
 	<main class="h-screen bg-black overflow-hidden flex flex-col justify-center pt-10">
 		<section class="container mx-auto px-4">
-			<motion.div 
-				initial={{ opacity: 0, y: -20 }}
-				animate={{ opacity: 1, y: 0 }}
-				className="text-center mb-12"
-				client:load
-			>
+			<div class="text-center mb-12 animate-fade-in-down">
 				<h1 class="text-5xl lg:text-8xl font-black mb-6 text-white tracking-tighter leading-none">
 					The Minds Behind <br/>
 					<span class="bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary bg-[length:200%_auto] animate-gradient-x italic">
@@ -23,9 +18,27 @@ import { TeamGrid } from '../components/TeamGrid';
 				<p class="text-xl lg:text-3xl text-neutral-400 max-w-4xl mx-auto leading-relaxed font-medium">
 					Meet the innovators dedicated to revolutionizing ergonomic health through <span class="text-white">AI and IoT technology.</span>
 				</p>
-			</motion.div>
+			</div>
 
 			<TeamGrid client:load />
 		</section>
 	</main>
 </Layout>
+
+<style>
+	@keyframes fade-in-down {
+		0% { opacity: 0; transform: translateY(-20px); }
+		100% { opacity: 1; transform: translateY(0); }
+	}
+	.animate-fade-in-down {
+		animation: fade-in-down 1s ease-out forwards;
+	}
+	@keyframes gradient-x {
+		0% { background-position: 0% 50%; }
+		50% { background-position: 100% 50%; }
+		100% { background-position: 0% 50%; }
+	}
+	.animate-gradient-x {
+		animation: gradient-x 5s ease infinite;
+	}
+</style>
