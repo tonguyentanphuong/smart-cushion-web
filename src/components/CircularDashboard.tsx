@@ -187,40 +187,50 @@ export const CircularDashboard = () => {
         {/* CONTENT AREA */}
         <div className="w-full h-full relative">
           
-          {/* Main Slide Area */}
-          <div className="absolute inset-0 lg:mr-[25vw] px-6 lg:pl-24">
-            <div className="relative h-full flex flex-col justify-center">
-              
-              {/* Intro Slide */}
+          {/* Full Width Intro Slide Area */}
+          <div className="absolute inset-0 px-6 lg:px-24 pointer-events-none">
+            <div className="relative h-full flex flex-col justify-center items-center">
               <motion.div
                 style={{
-                  opacity: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], [1, 1, 0]),
+                  opacity: useTransform(smoothProgress, [0, 0.05 / denominator, 0.5 / denominator], [1, 1, 0]),
                   y: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], [0, 0, -30]),
                   pointerEvents: useTransform(smoothProgress, [0, 0.5 / denominator, 1 / denominator], ["auto", "auto", "none"])
                 }}
-                className="absolute inset-0 flex flex-col justify-center items-center text-center z-10 lg:pr-[20vw]"
+                className="absolute inset-0 flex items-center justify-center z-10 w-full"
               >
-                <div className="flex flex-col items-center max-w-4xl w-full">
-                  <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-sm font-mono uppercase tracking-[0.3em] mb-6">
-                    <Sparkles size={16} /> Control Center
-                  </span>
-                  <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight tracking-tighter">
-                    Your Health,<br/>Improved alongside <span className="text-primary italic font-black">Capybara.</span>
-                  </h1>
-                  <p className="text-base lg:text-xl text-neutral-400 max-w-2xl leading-relaxed font-medium mb-10">
-                    The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
-                  </p>
+                <div className="flex flex-col lg:flex-row items-center gap-12 max-w-7xl w-full mx-auto px-4">
+                  {/* Text Container (Left) */}
+                  <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <span className="inline-flex items-center gap-2 text-primary text-[10px] lg:text-sm font-mono uppercase tracking-[0.3em] mb-6">
+                      <Sparkles size={16} /> Control Center
+                    </span>
+                    <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight tracking-tighter">
+                      Your Health,<br/>Improved alongside <span className="text-primary italic font-black">Capybara.</span>
+                    </h1>
+                    <p className="text-base lg:text-xl text-neutral-400 max-w-xl leading-relaxed font-medium mb-10">
+                      The PostureAI Dashboard provides a comprehensive suite of tools to monitor and analyze your sitting habits in real-time.
+                    </p>
+                  </div>
                   
-                  <div className="relative w-full max-w-3xl aspect-[16/9] lg:aspect-[21/9] rounded-[2rem] overflow-hidden border-2 border-white/10 shadow-2xl shadow-primary/20 bg-neutral-900/30 backdrop-blur-sm">
-                     <img 
-                       src="/dashboard-intro-capy.png" 
-                       alt="User tracking posture with capybara" 
-                       className="w-full h-full object-cover object-center"
-                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  {/* Image Container (Right) */}
+                  <div className="flex-1 w-full flex justify-center lg:justify-end">
+                    <div className="relative w-full max-w-2xl aspect-[4/3] rounded-[2.5rem] overflow-hidden border-2 border-white/10 shadow-2xl shadow-primary/20 bg-neutral-900/30 backdrop-blur-sm">
+                       <img 
+                         src="/dashboard-intro-capy.png" 
+                         alt="User tracking posture with capybara" 
+                         className="w-full h-full object-cover object-center"
+                       />
+                       <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-transparent" />
+                    </div>
                   </div>
                 </div>
               </motion.div>
+            </div>
+          </div>
+
+          {/* Main Slide Area (Restricted width for circular UI) */}
+          <div className="absolute inset-0 lg:mr-[25vw] px-6 lg:pl-24">
+            <div className="relative h-full flex flex-col justify-center">
 
               {/* View Slides */}
               {dashboardViews.map((view, index) => {
