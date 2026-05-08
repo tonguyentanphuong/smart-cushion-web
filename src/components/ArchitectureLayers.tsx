@@ -14,7 +14,7 @@ const dataNodes = [
 export const ArchitectureLayers = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const totalSlides = 4;
+  const totalSlides = 5;
 
   const paginate = (newDirection: number) => {
     setDirection(newDirection);
@@ -42,21 +42,34 @@ export const ArchitectureLayers = () => {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]" />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-4">
-            System <span className="text-primary italic">Architecture</span> Models
-          </h1>
-          <p className="text-neutral-400 max-w-2xl mx-auto text-lg">
-            A comparative view of standard architectural models applied to the Smart Cushion ecosystem.
-          </p>
-        </div>
-
         <div className="relative w-full max-w-6xl mx-auto h-[600px] flex items-center justify-center">
           
           <AnimatePresence initial={false} custom={direction} mode="wait">
             
-            {/* 3 LAYER - Cloud Computing */}
+            {/* 0 LAYER - Title Slide */}
             {activeIndex === 0 && (
+              <motion.div 
+                key="title" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30, staggerChildren: 0.1 }}
+                className="absolute inset-0 flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-[3rem] p-8 md:p-16 backdrop-blur-md shadow-2xl text-center overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(var(--primary),0.15)_0%,transparent_70%)] pointer-events-none" />
+                
+                <motion.div variants={itemVariants} className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-mono tracking-widest text-sm relative z-10">
+                   <Activity size={16} /> Technical Documentation
+                </motion.div>
+                
+                <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl xl:text-8xl font-black text-white tracking-tighter mb-8 leading-tight relative z-10">
+                  System <span className="text-primary italic">Architecture</span><br/>Models
+                </motion.h1>
+                
+                <motion.p variants={itemVariants} className="text-neutral-400 max-w-3xl mx-auto text-lg md:text-2xl font-medium leading-relaxed relative z-10">
+                  A comparative view of standard architectural models applied to the Smart Cushion ecosystem.
+                </motion.p>
+              </motion.div>
+            )}
+
+            {/* 3 LAYER - Cloud Computing */}
+            {activeIndex === 1 && (
               <motion.div 
                 key="3layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30, staggerChildren: 0.08 }}
                 className="absolute inset-0 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-16 backdrop-blur-xl shadow-2xl"
@@ -96,7 +109,7 @@ export const ArchitectureLayers = () => {
             )}
 
             {/* 5 LAYER - IoT Architecture */}
-            {activeIndex === 1 && (
+            {activeIndex === 2 && (
               <motion.div 
                 key="5layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30, staggerChildren: 0.06 }}
                 className="absolute inset-0 flex flex-col bg-gradient-to-tr from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-xl shadow-2xl items-center"
@@ -125,7 +138,7 @@ export const ArchitectureLayers = () => {
             )}
 
             {/* 7 LAYER - OSI Model */}
-            {activeIndex === 2 && (
+            {activeIndex === 3 && (
               <motion.div 
                 key="7layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30, staggerChildren: 0.04 }}
                 className="absolute inset-0 flex flex-col md:flex-row bg-gradient-to-bl from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-xl shadow-2xl"
@@ -159,7 +172,7 @@ export const ArchitectureLayers = () => {
             )}
 
             {/* SMART CUSHION ARCHITECTURE - Data Flow */}
-            {activeIndex === 3 && (
+            {activeIndex === 4 && (
               <motion.div 
                 key="data-flow" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md justify-center"
@@ -219,7 +232,7 @@ export const ArchitectureLayers = () => {
 
           {/* Dots Indicator */}
           <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-3 z-50">
-            {[0, 1, 2, 3].map((idx) => (
+            {[0, 1, 2, 3, 4].map((idx) => (
               <button 
                 key={idx} 
                 onClick={() => {
