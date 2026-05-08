@@ -245,7 +245,6 @@ export const ArchitectureLayers = () => {
                 </div>
 
               </motion.div>
-            )}>
             )}
             
           </AnimatePresence>
