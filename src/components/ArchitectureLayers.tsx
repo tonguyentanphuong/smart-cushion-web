@@ -186,6 +186,8 @@ export const ArchitectureLayers = () => {
                   </div>
                 </div>
               </motion.div>
+            )}
+
             {/* SMART CUSHION ARCHITECTURE - Data Flow */}
             {activeIndex === 4 && (
               <motion.div 
