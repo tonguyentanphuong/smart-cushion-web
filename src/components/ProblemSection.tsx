@@ -45,25 +45,25 @@ const items = [
   {
     title: "Chronic Back Pain",
     description: "80% of office workers experience back pain at some point, often due to poor posture.",
-    header: <Skeleton color="from-red-500 to-orange-500" />,
+    header: <div className="flex flex-1 w-full h-full min-h-[12rem] rounded-xl overflow-hidden border border-white/10 shadow-inner bg-neutral-900/50"><img src="/problem-1.png" className="w-full h-full object-cover" /></div>,
     icon: <AlertTriangle className="h-4 w-4 text-red-500" />,
   },
   {
     title: "The 9.3 Hour Average",
     description: "We spend more time sitting than sleeping. It's the new smoking.",
-    header: <Skeleton color="from-blue-500 to-cyan-500" />,
+    header: <div className="flex flex-1 w-full h-full min-h-[12rem] rounded-xl overflow-hidden border border-white/10 shadow-inner bg-neutral-900/50"><img src="/problem-2.png" className="w-full h-full object-cover" /></div>,
     icon: <Clock className="h-4 w-4 text-blue-500" />,
   },
   {
     title: "Posture Deterioration",
     description: "Slouching reduces oxygen flow and leads to permanent spinal misalignment.",
-    header: <Skeleton color="from-purple-500 to-pink-500" />,
+    header: <div className="flex flex-1 w-full h-full min-h-[12rem] rounded-xl overflow-hidden border border-white/10 shadow-inner bg-neutral-900/50"><img src="/problem-3.png" className="w-full h-full object-cover" /></div>,
     icon: <Activity className="h-4 w-4 text-purple-500" />,
   },
   {
     title: "Mental Fatigue & Productivity Loss",
     description: "Discomfort from sitting leads to higher stress and significant drops in focus and output.",
-    header: <Skeleton color="from-emerald-500 to-teal-500" />,
+    header: <div className="flex flex-1 w-full h-full min-h-[12rem] rounded-xl overflow-hidden border border-white/10 shadow-inner bg-neutral-900/50"><img src="/problem-4.png" className="w-full h-full object-cover" /></div>,
     icon: <PenTool className="h-4 w-4 text-emerald-500" />,
   },
 ];

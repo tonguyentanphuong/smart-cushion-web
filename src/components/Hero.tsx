@@ -37,15 +37,15 @@ export default function Hero() {
               </div>
               
               <h1 className="text-5xl md:text-8xl font-bold text-white mb-8 leading-[1.1] tracking-tight">
-                The Future of <br/>
+                Improve your sitting with <br/>
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary bg-[length:200%_auto] animate-gradient-x italic">
-                  Healthy Sitting.
+                  Capybara Companion.
                 </span>
               </h1>
               
               <p className="text-lg md:text-2xl text-neutral-400 mb-10 max-w-2xl leading-relaxed font-medium">
-                Transform your sitting habits with our IoT-enabled smart cushion. 
-                Real-time posture detection, AI coaching, and deep health insights.
+                Transform your sitting habits with our IoT smart cushion. 
+                Meet your AI health companion, detect posture in real-time, and embark on a gamified journey to spinal wellness.
               </p>
 
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6">
@@ -115,6 +115,15 @@ export default function Hero() {
               <div className={`absolute inset-0 bg-gradient-to-br ${activeEnv.color} blur-[150px] rounded-full transition-all duration-700`} />
               
               <div className="relative z-10 w-full h-full flex items-center justify-center p-8">
+                {/* Floating Mascot */}
+                <motion.div 
+                  animate={{ y: [0, -20, 0], rotate: [0, 2, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-10 -left-10 w-32 h-32 md:w-48 md:h-48 z-20 pointer-events-none drop-shadow-[0_20px_20px_rgba(var(--primary),0.3)]"
+                >
+                  <img src="/capy-mascot.png" alt="Capybara Mascot" className="w-full h-full object-contain" />
+                </motion.div>
+
                 <motion.div
                   key={activeEnv.id}
                   initial={{ opacity: 0.5, scale: 0.95 }}
