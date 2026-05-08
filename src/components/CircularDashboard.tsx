@@ -10,7 +10,10 @@ import {
   Sparkles,
   ArrowRight,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Gift,
+  Library,
+  BookOpen
 } from "lucide-react";
 
 const dashboardViews = [
@@ -54,6 +57,30 @@ const dashboardViews = [
     color: "text-orange-500",
     glow: "rgba(249, 115, 22, 0.5)"
   },
+  {
+    title: "Capybara Gacha",
+    description: "Earn points by maintaining good posture and use them in our Gacha system to unlock rare Capybara skins and accessories.",
+    icon: Gift,
+    image: "/dashboard-gatcha.gif",
+    color: "text-pink-500",
+    glow: "rgba(236, 72, 153, 0.5)"
+  },
+  {
+    title: "Avatar Collection",
+    description: "Browse and equip your unlocked Capybara themes. Show off your dedication to spinal health with exclusive digital pets.",
+    icon: Library,
+    image: "/dashboard-collect.png",
+    color: "text-yellow-500",
+    glow: "rgba(234, 179, 8, 0.5)"
+  },
+  {
+    title: "Health Passport",
+    description: "Your unified ergonomic profile. Track achievements, daily streaks, and overall wellness milestones in your Capybara Passport.",
+    icon: BookOpen,
+    image: "/dashboard-passport.png",
+    color: "text-indigo-500",
+    glow: "rgba(99, 102, 241, 0.5)"
+  },
 ];
 
 export const CircularDashboard = () => {
@@ -71,7 +98,7 @@ export const CircularDashboard = () => {
     restDelta: 0.001,
   });
 
-  const sections = Array.from({ length: 7 });
+  const sections = Array.from({ length: 10 });
   const itemsCount = sections.length; 
   const denominator = itemsCount - 1;
 
@@ -84,8 +111,8 @@ export const CircularDashboard = () => {
 
   const rotation = useTransform(
     smoothProgress, 
-    [1 / denominator, 5 / denominator], 
-    [0, 180]
+    [1 / denominator, 8 / denominator], 
+    [0, 315]
   );
 
   const navigateTo = (index: number) => {
@@ -98,7 +125,7 @@ export const CircularDashboard = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative h-[700vh] bg-black scroll-smooth">
+    <div ref={containerRef} className="relative h-[1000vh] bg-black scroll-smooth">
       {/* Real Snap Points for both Desktop & Mobile */}
       <div className="absolute inset-0 flex flex-col pointer-events-none">
         {sections.map((_, i) => (
@@ -111,7 +138,7 @@ export const CircularDashboard = () => {
         {/* Right Side: CIRCULAR UI */}
         <motion.div 
           style={{ 
-            opacity: useTransform(smoothProgress, [0.5 / denominator, 1 / denominator, 5 / denominator, 5.5 / denominator], [0, 1, 1, 0]),
+            opacity: useTransform(smoothProgress, [0.5 / denominator, 1 / denominator, 8 / denominator, 8.5 / denominator], [0, 1, 1, 0]),
           }}
           className="hidden lg:flex absolute right-[-19vw] w-[38vw] h-[38vw] items-center justify-center"
         >
@@ -253,9 +280,9 @@ export const CircularDashboard = () => {
           {/* FINAL CTA */}
           <motion.div
             style={{
-              opacity: useTransform(smoothProgress, [5.5 / denominator, 6 / denominator, 1], [0, 1, 1]),
-              scale: useTransform(smoothProgress, [5.5 / denominator, 6 / denominator], [0.9, 1]),
-              pointerEvents: useTransform(smoothProgress, [5.5 / denominator, 6 / denominator, 1], ["none", "auto", "auto"])
+              opacity: useTransform(smoothProgress, [8.5 / denominator, 9 / denominator, 1], [0, 1, 1]),
+              scale: useTransform(smoothProgress, [8.5 / denominator, 9 / denominator], [0.9, 1]),
+              pointerEvents: useTransform(smoothProgress, [8.5 / denominator, 9 / denominator, 1], ["none", "auto", "auto"])
             }}
             className="absolute inset-0 z-50 flex items-center justify-center bg-black/80"
           >
