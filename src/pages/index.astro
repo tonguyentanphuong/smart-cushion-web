@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import { ProblemSection } from '../components/ProblemSection';
-import { ArchitectureDiagram } from '../components/ArchitectureDiagram';
 import { CircularFeatures } from '../components/CircularFeatures';
 import { TechStack } from '../components/TechStack';
 import { Spotlight } from '@/components/ui/Spotlight';
@@ -18,7 +17,6 @@ import { ArrowRight } from 'lucide-react';
 		<Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
 		<Hero client:load />
 		<ProblemSection client:load />
-		<ArchitectureDiagram client:load />
 		<CircularFeatures client:load />
 		<TechStack client:load />
 	</main>

@@ -1,17 +1,26 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Cpu, Cloud, Smartphone, Activity, BrainCircuit, Database } from "lucide-react";
+
+const dataNodes = [
+  { id: "edge", title: "Smart Cushion", desc: "FSR Sensor Matrix", icon: Activity, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+  { id: "esp", title: "Edge MCU", desc: "ESP32 Pre-processing", icon: Cpu, color: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20" },
+  { id: "fog", title: "Fog Node", desc: "CNN Inference Model", icon: BrainCircuit, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", glow: true },
+  { id: "cloud", title: "AWS Cloud", desc: "IoT Core & Lambda", icon: Cloud, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
+  { id: "dashboard", title: "Live Dashboard", desc: "Analytics & Gamification", icon: Smartphone, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+];
 
 export const ArchitectureLayers = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const totalSlides = 4;
 
   const paginate = (newDirection: number) => {
     setDirection(newDirection);
     let newIndex = activeIndex + newDirection;
-    if (newIndex < 0) newIndex = 2;
-    if (newIndex > 2) newIndex = 0;
+    if (newIndex < 0) newIndex = totalSlides - 1;
+    if (newIndex >= totalSlides) newIndex = 0;
     setActiveIndex(newIndex);
   };
 
@@ -36,7 +45,7 @@ export const ArchitectureLayers = () => {
           </p>
         </div>
 
-        <div className="relative w-full max-w-3xl mx-auto h-[600px] flex items-center justify-center">
+        <div className="relative w-full max-w-6xl mx-auto h-[600px] flex items-center justify-center">
           
           <AnimatePresence initial={false} custom={direction} mode="wait">
             
@@ -44,7 +53,7 @@ export const ArchitectureLayers = () => {
             {activeIndex === 0 && (
               <motion.div 
                 key="3layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md"
+                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md max-w-3xl mx-auto"
               >
                 <div className="text-center mb-10">
                   <div className="text-8xl md:text-9xl font-black text-white mb-2 drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">3</div>
@@ -81,7 +90,7 @@ export const ArchitectureLayers = () => {
             {activeIndex === 1 && (
               <motion.div 
                 key="5layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md"
+                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md max-w-3xl mx-auto"
               >
                 <div className="text-center mb-8">
                   <div className="text-8xl md:text-9xl font-black text-white mb-2 drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">5</div>
@@ -106,7 +115,7 @@ export const ArchitectureLayers = () => {
             {activeIndex === 2 && (
               <motion.div 
                 key="7layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md"
+                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md max-w-3xl mx-auto"
               >
                 <div className="text-center mb-8">
                   <div className="text-8xl md:text-9xl font-black text-white mb-2 drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">7</div>
@@ -133,6 +142,47 @@ export const ArchitectureLayers = () => {
                 </div>
               </motion.div>
             )}
+
+            {/* SMART CUSHION ARCHITECTURE - Data Flow */}
+            {activeIndex === 3 && (
+              <motion.div 
+                key="data-flow" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md justify-center"
+              >
+                <div className="text-center mb-16">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono tracking-widest mb-4">
+                    PRACTICAL IMPLEMENTATION
+                  </span>
+                  <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
+                    From Sensor to Screen
+                  </h2>
+                </div>
+
+                <div className="relative w-full max-w-6xl mx-auto">
+                  {/* Connecting Line (Desktop) */}
+                  <div className="hidden lg:block absolute top-[44px] left-[8%] right-[8%] h-[2px] bg-white/10 -translate-y-1/2 rounded-full overflow-hidden">
+                     <motion.div className="absolute top-0 bottom-0 w-32 bg-gradient-to-r from-transparent via-primary to-transparent" animate={{ left: ["-10%", "110%"] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} />
+                     <motion.div className="absolute top-0 bottom-0 w-24 bg-gradient-to-r from-transparent via-cyan-400 to-transparent" animate={{ left: ["-10%", "110%"] }} transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 1.2 }} />
+                  </div>
+
+                  <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-0 relative">
+                    {dataNodes.map((node, i) => (
+                      <div key={node.id} className="flex flex-col items-center w-full lg:w-48 group relative z-10">
+                        <div className={`w-20 h-20 md:w-[88px] md:h-[88px] rounded-2xl flex items-center justify-center border backdrop-blur-md bg-black/50 ${node.bg} ${node.border} ${node.glow ? 'shadow-[0_0_30px_rgba(var(--primary),0.2)] border-primary/40' : ''} relative`}>
+                          <node.icon className={`w-10 h-10 md:w-12 md:h-12 ${node.color}`} />
+                          {node.glow && <span className="absolute inset-0 rounded-2xl bg-primary/20 animate-ping opacity-50" />}
+                        </div>
+                        <div className="mt-6 text-center">
+                          <h4 className="text-white font-bold text-lg tracking-wide mb-1.5">{node.title}</h4>
+                          <p className="text-neutral-500 text-sm font-medium">{node.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </motion.div>
+            )}
             
           </AnimatePresence>
 
@@ -144,7 +194,7 @@ export const ArchitectureLayers = () => {
             
             {/* Dots */}
             <div className="flex gap-3">
-              {[0, 1, 2].map((idx) => (
+              {[0, 1, 2, 3].map((idx) => (
                 <button 
                   key={idx} 
                   onClick={() => {
