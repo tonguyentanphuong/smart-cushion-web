@@ -15,6 +15,7 @@ const features = [
     title: "9-Posture Recognition",
     description: "Our advanced AI analyzes data from a high-precision 3x3 sensor matrix to accurately identify 9 distinct sitting postures.",
     icon: Brain,
+    image: "/feat_posture_recognition.png",
     color: "text-blue-500",
     glow: "rgba(59, 130, 246, 0.5)"
   },
@@ -22,6 +23,7 @@ const features = [
     title: "Embedded Fog Computing",
     description: "Localized data processing ensures zero latency and maximum privacy for your sensitive health data.",
     icon: Cpu,
+    image: "/feat_fog_computing.png",
     color: "text-cyan-500",
     glow: "rgba(6, 182, 212, 0.5)"
   },
@@ -29,6 +31,7 @@ const features = [
     title: "Real-time App Feedback",
     description: "Receive instant posture corrections and long-term health trends directly through our dedicated mobile application.",
     icon: Smartphone,
+    image: "/feat_app_feedback.png",
     color: "text-indigo-500",
     glow: "rgba(99, 102, 241, 0.5)"
   },
@@ -36,6 +39,7 @@ const features = [
     title: "Cloud Integration",
     description: "Securely backup your health history and sync across all your ergonomic devices automatically.",
     icon: Cloud,
+    image: "/feat_cloud_sync.png",
     color: "text-purple-500",
     glow: "rgba(168, 85, 247, 0.5)"
   },
@@ -43,6 +47,7 @@ const features = [
     title: "Smart Vibrations",
     description: "Subtle haptic feedback alerts you immediately when your posture needs adjustment without distraction.",
     icon: Bell,
+    image: "/feat_smart_vibration.png",
     color: "text-orange-500",
     glow: "rgba(249, 115, 22, 0.5)"
   },
@@ -50,6 +55,7 @@ const features = [
     title: "Capybara Data Journey",
     description: "Observe your real-time posture through your virtual Capybara companion. A healthy spine keeps your buddy happy and thriving!",
     icon: Sparkles,
+    image: "/feat_capy_journey.png",
     color: "text-emerald-500",
     glow: "rgba(160, 185, 129, 0.5)"
   },
@@ -280,19 +286,35 @@ export const CircularFeatures = () => {
                   scale,
                   pointerEvents: useTransform(smoothProgress, [activePoint - range, activePoint, activePoint + range], ["none", "auto", "none"])
                 }}
-                className="absolute inset-0 flex flex-col justify-center px-6 lg:pl-[30vw] lg:pr-32 text-center lg:text-left"
+                className="absolute inset-0 flex flex-col justify-center px-6 lg:pl-[28vw] lg:pr-12 text-center lg:text-left"
               >
-                <div className="flex flex-col items-center lg:items-start">
+                <div className="flex flex-col items-center lg:items-start w-full max-w-6xl">
                    <div className={`p-5 rounded-2xl bg-white/5 border border-white/10 mb-8 lg:hidden ${feature.color}`}>
                       <feature.icon size={40} />
                    </div>
                    <span className={`text-xs lg:text-sm font-mono mb-6 ${feature.color} uppercase tracking-widest`}>TECH / 0{index + 1}</span>
-                   <h3 className="text-4xl lg:text-8xl font-bold text-white mb-8 leading-tight tracking-tighter">
-                     {feature.title}
-                   </h3>
-                   <p className="text-lg lg:text-3xl text-neutral-400 max-w-2xl leading-relaxed">
-                     {feature.description}
-                   </p>
+                   
+                   <div className="flex flex-col lg:flex-row gap-10 items-center lg:items-center w-full">
+                       <div className="flex-1">
+                           <h3 className="text-4xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tighter">
+                             {feature.title}
+                           </h3>
+                           <p className="text-lg lg:text-2xl text-neutral-400 leading-relaxed max-w-2xl">
+                             {feature.description}
+                           </p>
+                       </div>
+                       
+                       <div className="flex-1 w-full max-w-lg hidden md:block">
+                           <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md p-2 shadow-2xl">
+                              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent z-10 pointer-events-none" />
+                              <img 
+                                src={feature.image} 
+                                alt={feature.title} 
+                                className="w-full h-full object-cover rounded-2xl shadow-inner transition-transform duration-700 hover:scale-105" 
+                              />
+                           </div>
+                       </div>
+                   </div>
                 </div>
               </motion.div>
             );
