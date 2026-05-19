@@ -16,9 +16,20 @@ const capyQuotes = [
 ];
 
 const CapyCompanion = () => {
-  const [quote, setQuote] = useState(capyQuotes[0]);
+  const [quote, setQuote] = React.useState("Hi! Let's sit healthy today! 🦦✨");
+  const [showGreeting, setShowGreeting] = React.useState(true);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowGreeting(false);
+      // Set to first quote for subsequent hover actions
+      setQuote(capyQuotes[0]);
+    }, 1800); // 1.8 seconds is perfect to read and view entry animation
+    return () => clearTimeout(timer);
+  }, []);
   
   const triggerRandomQuote = () => {
+    setShowGreeting(false); // Disable welcome state once user interacts
     const randomIndex = Math.floor(Math.random() * capyQuotes.length);
     setQuote(capyQuotes[randomIndex]);
   };
@@ -29,9 +40,13 @@ const CapyCompanion = () => {
       onMouseEnter={triggerRandomQuote}
       onClick={triggerRandomQuote}
     >
-      {/* Speech Bubble */}
+      {/* Speech Bubble — active immediately on load, then transitions to hover-based visibility */}
       <div
-        className="absolute bottom-[115%] left-1/2 -translate-x-1/2 w-48 md:w-56 bg-neutral-900/95 border border-primary/30 backdrop-blur-md px-4 py-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] pointer-events-none text-center opacity-0 scale-90 translate-y-2 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0 transition-all duration-300 z-50 origin-bottom"
+        className={`absolute bottom-[115%] left-1/2 -translate-x-1/2 w-48 md:w-56 bg-neutral-900/95 border border-primary/30 backdrop-blur-md px-4 py-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] pointer-events-none text-center transition-all duration-300 z-50 origin-bottom ${
+          showGreeting 
+            ? 'opacity-100 scale-100 translate-y-0' 
+            : 'opacity-0 scale-90 translate-y-2 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0'
+        }`}
       >
         <p className="text-white text-xs font-semibold leading-relaxed tracking-wide font-sans">{quote}</p>
         {/* Arrow pointing down */}
