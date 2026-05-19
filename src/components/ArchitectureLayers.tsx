@@ -302,11 +302,11 @@ export const ArchitectureLayers = () => {
             {activeIndex === 4 && (
               <motion.div 
                 key="data-flow" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-md justify-center overflow-hidden"
+                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-md justify-center overflow-visible"
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--primary),0.1)_0%,transparent_70%)] pointer-events-none" />
                 
-                <div className="text-center mb-16 relative z-10">
+                <div className="text-center mb-10 relative z-10">
                   <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-mono tracking-widest mb-4">
                     <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> PRACTICAL IMPLEMENTATION
                   </motion.div>
@@ -320,6 +320,18 @@ export const ArchitectureLayers = () => {
                   <div className="hidden lg:block absolute top-[44px] left-[5%] right-[5%] h-[3px] bg-white/5 -translate-y-1/2 rounded-full overflow-hidden">
                      <motion.div className="absolute top-0 bottom-0 w-64 bg-gradient-to-r from-transparent via-primary/50 to-transparent" animate={{ left: ["-20%", "120%"] }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
                      <motion.div className="absolute top-0 bottom-0 w-48 bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" animate={{ left: ["-20%", "120%"] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.8 }} />
+                  </div>
+
+                  {/* Connecting Line extending OUT to the CTA card */}
+                  <div className="hidden lg:block absolute top-[44px] left-[90%] right-[-170px] h-[3px] -translate-y-1/2 z-0">
+                    <div className="w-full h-full border-t-2 border-dashed border-primary/40 relative">
+                      {/* traveling neon energy dot from Live Dashboard to Dashboard card */}
+                      <motion.div 
+                        className="absolute -top-[6px] w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_rgba(249,115,22,1)]"
+                        animate={{ left: ["0%", "100%"] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                      />
+                    </div>
                   </div>
 
                   <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-0 relative">
@@ -375,6 +387,65 @@ export const ArchitectureLayers = () => {
                       </motion.div>
                     ))}
                   </div>
+
+                  {/* Desktop Floating CTA connected by line */}
+                  <div className="absolute right-[-230px] top-[44px] -translate-y-1/2 z-50 hidden lg:flex">
+                    <motion.a
+                      href="/dashboard"
+                      initial={{ opacity: 0, scale: 0.92 }}
+                      animate={{ 
+                        opacity: 1, 
+                        scale: 1,
+                        y: [0, -8, 0]
+                      }}
+                      transition={{ 
+                        type: "spring", 
+                        stiffness: 280, 
+                        damping: 22,
+                        y: {
+                          repeat: Infinity,
+                          duration: 3.5,
+                          ease: "easeInOut"
+                        }
+                      }}
+                      className="group flex flex-col items-center gap-1 cursor-pointer relative"
+                    >
+                      {/* Radar Pulse Effect */}
+                      <span className="absolute inset-0 rounded-2xl bg-primary/20 animate-[ping_2s_infinite] scale-105 pointer-events-none" />
+                      
+                      {/* Main Glow Backdrop */}
+                      <span className="absolute inset-0 rounded-2xl bg-primary/10 blur-xl scale-125 group-hover:bg-primary/25 transition-all duration-500 pointer-events-none" />
+                      
+                      {/* Sliding Glass Card */}
+                      <span className="relative flex items-center gap-4 pl-5 pr-4 py-4 rounded-2xl bg-black/90 backdrop-blur-2xl border border-primary/40 group-hover:border-primary/80 group-hover:bg-neutral-950 transition-all duration-300 shadow-[0_15px_40px_rgba(249,115,22,0.3)]">
+                        <span className="flex flex-col items-start leading-tight">
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-primary/70 group-hover:text-primary transition-colors">Up next</span>
+                          <span className="text-white font-extrabold text-base tracking-wide mt-0.5 group-hover:translate-x-0.5 transition-transform duration-300">Dashboard</span>
+                        </span>
+                        <span className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.4)] group-hover:shadow-[0_0_25px_rgba(249,115,22,0.8)] group-hover:scale-110 active:scale-95 transition-all duration-300">
+                          <ChevronRight size={18} className="text-black stroke-[3px]" />
+                        </span>
+                      </span>
+                    </motion.a>
+                  </div>
+                </div>
+
+                {/* Mobile Fallback CTA below the nodes */}
+                <div className="mt-4 flex justify-center lg:hidden">
+                  <motion.a
+                    href="/dashboard"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="group flex items-center gap-4 pl-5 pr-4 py-3 rounded-2xl bg-black/80 border border-primary/30 shadow-[0_4px_25px_rgba(249,115,22,0.2)]"
+                  >
+                    <span className="flex flex-col items-start leading-tight">
+                      <span className="text-[9px] font-mono uppercase tracking-wider text-primary/70">Up next</span>
+                      <span className="text-white font-bold text-sm">Dashboard</span>
+                    </span>
+                    <span className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+                      <ChevronRight size={16} className="text-black stroke-[3px]" />
+                    </span>
+                  </motion.a>
                 </div>
 
               </motion.div>
@@ -402,50 +473,7 @@ export const ArchitectureLayers = () => {
             </button>
           )}
 
-          {/* Premium Dashboard CTA — floats at bottom-right only on last slide */}
-          <AnimatePresence>
-            {activeIndex === totalSlides - 1 && (
-              <motion.a
-                href="/dashboard"
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ 
-                  opacity: 1, 
-                  scale: 1,
-                  y: [0, -8, 0] // Gentle floating animation
-                }}
-                exit={{ opacity: 0, scale: 0.92 }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 280, 
-                  damping: 22, 
-                  delay: 0.1,
-                  y: {
-                    repeat: Infinity,
-                    duration: 3.5,
-                    ease: "easeInOut"
-                  }
-                }}
-                className="absolute right-2 md:-right-16 lg:-right-28 xl:-right-36 top-1/2 -translate-y-1/2 z-50 group hidden sm:flex flex-col items-center gap-1 cursor-pointer"
-              >
-                {/* Radar Pulse Effect */}
-                <span className="absolute inset-0 rounded-2xl bg-primary/20 animate-[ping_2s_infinite] scale-105 pointer-events-none" />
-                
-                {/* Main Glow Backdrop */}
-                <span className="absolute inset-0 rounded-2xl bg-primary/10 blur-xl scale-125 group-hover:bg-primary/25 transition-all duration-500 pointer-events-none" />
-                
-                {/* Sliding Glass Card */}
-                <span className="relative flex items-center gap-4 pl-5 pr-4 py-4 rounded-2xl bg-black/85 backdrop-blur-2xl border border-primary/30 group-hover:border-primary/70 group-hover:bg-neutral-950 transition-all duration-300 shadow-[0_15px_40px_rgba(249,115,22,0.25)]">
-                  <span className="flex flex-col items-start leading-tight">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-primary/70 group-hover:text-primary transition-colors">Up next</span>
-                    <span className="text-white font-extrabold text-base tracking-wide mt-0.5 group-hover:translate-x-0.5 transition-transform duration-300">Dashboard</span>
-                  </span>
-                  <span className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.4)] group-hover:shadow-[0_0_25px_rgba(249,115,22,0.8)] group-hover:scale-110 active:scale-95 transition-all duration-300">
-                    <ChevronRight size={18} className="text-black stroke-[3px] group-hover:translate-x-0.5 transition-all" />
-                  </span>
-                </span>
-              </motion.a>
-            )}
-          </AnimatePresence>
+
 
 
           {/* Dots Indicator */}
