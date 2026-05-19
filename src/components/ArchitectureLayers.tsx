@@ -407,22 +407,40 @@ export const ArchitectureLayers = () => {
             {activeIndex === totalSlides - 1 && (
               <motion.a
                 href="/dashboard"
-                initial={{ opacity: 0, y: 20, scale: 0.92 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 20, scale: 0.92 }}
-                transition={{ type: "spring", stiffness: 280, damping: 22, delay: 0.1 }}
-                className="absolute right-2 md:-right-12 lg:-right-20 xl:-right-28 top-1/2 -translate-y-1/2 z-50 group hidden sm:flex flex-col items-center gap-1 cursor-pointer"
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1,
+                  y: [0, -8, 0] // Gentle floating animation
+                }}
+                exit={{ opacity: 0, scale: 0.92 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 280, 
+                  damping: 22, 
+                  delay: 0.1,
+                  y: {
+                    repeat: Infinity,
+                    duration: 3.5,
+                    ease: "easeInOut"
+                  }
+                }}
+                className="absolute right-2 md:-right-16 lg:-right-28 xl:-right-36 top-1/2 -translate-y-1/2 z-50 group hidden sm:flex flex-col items-center gap-1 cursor-pointer"
               >
-                {/* Glow backdrop */}
-                <span className="absolute inset-0 rounded-2xl bg-primary/15 blur-2xl scale-125 group-hover:bg-primary/30 transition-all duration-500 pointer-events-none" />
-                {/* Card */}
-                <span className="relative flex items-center gap-3 pl-5 pr-4 py-3.5 rounded-2xl bg-neutral-900/80 backdrop-blur-xl border border-white/10 group-hover:border-primary/50 group-hover:bg-neutral-900/90 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+                {/* Radar Pulse Effect */}
+                <span className="absolute inset-0 rounded-2xl bg-primary/20 animate-[ping_2s_infinite] scale-105 pointer-events-none" />
+                
+                {/* Main Glow Backdrop */}
+                <span className="absolute inset-0 rounded-2xl bg-primary/10 blur-xl scale-125 group-hover:bg-primary/25 transition-all duration-500 pointer-events-none" />
+                
+                {/* Sliding Glass Card */}
+                <span className="relative flex items-center gap-4 pl-5 pr-4 py-4 rounded-2xl bg-black/85 backdrop-blur-2xl border border-primary/30 group-hover:border-primary/70 group-hover:bg-neutral-950 transition-all duration-300 shadow-[0_15px_40px_rgba(249,115,22,0.25)]">
                   <span className="flex flex-col items-start leading-tight">
-                    <span className="text-[9px] font-mono uppercase tracking-[0.25em] text-neutral-500 group-hover:text-primary/70 transition-colors">Up next</span>
-                    <span className="text-white font-bold text-sm tracking-wide group-hover:text-primary transition-colors">Dashboard</span>
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-primary/70 group-hover:text-primary transition-colors">Up next</span>
+                    <span className="text-white font-extrabold text-base tracking-wide mt-0.5 group-hover:translate-x-0.5 transition-transform duration-300">Dashboard</span>
                   </span>
-                  <span className="w-8 h-8 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(var(--primary),0.5)] transition-all duration-300">
-                    <ChevronRight size={16} className="text-primary group-hover:text-neutral-950 group-hover:translate-x-0.5 transition-all" />
+                  <span className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.4)] group-hover:shadow-[0_0_25px_rgba(249,115,22,0.8)] group-hover:scale-110 active:scale-95 transition-all duration-300">
+                    <ChevronRight size={18} className="text-black stroke-[3px] group-hover:translate-x-0.5 transition-all" />
                   </span>
                 </span>
               </motion.a>
