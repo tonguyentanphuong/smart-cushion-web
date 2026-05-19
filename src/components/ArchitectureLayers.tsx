@@ -230,15 +230,15 @@ export const ArchitectureLayers = () => {
                 </div>
 
                 <div className="w-full md:w-2/3 flex gap-4 flex-1 items-end relative z-10">
-                  <div className="w-1/3 flex flex-col gap-2 justify-end">
-                    <motion.div variants={itemVariants}><DataUnitBox text="Data" height="h-[184px]" color="bg-white/5 text-white/50 border-white/10" /></motion.div>
-                    <motion.div variants={itemVariants}><DataUnitBox text="Segments / Datagrams" height="h-14" color="bg-cyan-500/10 text-cyan-400 border-cyan-500/30" /></motion.div>
-                    <motion.div variants={itemVariants}><DataUnitBox text="Packets" height="h-14" color="bg-green-500/10 text-green-400 border-green-500/30" /></motion.div>
-                    <motion.div variants={itemVariants}><DataUnitBox text="Frames" height="h-14" color="bg-lime-500/10 text-lime-400 border-lime-500/30" /></motion.div>
-                    <motion.div variants={itemVariants}><DataUnitBox text="Bits" height="h-14" color="bg-yellow-500/10 text-yellow-400 border-yellow-500/30" /></motion.div>
+                  <div className="w-1/3 flex flex-col gap-2 md:gap-3 justify-end">
+                    <motion.div variants={itemVariants}><DataUnitBox text="Data" height="h-[216px] md:h-[248px]" color="bg-white/5 text-white/50 border-white/10" /></motion.div>
+                    <motion.div variants={itemVariants}><DataUnitBox text="Segments / Datagrams" height="h-16 md:h-20" color="bg-cyan-500/10 text-cyan-400 border-cyan-500/30" /></motion.div>
+                    <motion.div variants={itemVariants}><DataUnitBox text="Packets" height="h-16 md:h-20" color="bg-green-500/10 text-green-400 border-green-500/30" /></motion.div>
+                    <motion.div variants={itemVariants}><DataUnitBox text="Frames" height="h-16 md:h-20" color="bg-lime-500/10 text-lime-400 border-lime-500/30" /></motion.div>
+                    <motion.div variants={itemVariants}><DataUnitBox text="Bits" height="h-16 md:h-20" color="bg-yellow-500/10 text-yellow-400 border-yellow-500/30" /></motion.div>
                   </div>
                   
-                  <div className="w-2/3 flex flex-col gap-2">
+                  <div className="w-2/3 flex flex-col gap-2 md:gap-3">
                     <motion.div variants={itemVariants}><OsiLayerBox num={7} name="Application" desc="MQTT Pub/Sub & JSON Payloads" info="Smart Cushion Web App interaction layer." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
                     <motion.div variants={itemVariants}><OsiLayerBox num={6} name="Presentation" desc="Data Formatting" info="Conversion of raw sensor arrays into JSON for transmission." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
                     <motion.div variants={itemVariants}><OsiLayerBox num={5} name="Session" desc="MQTT Connection" info="Establishing and maintaining the link between ESP32 and Broker." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" /></motion.div>
@@ -423,19 +423,19 @@ export const ConnectionLine = motion.create(React.forwardRef<HTMLDivElement, any
 )));
 
 export const DataUnitBox = motion.create(React.forwardRef<HTMLDivElement, any>(({ text, height, color = "bg-indigo-500/20 text-indigo-400 border-indigo-500/30" }, ref) => (
-  <div ref={ref} className={`${height} ${color} border rounded-xl p-3 flex items-center justify-center text-center text-xs font-bold leading-tight shadow-inner`}>
+  <div ref={ref} className={`${height} ${color} border rounded-[1rem] p-3 flex items-center justify-center text-center text-sm font-bold leading-tight shadow-inner transition-transform hover:scale-105 duration-300`}>
     {text}
   </div>
 )));
 
 export const OsiLayerBox = motion.create(React.forwardRef<HTMLDivElement, any>(({ num, name, desc, info, color }, ref) => (
-  <div ref={ref} className={`h-14 ${color} border rounded-xl flex items-stretch overflow-hidden group/osi hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all cursor-default relative`}>
-    <div className="flex-1 px-4 flex flex-col justify-center leading-tight">
-      <span className="font-bold text-white text-[15px] md:text-base">{name}</span>
-      <span className="text-[10px] md:text-[11px] opacity-80 group-hover/osi:hidden">{desc}</span>
-      <span className="text-[10px] text-white/90 hidden group-hover/osi:block font-medium italic">{info}</span>
+  <div ref={ref} className={`h-16 md:h-20 ${color} border rounded-[1rem] flex items-stretch overflow-hidden group/osi hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] transition-all duration-300 cursor-default relative`}>
+    <div className="flex-1 px-5 md:px-6 flex flex-col justify-center leading-tight">
+      <span className="font-bold text-white text-lg md:text-xl mb-0.5">{name}</span>
+      <span className="text-xs md:text-sm text-neutral-300 opacity-80 group-hover/osi:hidden transition-opacity">{desc}</span>
+      <span className="text-xs md:text-sm text-white/90 hidden group-hover/osi:block font-medium italic transition-opacity">{info}</span>
     </div>
-    <div className="w-10 md:w-12 flex items-center justify-center font-black text-lg md:text-xl bg-black/20 border-l border-inherit group-hover/osi:bg-white/10 transition-colors">
+    <div className="w-12 md:w-16 flex items-center justify-center font-black text-2xl md:text-3xl bg-black/20 border-l border-inherit group-hover/osi:bg-white/10 transition-colors">
       {num}
     </div>
   </div>
