@@ -23,7 +23,7 @@ const features = [
     title: "Embedded Fog Computing",
     description: "Localized data processing ensures zero latency and maximum privacy for your sensitive health data.",
     icon: Cpu,
-    image: "/feat_fog_computing.png",
+    image: "/feat_cloud_sync.png",
     color: "text-cyan-500",
     glow: "rgba(6, 182, 212, 0.5)"
   },
@@ -39,7 +39,7 @@ const features = [
     title: "Cloud Integration",
     description: "Securely backup your health history and sync across all your ergonomic devices automatically.",
     icon: Cloud,
-    image: "/feat_cloud_sync.png",
+    image: "/feat_fog_computing.png",
     color: "text-purple-500",
     glow: "rgba(168, 85, 247, 0.5)"
   },
