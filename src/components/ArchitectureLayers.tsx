@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Cpu, Cloud, Smartphone, Activity, BrainCircuit, Database } from "lucide-react";
 
 const layersData = [
-  { id: "business", name: "Business Layer", icon: "📊", desc: "Analytics & Gamification", info: "Manages user streaks, rewards, and long-term health trends stored in PostgreSQL.", color: "from-blue-500/20 to-transparent", borderColor: "border-blue-500/40", hoverColor: "from-blue-500/30 via-blue-500/10 to-transparent", textColor: "text-blue-400" },
+  { id: "business", name: "Business Layer", icon: "📊", desc: "Analytics & Gamification", info: "Manages user streaks, rewards, and long-term health trends stored in Amazon DynamoDB.", color: "from-blue-500/20 to-transparent", borderColor: "border-blue-500/40", hoverColor: "from-blue-500/30 via-blue-500/10 to-transparent", textColor: "text-blue-400" },
   { id: "application", name: "Application Layer", icon: "📱", desc: "User Interface", info: "Astro & React dashboard featuring real-time 3D posture visualization and Capybara companion.", color: "from-cyan-500/20 to-transparent", borderColor: "border-cyan-500/40", hoverColor: "from-cyan-500/30 via-cyan-500/10 to-transparent", textColor: "text-cyan-400" },
   { id: "middleware", name: "Middleware Layer", icon: "⚙️", desc: "Fog Computing", info: "Local processing node running AI models for sub-100ms posture classification.", color: "from-red-500/20 to-transparent", borderColor: "border-red-500/40", hoverColor: "from-red-500/30 via-red-500/10 to-transparent", textColor: "text-red-400", dashed: true },
   { id: "network", name: "Network Layer", icon: "🌐", desc: "Data Transmission", info: "MQTT protocol over Wi-Fi ensuring lightweight and reliable message delivery between ESP32 and Fog Node.", color: "from-green-500/20 to-transparent", borderColor: "border-green-500/40", hoverColor: "from-green-500/30 via-green-500/10 to-transparent", textColor: "text-green-400" },
@@ -15,7 +15,7 @@ const dataNodes = [
   { id: "edge", title: "Smart Cushion", desc: "FSR Sensor Matrix", details: "9 high-precision FSR pressure sensors + MPU6050 gyroscope with 50Hz polling rate.", image: "/cushion-slate.png", icon: Activity, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
   { id: "esp", title: "Edge MCU", desc: "ESP32 Pre-processing", details: "ADC noise filtering, local calibration, WiFi connection, and MQTT JSON packaging.", image: "/esp32-node.png", icon: Cpu, color: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20" },
   { id: "fog", title: "Fog Node", desc: "AI Inference Model", details: "Local AI model, posture inference under 100ms, and MQTT feedback trigger.", image: "/fog-node-pc.png", icon: BrainCircuit, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", glow: true },
-  { id: "cloud", title: "AWS Cloud", desc: "IoT Core & Lambda", details: "AWS IoT Core broker, database logging in PostgreSQL, and historic data warehousing.", image: "/aws-logo-neon.png", icon: Cloud, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
+  { id: "cloud", title: "AWS Cloud", desc: "IoT Core & Lambda", details: "AWS IoT Core broker, database logging in DynamoDB Tables, and serverless logic.", image: "/aws-logo-neon.png", icon: Cloud, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
   { id: "dashboard", title: "Live Dashboard", desc: "Analytics & Gamification", details: "Astro & React WebApp, real-time 3D posture visualizer, and gamified Capybara passport.", image: "/app.png", icon: Smartphone, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
 ];
 
@@ -123,7 +123,7 @@ export const ArchitectureLayers = () => {
                   <motion.div variants={itemVariants} className="flex items-stretch rounded-3xl overflow-hidden border border-orange-500/30 bg-orange-500/10 hover:bg-orange-500/20 hover:scale-105 hover:shadow-[0_0_40px_rgba(249,115,22,0.3)] transition-all duration-500 cursor-default group">
                     <div className="w-1/3 bg-orange-500/20 p-7 flex flex-col items-center justify-center text-center"><span className="text-orange-400 font-bold text-xl mb-1">Our Team</span><span className="text-orange-500/70 text-sm">App Builder</span></div>
                     <div className="w-2/3 p-7 flex items-center justify-between">
-                      <div><strong className="text-white text-2xl block mb-1">AWS IoT Core & Lambda</strong><span className="text-neutral-400 text-base">Managed MQTT broker, serverless AI triggers & DB writes</span></div>
+                      <div><strong className="text-white text-2xl block mb-1">AWS Lambda & API Gateway</strong><span className="text-neutral-400 text-base">Python 3.11 serverless triggers, REST endpoints & WebSockets</span></div>
                       <div className="text-orange-400 font-black text-4xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">PaaS</div>
                     </div>
                   </motion.div>
@@ -131,7 +131,7 @@ export const ArchitectureLayers = () => {
                   <motion.div variants={itemVariants} className="flex items-stretch rounded-3xl overflow-hidden border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 hover:scale-105 hover:shadow-[0_0_40px_rgba(168,85,247,0.3)] transition-all duration-500 cursor-default group">
                     <div className="w-1/3 bg-purple-500/20 p-7 flex flex-col items-center justify-center text-center"><span className="text-purple-400 font-bold text-xl mb-1">AWS Infra</span><span className="text-purple-500/70 text-sm">Raw Resources</span></div>
                     <div className="w-2/3 p-7 flex items-center justify-between">
-                      <div><strong className="text-white text-2xl block mb-1">EC2 & RDS PostgreSQL</strong><span className="text-neutral-400 text-base">Virtual compute, storage & database for session history</span></div>
+                      <div><strong className="text-white text-2xl block mb-1">AWS IoT Core & DynamoDB</strong><span className="text-neutral-400 text-base">Serverless MQTT message ingestion & NoSQL session storage</span></div>
                       <div className="text-purple-400 font-black text-4xl ml-4 opacity-50 group-hover:opacity-100 transition-opacity">IaaS</div>
                     </div>
                   </motion.div>
