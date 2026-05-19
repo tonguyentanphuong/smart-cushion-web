@@ -358,40 +358,40 @@ export const CircularDashboard = () => {
           >
             {/* Stunning Animated Glowing Background Orbs & Tech Grid */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              {/* Dark radial vignette to make text highly readable */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.08)_0%,rgba(0,0,0,0.9)_80%)]" />
+              {/* Dark radial vignette with more vibrant central glow to make it instantly noticeable */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.18)_0%,rgba(0,0,0,0.98)_80%)]" />
               
-              {/* Futuristic glowing grid pattern */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.012)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.012)_1px,transparent_1px)] bg-[size:50px_50px] opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+              {/* Futuristic glowing grid pattern - highly visible on all monitors */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:45px_45px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_85%)]" />
               
-              {/* Glowing breathing blue orb in top-left */}
+              {/* Glowing breathing blue orb in top-left - increased opacity and size for ultimate pop */}
               <motion.div 
                 animate={{
-                  scale: [1, 1.25, 1],
-                  opacity: [0.25, 0.45, 0.25],
-                  y: [0, 20, 0]
+                  scale: [1, 1.3, 1],
+                  opacity: [0.4, 0.7, 0.4],
+                  y: [0, 30, 0]
                 }}
                 transition={{
-                  duration: 12,
+                  duration: 10,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[90px]"
+                className="absolute -top-[15%] -left-[15%] w-[65%] h-[65%] rounded-full bg-blue-500/20 blur-[110px]"
               />
               
-              {/* Glowing breathing orange primary orb in bottom-right */}
+              {/* Glowing breathing orange primary orb in bottom-right - increased opacity for high fidelity */}
               <motion.div 
                 animate={{
-                  scale: [1.25, 1, 1.25],
-                  opacity: [0.3, 0.5, 0.3],
-                  y: [0, -20, 0]
+                  scale: [1.3, 1, 1.3],
+                  opacity: [0.45, 0.75, 0.45],
+                  y: [0, -30, 0]
                 }}
                 transition={{
-                  duration: 15,
+                  duration: 13,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute -bottom-[10%] -right-[10%] w-[55%] h-[55%] rounded-full bg-primary/15 blur-[100px]"
+                className="absolute -bottom-[15%] -right-[15%] w-[70%] h-[70%] rounded-full bg-primary/25 blur-[120px]"
               />
             </div>
 
