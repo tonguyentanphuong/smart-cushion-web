@@ -393,37 +393,21 @@ export const ArchitectureLayers = () => {
                     <motion.a
                       href="/dashboard"
                       initial={{ opacity: 0, scale: 0.92 }}
-                      animate={{ 
-                        opacity: 1, 
-                        scale: 1,
-                        y: [0, -8, 0]
-                      }}
-                      transition={{ 
-                        type: "spring", 
-                        stiffness: 280, 
-                        damping: 22,
-                        y: {
-                          repeat: Infinity,
-                          duration: 3.5,
-                          ease: "easeInOut"
-                        }
-                      }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.92 }}
+                      transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
                       className="group flex flex-col items-center gap-1 cursor-pointer relative"
                     >
-                      {/* Radar Pulse Effect */}
-                      <span className="absolute inset-0 rounded-2xl bg-primary/20 animate-[ping_2s_infinite] scale-105 pointer-events-none" />
-                      
-                      {/* Main Glow Backdrop */}
-                      <span className="absolute inset-0 rounded-2xl bg-primary/10 blur-xl scale-125 group-hover:bg-primary/25 transition-all duration-500 pointer-events-none" />
+                      {/* Soft ambient glow behind card — only visible on hover */}
+                      <span className="absolute inset-0 rounded-2xl bg-primary/20 blur-xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                       
                       {/* Sliding Glass Card */}
-                      <span className="relative flex items-center gap-4 pl-5 pr-4 py-4 rounded-2xl bg-black/90 backdrop-blur-2xl border border-primary/40 group-hover:border-primary/80 group-hover:bg-neutral-950 transition-all duration-300 shadow-[0_15px_40px_rgba(249,115,22,0.3)]">
-                        <span className="flex flex-col items-start leading-tight">
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-primary/70 group-hover:text-primary transition-colors">Up next</span>
-                          <span className="text-white font-extrabold text-base tracking-wide mt-0.5 group-hover:translate-x-0.5 transition-transform duration-300">Dashboard</span>
-                        </span>
-                        <span className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(249,115,22,0.4)] group-hover:shadow-[0_0_25px_rgba(249,115,22,0.8)] group-hover:scale-110 active:scale-95 transition-all duration-300">
-                          <ChevronRight size={18} className="text-black stroke-[3px]" />
+                      <span className="relative flex items-center gap-4 pl-6 pr-5 py-4 rounded-2xl bg-neutral-950/80 backdrop-blur-xl border border-white/10 group-hover:border-primary/50 group-hover:bg-neutral-900/90 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+                        <span className="text-white font-extrabold text-base tracking-wide group-hover:text-primary transition-colors">Go to Dashboard</span>
+                        <span className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+                          <ChevronRight size={18} className="text-white group-hover:text-black stroke-[3px] group-hover:translate-x-0.5 transition-all" />
                         </span>
                       </span>
                     </motion.a>
@@ -436,14 +420,11 @@ export const ArchitectureLayers = () => {
                     href="/dashboard"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="group flex items-center gap-4 pl-5 pr-4 py-3 rounded-2xl bg-black/80 border border-primary/30 shadow-[0_4px_25px_rgba(249,115,22,0.2)]"
+                    className="group flex items-center gap-4 pl-6 pr-5 py-3.5 rounded-2xl bg-neutral-950/80 border border-white/10 active:border-primary/50 active:bg-neutral-900 transition-all duration-300 shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
                   >
-                    <span className="flex flex-col items-start leading-tight">
-                      <span className="text-[9px] font-mono uppercase tracking-wider text-primary/70">Up next</span>
-                      <span className="text-white font-bold text-sm">Dashboard</span>
-                    </span>
-                    <span className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                      <ChevronRight size={16} className="text-black stroke-[3px]" />
+                    <span className="text-white font-bold text-sm">Go to Dashboard</span>
+                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                      <ChevronRight size={16} className="text-white stroke-[3px]" />
                     </span>
                   </motion.a>
                 </div>
