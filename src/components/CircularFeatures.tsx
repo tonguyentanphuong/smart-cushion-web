@@ -31,7 +31,7 @@ const features = [
     title: "Real-time App Feedback",
     description: "Receive instant posture corrections and long-term health trends directly through our dedicated mobile application.",
     icon: Smartphone,
-    image: "/feat_app_feedback.png",
+    image: "/feat_app_feedback.gif",
     color: "text-indigo-500",
     glow: "rgba(99, 102, 241, 0.5)"
   },
