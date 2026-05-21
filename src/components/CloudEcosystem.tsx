@@ -254,10 +254,10 @@ export const CloudEcosystem = () => {
                 <Cloud className="w-3.5 h-3.5 animate-pulse" /> Cloud Integration Ecosystem
               </div>
               <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-tight">
-                AWS Serverless & <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400 italic font-medium pr-2">Gamified Cloud</span>
+                AWS Serverless & <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400 italic font-medium pr-2">IoT Infrastructure</span>
               </h1>
               <p className="text-neutral-400 text-base md:text-lg max-w-3xl mx-auto mt-4 leading-relaxed font-medium">
-                How we utilize serverless microservices to process posture logs, secure global user states, and orchestrate our anti-cheat gacha rewards engine with single-digit millisecond latency.
+                How we process posture sensor logs, manage real-time WebSocket sessions, and synchronize sitting statistics with low latency.
               </p>
             </motion.div>
           )}
@@ -471,10 +471,10 @@ export const CloudEcosystem = () => {
           </div>
           <div className="flex gap-4">
             <a 
-              href="/architecture" 
+              href="/dashboard" 
               className="flex items-center gap-2 text-xs md:text-sm font-semibold py-3 px-6 rounded-full bg-white/5 border border-white/10 hover:border-white/20 text-neutral-300 hover:text-white transition-all cursor-pointer"
             >
-              System Architecture <ArrowRight className="w-4 h-4" />
+              Live Posture Dashboard <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>
