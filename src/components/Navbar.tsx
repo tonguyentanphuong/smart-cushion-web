@@ -1,7 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Activity } from "lucide-react";
+import { Menu, X } from "lucide-react";
+
+// Custom Icon: A cute Capybara sitting comfortably on an ergonomic memory foam cushion
+const CapybaraCushionIcon = ({ className = "w-6 h-6" }: { className?: string }) => {
+  return (
+    <svg 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}
+    >
+      {/* Tiny Yuzu/Orange on head (Playful Easter egg) */}
+      <circle cx="11.5" cy="4" r="1.2" fill="#f97316" stroke="none" />
+      <path d="M 11.5,2.8 C 12.2,2.3 12.7,2.8 11.8,2.8 Z" fill="#10b981" stroke="none" />
+
+      {/* Capybara Body Outline */}
+      <path 
+        d="M 16,14.5 
+           C 17.5,12.7 17.5,10.3 16,8.7 
+           C 15.3,7.7 14.7,7.3 14.3,6.5 
+           C 13.7,5 11.7,5 11,6.5 
+           C 10.5,7.3 9.5,7.7 9,8.2
+           C 8,9.2 8,10.3 8.7,11 
+           C 9.5,11.7 10,12 10.3,13 
+           C 10.7,14 10.7,14.5 10.7,14.5" 
+        fill="rgba(249, 115, 22, 0.08)"
+      />
+
+      {/* Sleepy eye */}
+      <path d="M 10,8.7 C 10.7,9.3 11,9.3 11.7,8.7" strokeWidth="1.5" />
+      
+      {/* Ear */}
+      <path d="M 12.7,6 C 12.7,5 13.5,5 13.5,6 Z" fill="currentColor" fillOpacity="0.2" />
+      
+      {/* Ergonomic Cushion at the bottom */}
+      <path 
+        d="M 3,15.5 
+           C 3,13.7 5,13.2 12,13.2 
+           C 19,13.2 21,13.7 21,15.5 
+           C 21,17.7 18.5,18.7 12,18.7 
+           C 5.5,18.7 3,17.7 3,15.5 Z" 
+        fill="currentColor"
+        fillOpacity="0.18"
+      />
+      {/* Cushion stitch/recess contour */}
+      <path d="M 4,16 C 7.5,17 16.5,17 20,16" opacity="0.7" strokeWidth="1.5" />
+    </svg>
+  );
+};
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,7 +99,7 @@ const Navbar = () => {
         <a href="/" className="flex items-center gap-2.5 font-bold text-xl tracking-tight group">
           <div className="relative">
             <div className="absolute inset-0 bg-primary/40 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <Activity className="w-6 h-6 text-primary animate-[pulse_2s_ease-in-out_infinite] relative z-10" />
+            <CapybaraCushionIcon className="w-6 h-6 text-primary animate-[pulse_2.5s_ease-in-out_infinite] relative z-10" />
           </div>
           <span className="text-white group-hover:text-primary transition-colors duration-300">
             Smart<span className="text-primary group-hover:text-white transition-colors duration-300">Cushion</span>
