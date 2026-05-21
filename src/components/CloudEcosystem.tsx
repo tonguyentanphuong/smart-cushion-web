@@ -116,8 +116,8 @@ export const CloudEcosystem = () => {
       tagline: "Secure endpoints routing REST & WebSocket communication.",
       role: "Acts as the portal to the cloud. Integrates directly with Astro web dashboards via REST API and acts as a stateful WebSocket proxy to relay live posture alerts from the physical cushion.",
       resources: [
-        "REST REST API: /login, /sessions, /summary",
-        "Gamified Endpoints: /user/gems, /gacha/roll",
+        "REST API: /login, /sessions, /summary",
+        "Progression & Reward Endpoints: /user/gems, /gacha/roll",
         "WebSocket Route: $connect, $disconnect, $default"
       ],
       snippetTitle: "API Route Integration Map",
