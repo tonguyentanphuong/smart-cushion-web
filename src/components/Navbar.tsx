@@ -26,6 +26,7 @@ const Navbar = () => {
     { name: "What we solve", href: "/solutions" },
     { name: "Product", href: "/features" },
     { name: "Architecture", href: "/architecture" },
+    { name: "Cloud", href: "/cloud" },
     { name: "Dashboard", href: "/dashboard" },
     { name: "Team", href: "/team" },
   ];
@@ -67,7 +68,7 @@ const Navbar = () => {
                   href={link.href} 
                   onMouseEnter={() => setHoveredIndex(idx)}
                   onMouseLeave={() => setHoveredIndex(null)}
-                  className={`text-sm font-semibold relative py-2 px-4 rounded-full transition-colors duration-300 ${
+                  className={`text-sm font-semibold relative py-2 px-4 rounded-full transition-colors duration-300 whitespace-nowrap ${
                     isActive ? "text-white" : "text-neutral-400 hover:text-white"
                   }`}
                 >

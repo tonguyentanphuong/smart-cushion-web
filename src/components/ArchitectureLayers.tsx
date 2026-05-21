@@ -70,9 +70,9 @@ export const ArchitectureLayers = () => {
     let newIndex = activeIndex + newDirection;
     // Going back from first slide: no-op
     if (newIndex < 0) return;
-    // Going forward past last slide: navigate to Dashboard page
+    // Going forward past last slide: navigate to Cloud Integration page
     if (newIndex >= totalSlides) {
-      window.location.href = '/dashboard';
+      window.location.href = '/cloud';
       return;
     }
     setActiveIndex(newIndex);
@@ -433,7 +433,7 @@ export const ArchitectureLayers = () => {
                   {/* Desktop Floating CTA connected by line */}
                   <div className="absolute top-[44px] -translate-y-1/2 z-50 hidden lg:flex lg:right-[-140px] xl:right-[-240px] 2xl:right-[-350px]">
                     <motion.a
-                      href="/dashboard"
+                      href="/cloud"
                       initial={{ opacity: 0, scale: 0.92 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.92 }}
@@ -447,7 +447,7 @@ export const ArchitectureLayers = () => {
                       
                       {/* Sliding Glass Card */}
                       <span className="relative flex items-center gap-4 pl-6 pr-5 py-4 rounded-2xl bg-neutral-950/80 backdrop-blur-xl border border-white/10 group-hover:border-primary/50 group-hover:bg-neutral-900/90 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-                        <span className="text-white font-extrabold text-base tracking-wide group-hover:text-primary transition-colors">Go to Dashboard</span>
+                        <span className="text-white font-extrabold text-base tracking-wide group-hover:text-primary transition-colors">Explore Cloud Engine</span>
                         <span className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300">
                           <ChevronRight size={18} className="text-white group-hover:text-black stroke-[3px] group-hover:translate-x-0.5 transition-all" />
                         </span>
@@ -459,12 +459,12 @@ export const ArchitectureLayers = () => {
                 {/* Mobile Fallback CTA below the nodes */}
                 <div className="mt-4 flex justify-center lg:hidden">
                   <motion.a
-                    href="/dashboard"
+                    href="/cloud"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="group flex items-center gap-4 pl-6 pr-5 py-3.5 rounded-2xl bg-neutral-950/80 border border-white/10 active:border-primary/50 active:bg-neutral-900 transition-all duration-300 shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
                   >
-                    <span className="text-white font-bold text-sm">Go to Dashboard</span>
+                    <span className="text-white font-bold text-sm">Explore Cloud Engine</span>
                     <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
                       <ChevronRight size={16} className="text-white stroke-[3px]" />
                     </span>

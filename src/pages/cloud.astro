@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import { CloudEcosystem } from '../components/CloudEcosystem';
+---
+
+<Layout title="Smart Cushion | Cloud Integration Ecosystem">
+	<Navbar client:load />
+	
+	<main class="relative min-h-screen bg-black pt-20">
+		<CloudEcosystem client:load />
+	</main>
+</Layout>
