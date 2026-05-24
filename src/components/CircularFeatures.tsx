@@ -82,7 +82,7 @@ const PhotorealisticCushion3D: React.FC<PhotorealisticCushion3DProps> = ({ produ
 
       {/* Main 3D Card Body (Tilts and Scales) */}
       <div
-        className="w-[90%] h-[90%] relative rounded-[2rem] overflow-hidden flex items-center justify-center"
+        className="w-[90%] h-[90%] relative flex items-center justify-center"
         style={{
           transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${isHovered ? 1.04 : 1})`,
           transition: isHovered ? "none" : "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)",
@@ -93,27 +93,45 @@ const PhotorealisticCushion3D: React.FC<PhotorealisticCushion3DProps> = ({ produ
         <img 
           src={image} 
           alt={name} 
-          className="w-[95%] h-[95%] object-contain select-none filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)] transition-transform duration-300 pointer-events-none"
+          className="w-[95%] h-[95%] object-contain select-none filter drop-shadow-[0_20px_45px_rgba(0,0,0,0.65)] transition-transform duration-300 pointer-events-none"
           style={{
             transform: isHovered ? "translateZ(30px) scale(1.02)" : "translateZ(0px) scale(1)",
             transition: isHovered ? "none" : "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)",
           }}
         />
 
-        {/* Dynamic Glossy Light Highlight Overlay Layer (Spot gloss reflection) */}
+        {/* Dynamic Glossy Light Highlight Overlay Layer (Spot gloss reflection - MASKED to cushion shape) */}
         <div 
-          className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-0 group-hover/parallax:opacity-100 transition-opacity duration-300"
+          className="absolute w-[95%] h-[95%] pointer-events-none mix-blend-overlay opacity-0 group-hover/parallax:opacity-100 transition-opacity duration-300"
           style={{
-            background: `radial-gradient(circle at ${spotX}% ${spotY}%, rgba(255, 255, 255, 0.28) 0%, transparent 60%)`,
+            background: `radial-gradient(circle at ${spotX}% ${spotY}%, rgba(255, 255, 255, 0.35) 0%, transparent 60%)`,
             transition: isHovered ? "none" : "background 0.5s cubic-bezier(0.25, 1, 0.5, 1)",
+            maskImage: `url(${image})`,
+            WebkitMaskImage: `url(${image})`,
+            maskSize: "contain",
+            WebkitMaskSize: "contain",
+            maskRepeat: "no-repeat",
+            WebkitMaskRepeat: "no-repeat",
+            maskPosition: "center",
+            WebkitMaskPosition: "center",
+            transform: isHovered ? "translateZ(31px) scale(1.02)" : "translateZ(0px) scale(1)",
           }}
         />
 
-        {/* Dynamic Glass Glare (adds a realistic glass-like reflection sheen) */}
+        {/* Dynamic Glass Glare (adds a realistic glass-like reflection sheen - MASKED to cushion shape) */}
         <div 
-          className="absolute inset-0 pointer-events-none opacity-0 group-hover/parallax:opacity-100 transition-opacity duration-300"
+          className="absolute w-[95%] h-[95%] pointer-events-none opacity-0 group-hover/parallax:opacity-100 transition-opacity duration-300"
           style={{
-            background: `linear-gradient(${135 + rotateY}deg, rgba(255, 255, 255, 0.05) 0%, transparent 40%)`,
+            background: `linear-gradient(${135 + rotateY}deg, rgba(255, 255, 255, 0.12) 0%, transparent 40%)`,
+            maskImage: `url(${image})`,
+            WebkitMaskImage: `url(${image})`,
+            maskSize: "contain",
+            WebkitMaskSize: "contain",
+            maskRepeat: "no-repeat",
+            WebkitMaskRepeat: "no-repeat",
+            maskPosition: "center",
+            WebkitMaskPosition: "center",
+            transform: isHovered ? "translateZ(32px) scale(1.02)" : "translateZ(0px) scale(1)",
           }}
         />
       </div>
