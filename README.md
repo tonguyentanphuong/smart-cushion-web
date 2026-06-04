@@ -14,7 +14,7 @@ To understand the full scope of our Cloud-Fog solution, explore the correspondin
 | :--- | :--- | :--- | :--- |
 | **💻 Front-End Showcase** | [smart-cushion-web](https://github.com/tonguyentanphuong/smart-cushion-web) | *This Repository*. Symmetrical neon-dark showcase & landing portal. | Astro, React, Framer Motion |
 | **📱 Companion Web App** | [smart-cushion-app](https://github.com/MuoiVung/smart-cushion-app) | Interactive real-time posture telemetry dashboard & historical analysis client. | Next.js, React, Tailwind CSS |
-| **🔌 Hardware Node** | [smart-cushion-edge](https://github.com/MuoiVung/smart-cushion-edge) | ESP32-S firmware for 8-channel FSR sensor acquisition and telemetry publishing. | ESP-IDF, C++, FreeRTOS, MQTT |
+| **🔌 Hardware Node** | [smart-cushion-edge](https://github.com/MuoiVung/smart-cushion-edge) | ESP32-S firmware for 9-channel FSR sensor acquisition and telemetry publishing. | ESP-IDF, C++, FreeRTOS, MQTT |
 | **📡 Local Fog Node** | [smart-cushion-fog-node](https://github.com/MuoiVung/smart-cushion-fog-node) | Edge server performing real-time AI posture classification and local broker queue management. | Node.js, Mosquitto, PostgreSQL |
 | **🧠 Deep Learning Engine** | [smart-cushion-AI](https://github.com/MuoiVung/smart-cushion-AI) | Training pipelines and weights for the 5-Posture Sitting Classification model. | PyTorch, NumPy, Scikit-Learn |
 | **☁️ Serverless Cloud** | [smart-cushion-cloud](https://github.com/MuoiVung/smart-cushion-cloud) | AWS Serverless cluster handling persistent telemetry pipelines, analytics, and history API. | AWS IoT Core, Lambda, DynamoDB |
@@ -28,7 +28,7 @@ Our solution utilizes an optimized **4-Tier Cloud-Fog Topology** to isolate heav
 ```text
 +------------------------------------------------------------------------------------+
 |                             1. IoT Edge Hardware Node                              |
-|   [FSR Matrix (8 Sensors)] --- (Analog Signals) ---> [ESP32 Microcontroller]      |
+|   [FSR Matrix (9 Sensors)] --- (Analog Signals) ---> [ESP32 Microcontroller]      |
 +------------------------------------------+-----------------------------------------+
                                            | 
                                            | Telemetry (Raw Weights) via MQTT
@@ -59,7 +59,7 @@ Our solution utilizes an optimized **4-Tier Cloud-Fog Topology** to isolate heav
                                            | REST APIs & Live WebSockets
                                            v
 +------------------------------------------------------------------------------------+
-|                       4. Astro Web Dashboard (This Repo)                           |
+|                4. Companion Web App (https://github.com/MuoiVung/smart-cushion-app)|
 |      [React Live Monitor] <---> [Gamified Capybara Healthy Sitting Passport]       |
 +------------------------------------------------------------------------------------+
 ```
