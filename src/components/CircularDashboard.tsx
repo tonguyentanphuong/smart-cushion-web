@@ -146,14 +146,43 @@ export const CircularDashboard = () => {
       }
     };
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (window.innerWidth < 1024) return;
+      
+      let direction = 0;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
+        direction = 1;
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "PageUp") {
+        direction = -1;
+      }
+      
+      if (direction !== 0) {
+        e.preventDefault();
+        
+        if (isScrolling.current) return;
+        
+        const targetSlide = activeSlide + direction;
+        if (targetSlide >= 0 && targetSlide < itemsCount) {
+          isScrolling.current = true;
+          navigateTo(targetSlide);
+          
+          setTimeout(() => {
+            isScrolling.current = false;
+          }, 750);
+        }
+      }
+    };
+
     const container = containerRef.current;
     if (container) {
       container.addEventListener("wheel", handleWheel, { passive: false });
     }
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
       if (container) {
         container.removeEventListener("wheel", handleWheel);
       }
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [activeSlide, itemsCount]);
 
