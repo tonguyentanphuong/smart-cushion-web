@@ -144,7 +144,7 @@ const features = [
     title: "5-Posture Recognition",
     description: "Our advanced AI analyzes data from a high-precision 3x3 sensor matrix to accurately identify 5 distinct sitting postures.",
     icon: Brain,
-    image: "/feat_posture_recognition.png",
+    image: "/posture_recognition.png",
     color: "text-blue-500",
     glow: "rgba(59, 130, 246, 0.5)"
   },

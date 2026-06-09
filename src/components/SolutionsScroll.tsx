@@ -5,36 +5,28 @@ import { AlertCircle, Zap, Shield, Heart, ChevronLeft, ChevronRight, ArrowRight 
 
 const solutions = [
   {
-    title: "The Silent Crisis",
-    problem: "Poor sitting habits cost the global economy $120B in healthcare every year.",
-    solution: "Smart-Cushion detects micro-posture shifts before they become chronic pain.",
+    title: "The Silent Killer",
+    problem: "Physical inactivity and poor sitting postures account for approximately 3.2 million annual deaths globally, representing 6% of global mortality.",
+    solution: "Smart-Cushion proactively tracks your posture to break sedentary patterns and lower long-term health risks.",
     icon: AlertCircle,
     color: "text-red-500",
-    image: "/problem-1.png"
+    image: "/1. silent killer.png"
   },
   {
-    title: "Concentration Drain",
-    problem: "Discomfort reduces cognitive performance by 25% within just 2 hours.",
-    solution: "Stay in the flow zone with gentle ergonomic reminders that keep you focused.",
-    icon: Zap,
-    color: "text-yellow-500",
-    image: "/problem-2.png"
-  },
-  {
-    title: "Spinal Integrity",
-    problem: "Long-term slouching leads to permanent vertebral misalignment.",
-    solution: "Our medical-grade sensors ensure your spine maintains its natural S-curve.",
+    title: "Spinal Misalignment",
+    problem: "Improper sitting posture leads to thoracic kyphosis, lumbar compression, high muscle tension, and abnormal vertebral alignment (such as a 38-degree tilt angle).",
+    solution: "Smart-Cushion detects these bad sitting angles in real-time, alerting you to adjust and prevent spinal compression.",
     icon: Shield,
-    color: "text-blue-500",
-    image: "/problem-3.png"
+    color: "text-yellow-500",
+    image: "/2. result of silent killer.png"
   },
   {
-    title: "Health Ecosystem",
-    problem: "Most health tracking stops the moment you sit down at your desk.",
-    solution: "Integrate your sitting data into your complete wellness profile automatically.",
+    title: "Rising Disease Trend",
+    problem: "The global low back pain (LBP) burden is rising rapidly, increasing from 619 million cases in 2020 to a projected 843 million cases by 2050.",
+    solution: "Smart-Cushion helps you maintain spinal health continuously, preventing you from becoming part of this growing global statistic.",
     icon: Heart,
     color: "text-emerald-500",
-    image: "/problem-4.png"
+    image: "/3. xu huong phat benh.png"
   },
 ];
 
@@ -53,7 +45,7 @@ export const SolutionsScroll = () => {
     restDelta: 0.001,
   });
 
-  const sections = Array.from({ length: 6 });
+  const sections = Array.from({ length: 5 });
   const itemsCount = sections.length;
 
   // Sync activeSlide with scroll
@@ -134,7 +126,7 @@ export const SolutionsScroll = () => {
   }, [activeSlide, itemsCount]);
 
   return (
-    <div ref={containerRef} className="relative h-[600vh] bg-neutral-950">
+    <div ref={containerRef} className="relative h-[500vh] bg-neutral-950">
       {/* Snap Points Container */}
       <div className="absolute inset-0 pointer-events-none z-50">
         {sections.map((_, i) => (
@@ -154,8 +146,8 @@ export const SolutionsScroll = () => {
             {/* Intro Slide */}
             <motion.div
               style={{
-                opacity: useTransform(smoothProgress, [0, 0.1, 0.2], [1, 1, 0]),
-                y: useTransform(smoothProgress, [0, 0.1, 0.2], [0, 0, -50]),
+                opacity: useTransform(smoothProgress, [0, 0.1, 0.25], [1, 1, 0]),
+                y: useTransform(smoothProgress, [0, 0.1, 0.25], [0, 0, -50]),
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center"
             >
@@ -235,8 +227,8 @@ export const SolutionsScroll = () => {
             {/* Closing Slide */}
             <motion.div
               style={{
-                opacity: useTransform(smoothProgress, [0.8, 0.9, 1.0], [0, 1, 1]),
-                y: useTransform(smoothProgress, [0.8, 0.9], [50, 0]),
+                opacity: useTransform(smoothProgress, [0.75, 0.9, 1.0], [0, 1, 1]),
+                y: useTransform(smoothProgress, [0.75, 0.9], [50, 0]),
               }}
               className="absolute inset-0 flex flex-col justify-center items-center text-center overflow-hidden"
             >
