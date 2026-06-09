@@ -159,6 +159,9 @@ const Navbar = () => {
           <Button size="sm" asChild className="ml-4 rounded-full px-6 bg-primary text-white shadow-[0_4px_20px_rgba(249,115,22,0.3)] hover:shadow-[0_4px_30px_rgba(249,115,22,0.6)] hover:scale-105 active:scale-95 transition-all duration-300">
             <a href="/contact">Contact Us</a>
           </Button>
+          <Button size="sm" asChild variant="outline" className="ml-3 rounded-full px-6 border-white/20 text-white hover:bg-white/10 hover:text-white hover:scale-105 active:scale-95 transition-all duration-300">
+            <a href="/future-work">Future Work</a>
+          </Button>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -204,6 +207,9 @@ const Navbar = () => {
               })}
               <Button className="w-full mt-3 rounded-xl py-6 text-base bg-primary shadow-[0_0_20px_rgba(249,115,22,0.3)]" asChild>
                 <a href="/contact">Contact Us</a>
+              </Button>
+              <Button className="w-full mt-2 rounded-xl py-6 text-base border-white/10 bg-white/5 hover:bg-white/10 text-white" variant="outline" asChild>
+                <a href="/future-work">Future Work</a>
               </Button>
             </motion.div>
           </div>

@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import { SensorToScreen } from '../components/SensorToScreen';
+---
+
+<Layout title="Future Work | Smart Cushion">
+	<Navbar client:load />
+	
+	<main class="min-h-screen bg-black pt-28 pb-12 relative overflow-hidden flex items-center justify-center">
+		{/* Background Decor */}
+		<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
+			<div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full animate-pulse"></div>
+			<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full animate-pulse" style="animation-delay: 2s;"></div>
+		</div>
+
+		<div class="container mx-auto px-4 relative z-10">
+			<div class="max-w-6xl mx-auto">
+				<SensorToScreen client:load />
+			</div>
+		</div>
+	</main>
+</Layout>

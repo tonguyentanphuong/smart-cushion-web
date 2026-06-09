@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Cpu, Cloud, Smartphone, Activity, BrainCircuit, Database } from "lucide-react";
+import { SensorToScreen } from "./SensorToScreen";
 
 const layersData = [
   { id: "business", name: "Business Layer", icon: "📊", desc: "Analytics & Gamification", info: "Manages user streaks, rewards, and long-term health trends stored in Amazon DynamoDB.", color: "from-blue-500/20 to-transparent", borderColor: "border-blue-500/40", hoverColor: "from-blue-500/30 via-blue-500/10 to-transparent", textColor: "text-blue-400" },
@@ -24,7 +25,7 @@ export const ArchitectureLayers = () => {
   const [direction, setDirection] = useState(0);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [hoveredLayer, setHoveredLayer] = useState<string | null>(null);
-  const totalSlides = 5;
+  const totalSlides = 3;
 
   const sectionRef = useRef<HTMLElement>(null);
   const lastScrollTime = useRef<number>(0);
@@ -181,296 +182,12 @@ export const ArchitectureLayers = () => {
               </motion.div>
             )}
 
-
-
             {activeIndex === 2 && (
               <motion.div 
-                key="5layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30, staggerChildren: 0.06 }}
-                className="absolute inset-0 flex flex-col bg-gradient-to-tr from-white/5 to-transparent border border-white/10 rounded-[3rem] p-4 md:p-6 pb-8 backdrop-blur-xl shadow-2xl items-center"
-              >
-                <div className="absolute top-0 right-0 p-12 opacity-30 pointer-events-none">
-                  <div className="text-[20rem] font-black leading-none bg-clip-text text-transparent bg-gradient-to-b from-white to-white/0">5</div>
-                </div>
-
-                <div className="text-center mb-3 md:mb-4 relative z-10">
-                  <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-primary drop-shadow-[0_2px_10px_rgba(249,115,22,0.2)] mb-1.5">IoT Architecture</motion.h2>
-                  <motion.p variants={itemVariants} className="text-primary font-mono tracking-widest uppercase text-sm">Standard 5-Layer Stack</motion.p>
-                </div>
-
-                <div className="flex flex-col flex-1 justify-center w-full max-w-3xl relative z-10 min-h-[420px]">
-                  {layersData.map((layer, idx) => {
-                    const isHovered = hoveredLayer === layer.id;
-                    const isAnyHovered = hoveredLayer !== null;
-                    const isVisible = !isAnyHovered || isHovered;
-
-                    return (
-                      <React.Fragment key={layer.id}>
-                        {/* Connection Line */}
-                        {idx > 0 && (
-                          <div className="flex justify-center my-1.5 md:my-2">
-                            <div className="w-0.5 h-3 md:h-4 bg-gradient-to-b from-white/30 to-white/10 rounded-full" />
-                          </div>
-                        )}
-
-                        {/* Layer Box */}
-                        <motion.div
-                          animate={{ 
-                            opacity: isVisible ? 1 : 0.25, 
-                            scale: isHovered ? 1.04 : 1,
-                          }}
-                          transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                          onMouseEnter={() => setHoveredLayer(layer.id)}
-                          onMouseLeave={() => setHoveredLayer(null)}
-                          className={`overflow-hidden rounded-xl border bg-gradient-to-r cursor-pointer transition-all duration-300 w-full relative z-10 ${
-                            isHovered 
-                              ? `${layer.hoverColor} ${layer.borderColor} shadow-[0_0_40px_rgba(255,255,255,0.05)]` 
-                              : `${layer.color} ${layer.dashed ? 'border-dashed border-red-500/40' : layer.borderColor || 'border-blue-500/30'}`
-                          }`}
-                        >
-                          <div className={`flex items-center gap-6 p-4 md:p-5 px-7`}>
-                             {/* Icon block */}
-                             <div className={`text-3xl md:text-4xl w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 transition-transform duration-300 ${isHovered ? 'scale-110 rotate-3' : ''}`}>
-                               {layer.icon}
-                             </div>
-                             
-                             <div className="flex flex-col flex-1">
-                               <div className="flex flex-col md:flex-row md:items-center justify-between gap-1">
-                                 <span className="text-white font-bold text-lg md:text-xl tracking-wide">{layer.name}</span>
-                               </div>
-                               
-                               <div className="relative w-full mt-0.5 overflow-hidden min-h-[20px] md:min-h-[24px]">
-                                 {/* General desc (visible when not hovered) */}
-                                 <span className={`text-neutral-400 text-sm md:text-base font-medium transition-all duration-300 block ${isHovered ? 'opacity-0 -translate-y-2 pointer-events-none absolute' : 'opacity-100 translate-y-0'}`}>
-                                   {layer.desc}
-                                 </span>
-                                 
-                                 {/* Detailed info (visible when hovered) */}
-                                 <span className={`text-neutral-200 text-sm md:text-base font-medium transition-all duration-300 block leading-relaxed ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none absolute'}`}>
-                                   {layer.info}
-                                 </span>
-                               </div>
-                             </div>
-                           </div>
-                        </motion.div>
-                      </React.Fragment>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            )}
-
-            {/* 7 LAYER - OSI Model */}
-            {activeIndex === 3 && (
-              <motion.div 
-                key="7layer" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30, staggerChildren: 0.04 }}
-                className="absolute inset-0 flex flex-col md:flex-row bg-gradient-to-bl from-white/5 to-transparent border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-xl shadow-2xl"
-              >
-                <div className="w-full md:w-1/3 text-center md:text-left flex flex-col justify-center pr-8 relative z-10">
-                  <motion.div variants={itemVariants} className="text-[9rem] font-black leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white/80 to-white/0 drop-shadow-[0_0_50px_rgba(255,255,255,0.2)] -ml-2 mb-2">7</motion.div>
-                  <motion.h2 variants={itemVariants} className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-indigo-400 drop-shadow-[0_2px_10px_rgba(129,140,248,0.2)] mb-2">OSI Model</motion.h2>
-                  <motion.p variants={itemVariants} className="text-neutral-400 text-base">Open Systems Interconnection</motion.p>
-                </div>
-
-                <div className="w-full flex gap-4 flex-1 items-end relative z-10">
-                  <div className="w-full flex flex-col gap-2 md:gap-3 group/container">
-                    <motion.div variants={itemVariants} className="w-full flex justify-end">
-                      <OsiLayerBox num={7} name="Application" desc="MQTT Pub/Sub & JSON Payloads" 
-                        info="Smart Cushion Web App interaction layer." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" 
-                        visual={<div className="font-mono text-[10px] md:text-xs text-indigo-200 mt-2 p-2 bg-black/40 rounded border border-indigo-500/30 overflow-hidden">
-                          {`{ "id": "esp_01", "posture": "good", "sensors": [...] }`}
-                        </div>}
-                      />
-                    </motion.div>
-                    <motion.div variants={itemVariants} className="w-full flex justify-end">
-                      <OsiLayerBox num={6} name="Presentation" desc="Data Formatting" 
-                        info="Conversion of raw sensor arrays into JSON for transmission." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300"
-                        visual={<div className="font-mono text-[10px] md:text-xs text-indigo-200 mt-2 flex items-center gap-2">
-                          <span className="px-2 py-1 bg-white/10 rounded">Raw ADC (0-4095)</span>
-                          <span className="text-white">→</span>
-                          <span className="px-2 py-1 bg-indigo-500/30 rounded text-white font-bold">JSON UTF-8</span>
-                        </div>} 
-                      />
-                    </motion.div>
-                    <motion.div variants={itemVariants} className="w-full flex justify-end">
-                      <OsiLayerBox num={5} name="Session" desc="MQTT Connection" 
-                        info="Establishing and maintaining the link between ESP32 and Broker." color="bg-indigo-500/20 border-indigo-500/40 text-indigo-300" 
-                        visual={<div className="flex items-center gap-4 mt-2">
-                          <div className="flex items-center gap-2 px-3 py-1.5 bg-green-500/20 text-green-400 rounded border border-green-500/30 text-xs font-bold">
-                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"/> CONNECTED (Keep-Alive 60s)
-                          </div>
-                        </div>}
-                      />
-                    </motion.div>
-                    <motion.div variants={itemVariants} className="w-full flex justify-end">
-                      <OsiLayerBox num={4} name="Transport" desc="TCP/IP Guarantee" 
-                        info="Ensuring sensor packets arrive in order via TCP Port 1883." color="bg-cyan-500/20 border-cyan-500/40 text-cyan-300" 
-                        visual={<div className="font-mono text-xs md:text-sm text-cyan-200 mt-2 px-3 py-1.5 bg-cyan-900/40 rounded border border-cyan-500/30 inline-block">
-                          <span className="font-bold text-white">PROTOCOL:</span> TCP <span className="mx-2">|</span> <span className="font-bold text-white">PORT:</span> 1883 (MQTT) / 8883 (TLS)
-                        </div>}
-                      />
-                    </motion.div>
-                    <motion.div variants={itemVariants} className="w-full flex justify-end">
-                      <OsiLayerBox num={3} name="Network" desc="IP Routing" 
-                        info="Assigning local IP addresses to Cushion and Fog Nodes." color="bg-green-500/20 border-green-500/40 text-green-300" 
-                        visual={<div className="font-mono text-[10px] md:text-xs text-green-200 mt-2 flex gap-4">
-                          <div className="flex flex-col bg-black/30 p-1.5 rounded"><span className="text-white/50 text-[9px]">SOURCE (ESP32)</span>192.168.1.104</div>
-                          <div className="flex flex-col bg-black/30 p-1.5 rounded"><span className="text-white/50 text-[9px]">DEST (FOG NODE)</span>192.168.1.100</div>
-                        </div>}
-                      />
-                    </motion.div>
-                    <motion.div variants={itemVariants} className="w-full flex justify-end">
-                      <OsiLayerBox num={2} name="Data Link" desc="Wi-Fi MAC Addressing" 
-                        info="Managing physical addresses for wireless data frames." color="bg-lime-500/20 border-lime-500/40 text-lime-300" 
-                        visual={<div className="font-mono text-xs text-lime-200 mt-2 px-3 py-1.5 bg-black/40 rounded border border-lime-500/30 inline-flex items-center gap-2">
-                          <Activity size={14} className="text-lime-400" /> IEEE 802.11 b/g/n (Wi-Fi 4)
-                        </div>}
-                      />
-                    </motion.div>
-                    <motion.div variants={itemVariants} className="w-full flex justify-end">
-                      <OsiLayerBox num={1} name="Physical" desc="RF Signal & FSR Wiring" 
-                        info="The physical pressure sensors and ESP32 radio waves." color="bg-yellow-500/20 border-yellow-500/40 text-yellow-300" 
-                        visual={<div className="flex items-center gap-3 mt-2">
-                           <div className="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded text-yellow-200 text-xs font-bold">ESP32 2.4GHz RF</div>
-                           <div className="px-3 py-1 bg-orange-500/20 border border-orange-500/30 rounded text-orange-200 text-xs font-bold">FSR Matrix Wiring</div>
-                        </div>}
-                      />
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* SMART CUSHION ARCHITECTURE - Data Flow */}
-            {activeIndex === 4 && (
-              <motion.div 
                 key="data-flow" custom={direction} variants={variants} initial="enter" animate="center" exit="exit" transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                className="absolute inset-0 flex flex-col bg-white/5 border border-white/10 rounded-[3rem] p-8 md:p-12 backdrop-blur-md justify-center overflow-visible"
+                className="absolute inset-0 flex items-center justify-center"
               >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--primary),0.1)_0%,transparent_70%)] pointer-events-none" />
-                
-                <div className="text-center mb-10 relative z-10">
-                  <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-mono tracking-widest mb-4">
-                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> PRACTICAL IMPLEMENTATION
-                  </motion.div>
-                  <motion.h2 variants={itemVariants} className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight drop-shadow-[0_4px_15px_rgba(255,255,255,0.05)]">
-                    From <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400 drop-shadow-[0_2px_8px_rgba(249,115,22,0.3)] italic">Sensor</span> to <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-teal-300 drop-shadow-[0_2px_8px_rgba(6,182,212,0.3)] italic">Screen</span>
-                  </motion.h2>
-                </div>
-
-                <div className="relative w-full max-w-6xl mx-auto">
-                  {/* Connecting Line (Desktop) */}
-                  <div className="hidden lg:block absolute top-[44px] left-[5%] right-[5%] h-[3px] bg-white/5 -translate-y-1/2 rounded-full overflow-hidden">
-                     <motion.div className="absolute top-0 bottom-0 w-64 bg-gradient-to-r from-transparent via-primary/50 to-transparent" animate={{ left: ["-20%", "120%"] }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }} />
-                     <motion.div className="absolute top-0 bottom-0 w-48 bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" animate={{ left: ["-20%", "120%"] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear", delay: 0.8 }} />
-                  </div>
-
-                  {/* Connecting Line extending OUT to the CTA card */}
-                  <div className="hidden lg:block absolute top-[44px] left-[90%] h-[3px] -translate-y-1/2 z-0 lg:right-[-50px] xl:right-[-150px] 2xl:right-[-250px]">
-                    <div className="w-full h-full border-t-2 border-dashed border-primary/40 relative">
-                      {/* traveling neon energy dot from Live Dashboard to Dashboard card */}
-                      <motion.div 
-                        className="absolute -top-[6px] w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_12px_rgba(249,115,22,1)]"
-                        animate={{ left: ["0%", "100%"] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-0 relative">
-                    {dataNodes.map((node, i) => (
-                      <motion.div 
-                        key={node.id} 
-                        variants={itemVariants}
-                        whileHover={{ scale: 1.1, y: -5 }}
-                        onMouseEnter={() => setHoveredNode(node.id)}
-                        onMouseLeave={() => setHoveredNode(null)}
-                        className="flex flex-col items-center w-full lg:w-52 group relative z-10 cursor-pointer"
-                      >
-                        <div className={`w-24 h-24 md:w-28 md:h-28 rounded-[1.5rem] flex items-center justify-center border-2 backdrop-blur-md bg-black/60 ${node.bg} ${node.border} ${node.glow ? 'shadow-[0_0_40px_rgba(var(--primary),0.3)] border-primary/50' : 'border-white/10'} relative transition-all duration-500 group-hover:border-white/30 overflow-hidden`}>
-                          {node.image ? (
-                            <img 
-                              src={node.image} 
-                              alt={node.title} 
-                              className="w-16 h-16 md:w-20 md:h-20 object-contain relative z-10 transition-transform duration-500 group-hover:scale-110" 
-                            />
-                          ) : (
-                            <node.icon className={`w-12 h-12 md:w-14 md:h-14 ${node.color} relative z-10`} />
-                          )}
-                          
-                          {/* Inner pulsing glow */}
-                          <motion.div 
-                            className={`absolute inset-0 rounded-[1.5rem] ${node.bg} opacity-20`}
-                            animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-                            transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
-                          />
-
-                          {node.glow && (
-                            <div className="absolute -top-1 -right-1 flex h-4 w-4">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-4 w-4 bg-primary"></span>
-                            </div>
-                          )}
-                        </div>
-                        <div className="mt-6 text-center h-28 flex flex-col items-center relative w-full px-2">
-                          <h4 className="text-white font-bold text-lg md:text-xl tracking-wide mb-1 transition-colors group-hover:text-primary">{node.title}</h4>
-                          
-                          <div className="relative w-full h-16 flex justify-center items-start overflow-hidden">
-                            {/* Default Description */}
-                            <span className={`text-neutral-500 text-xs md:text-sm font-medium leading-tight transition-all duration-300 block w-full ${hoveredNode === node.id ? 'opacity-0 scale-95 pointer-events-none absolute' : 'opacity-100 scale-100'}`}>
-                              {node.desc}
-                            </span>
-                            
-                            {/* Hover Details */}
-                            <span className={`${node.color} text-[11px] md:text-xs font-semibold leading-snug transition-all duration-300 block w-full px-1 ${hoveredNode === node.id ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none absolute'}`}>
-                              {node.details}
-                            </span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Desktop Floating CTA connected by line */}
-                  <div className="absolute top-[44px] -translate-y-1/2 z-50 hidden lg:flex lg:right-[-140px] xl:right-[-240px] 2xl:right-[-350px]">
-                    <motion.a
-                      href="/cloud"
-                      initial={{ opacity: 0, scale: 0.92 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.92 }}
-                      transition={{ type: "spring", stiffness: 280, damping: 22 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="group flex flex-col items-center gap-1 cursor-pointer relative"
-                    >
-                      {/* Soft ambient glow behind card — only visible on hover */}
-                      <span className="absolute inset-0 rounded-2xl bg-primary/20 blur-xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                      
-                      {/* Sliding Glass Card */}
-                      <span className="relative flex items-center gap-4 pl-6 pr-5 py-4 rounded-2xl bg-neutral-950/80 backdrop-blur-xl border border-white/10 group-hover:border-primary/50 group-hover:bg-neutral-900/90 transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-                        <span className="text-white font-extrabold text-base tracking-wide group-hover:text-primary transition-colors">Explore Cloud Engine</span>
-                        <span className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300">
-                          <ChevronRight size={18} className="text-white group-hover:text-black stroke-[3px] group-hover:translate-x-0.5 transition-all" />
-                        </span>
-                      </span>
-                    </motion.a>
-                  </div>
-                </div>
-
-                {/* Mobile Fallback CTA below the nodes */}
-                <div className="mt-4 flex justify-center lg:hidden">
-                  <motion.a
-                    href="/cloud"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="group flex items-center gap-4 pl-6 pr-5 py-3.5 rounded-2xl bg-neutral-950/80 border border-white/10 active:border-primary/50 active:bg-neutral-900 transition-all duration-300 shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
-                  >
-                    <span className="text-white font-bold text-sm">Explore Cloud Engine</span>
-                    <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
-                      <ChevronRight size={16} className="text-white stroke-[3px]" />
-                    </span>
-                  </motion.a>
-                </div>
-
+                <SensorToScreen />
               </motion.div>
             )}
             
@@ -481,13 +198,12 @@ export const ArchitectureLayers = () => {
 
 
 
-
         </div>
       </div>
 
       {/* Dots Indicator — Positioned relative to section, using a premium Vercel-style Liquid Spring Capsule */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 z-50">
-        {[0, 1, 2, 3, 4].map((idx) => {
+        {[0, 1, 2].map((idx) => {
           const isActive = activeIndex === idx;
           return (
             <button 
