@@ -20,7 +20,7 @@ export const SensorToScreen = () => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col bg-white/5 border border-white/10 rounded-[3rem] pt-6 pb-8 px-8 md:pt-8 md:pb-10 md:px-12 backdrop-blur-md justify-center overflow-visible relative">
+    <div className="w-full h-full flex flex-col bg-white/5 border border-white/10 rounded-[3rem] pt-8 pb-8 px-8 md:pt-10 md:pb-10 md:px-12 backdrop-blur-md justify-center overflow-visible relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--primary),0.1)_0%,transparent_70%)] pointer-events-none rounded-[3rem]" />
       
       <div className="text-center mb-6 relative z-10">
@@ -32,7 +32,7 @@ export const SensorToScreen = () => {
         </motion.h2>
       </div>
 
-      <div className="relative w-full max-w-6xl mx-auto">
+      <div className="relative w-full max-w-6xl mx-auto mt-12 lg:mt-24">
         {/* SVG Flow Connections (Desktop Only) */}
         <svg className="hidden lg:block absolute top-[56px] left-0 w-full pointer-events-none z-0 -translate-y-1/2 overflow-visible" viewBox="0 -95 1000 190" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
