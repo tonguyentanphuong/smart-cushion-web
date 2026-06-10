@@ -59,7 +59,7 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
 
       <div className="relative w-full max-w-6xl mx-auto mt-12 lg:mt-24">
         {/* SVG Flow Connections (Desktop Only) */}
-        <svg className="hidden lg:block absolute top-[56px] left-0 w-full pointer-events-none z-0 -translate-y-1/2 overflow-visible" viewBox="0 -115 1000 215" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className="hidden lg:block absolute top-1/2 left-0 w-full pointer-events-none z-0 -translate-y-1/2 overflow-visible" viewBox="0 -175 1000 345" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             {/* Glow filters */}
             <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
@@ -204,70 +204,90 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
               </g>
             </g>
           ) : (
-            /* Scaled Future Work View Connections (No Labels, Clean Clustered Flow Visuals) */
+            /* Scaled Future Work View Connections (Fanned for 5 Cushions & 5 Dashboards) */
             <g>
-              {/* Cushions to ESP32s (3 lines) */}
-              <path id="path-cushion-mcu-0" d="M 100,-68 L 300,-68" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
-              <path id="path-cushion-mcu-1" d="M 100,0 L 300,0" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
-              <path id="path-cushion-mcu-2" d="M 100,68 L 300,68" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
+              {/* Cushions to ESP32s (5 horizontal lines at Y = -144, -72, 0, 72, 144) */}
+              <path id="path-cushion-mcu-0" d="M 100,-144 L 300,-144" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cushion-mcu-1" d="M 100,-72 L 300,-72" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cushion-mcu-2" d="M 100,0 L 300,0" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cushion-mcu-3" d="M 100,72 L 300,72" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cushion-mcu-4" d="M 100,144 L 300,144" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
 
-              {/* ESP32s to Fog Node (3 fanning lines) */}
-              <path id="path-mcu-fog-0" d="M 300,-68 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
-              <path id="path-mcu-fog-1" d="M 300,0 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
-              <path id="path-mcu-fog-2" d="M 300,68 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
+              {/* ESP32s to Fog Node (5 fanning lines fanning into X=500, Y=0) */}
+              <path id="path-mcu-fog-0" d="M 300,-144 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-mcu-fog-1" d="M 300,-72 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-mcu-fog-2" d="M 300,0 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-mcu-fog-3" d="M 300,72 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-mcu-fog-4" d="M 300,144 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
 
-              {/* Fog Node to ESP32 Haptic Alert warning reverse paths (3 lines) */}
-              <path id="path-fog-mcu-0" d="M 500,0 L 300,-68" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
-              <path id="path-fog-mcu-1" d="M 500,0 L 500,88 L 305,88 Q 300,88 300,83 L 300,0" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
-              <path id="path-fog-mcu-2" d="M 500,0 L 300,68" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
+              {/* Fog Node to ESP32 Haptic Alert warning reverse paths (5 lines) */}
+              <path id="path-fog-mcu-0" d="M 500,0 L 300,-144" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
+              <path id="path-fog-mcu-1" d="M 500,0 L 300,-72" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
+              <path id="path-fog-mcu-2" d="M 500,0 L 500,158 L 305,158 Q 300,158 300,153 L 300,0" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
+              <path id="path-fog-mcu-3" d="M 500,0 L 300,72" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
+              <path id="path-fog-mcu-4" d="M 500,0 L 300,144" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
 
               {/* Fog Node to AWS Cloud (1 line) */}
               <path id="path-fog-cloud" d="M 500,0 L 700,0" stroke="url(#grad-fog-cloud)" strokeWidth="3.5" strokeDasharray="6 4" />
 
-              {/* Cloud to Dashboards (3 fanning lines) */}
-              <path id="path-cloud-dash-0" d="M 700,0 L 900,-68" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
-              <path id="path-cloud-dash-1" d="M 700,0 L 900,0" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
-              <path id="path-cloud-dash-2" d="M 700,0 L 900,68" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
+              {/* Cloud to Dashboards (5 fanning lines fanning out to X=900) */}
+              <path id="path-cloud-dash-0" d="M 700,0 L 900,-144" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cloud-dash-1" d="M 700,0 L 900,-72" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cloud-dash-2" d="M 700,0 L 900,0" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cloud-dash-3" d="M 700,0 L 900,72" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cloud-dash-4" d="M 700,0 L 900,144" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
 
-              {/* Fog Node to Dashboards Direct Local WS (3 fanning trunk bypass lines) */}
-              <path id="path-fog-dash-0" d="M 500,0 L 500,-95 L 900,-95 L 900,-68" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
-              <path id="path-fog-dash-1" d="M 500,0 L 500,-95 L 860,-95 L 860,0 L 900,0" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
-              <path id="path-fog-dash-2" d="M 500,0 L 500,-95 L 830,-95 L 830,68 L 900,68" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              {/* Fog Node to Dashboards Direct Local WS (5 fanning trunk bypass lines at Y = -158) */}
+              <path id="path-fog-dash-0" d="M 500,0 L 500,-158 L 950,-158 L 950,-144 L 900,-144" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              <path id="path-fog-dash-1" d="M 500,0 L 500,-158 L 950,-158 L 950,-72 L 900,-72" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              <path id="path-fog-dash-2" d="M 500,0 L 500,-158 L 950,-158 L 950,0 L 900,0" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              <path id="path-fog-dash-3" d="M 500,0 L 500,-158 L 950,-158 L 950,72 L 900,72" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              <path id="path-fog-dash-4" d="M 500,0 L 500,-158 L 950,-158 L 950,144 L 900,144" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
 
               {/* Light Pulses */}
               <circle r="3.5" fill="#60a5fa" filter="url(#glow-cyan)"><animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#path-cushion-mcu-0" /></animateMotion></circle>
               <circle r="3.5" fill="#60a5fa" filter="url(#glow-cyan)"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#path-cushion-mcu-1" /></animateMotion></circle>
               <circle r="3.5" fill="#60a5fa" filter="url(#glow-cyan)"><animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#path-cushion-mcu-2" /></animateMotion></circle>
+              <circle r="3.5" fill="#60a5fa" filter="url(#glow-cyan)"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#path-cushion-mcu-3" /></animateMotion></circle>
+              <circle r="3.5" fill="#60a5fa" filter="url(#glow-cyan)"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#path-cushion-mcu-4" /></animateMotion></circle>
 
               <circle r="3.5" fill="#22d3ee" filter="url(#glow-cyan)"><animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#path-mcu-fog-0" /></animateMotion></circle>
               <circle r="3.5" fill="#22d3ee" filter="url(#glow-cyan)"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#path-mcu-fog-1" /></animateMotion></circle>
               <circle r="3.5" fill="#22d3ee" filter="url(#glow-cyan)"><animateMotion dur="2.1s" repeatCount="indefinite"><mpath href="#path-mcu-fog-2" /></animateMotion></circle>
+              <circle r="3.5" fill="#22d3ee" filter="url(#glow-cyan)"><animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#path-mcu-fog-3" /></animateMotion></circle>
+              <circle r="3.5" fill="#22d3ee" filter="url(#glow-cyan)"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#path-mcu-fog-4" /></animateMotion></circle>
 
               <circle r="4.5" fill="#ef4444" filter="url(#glow-orange)"><animateMotion dur="2.1s" repeatCount="indefinite"><mpath href="#path-fog-mcu-0" /></animateMotion></circle>
               <circle r="4.5" fill="#ef4444" filter="url(#glow-orange)"><animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#path-fog-mcu-1" /></animateMotion></circle>
               <circle r="4.5" fill="#ef4444" filter="url(#glow-orange)"><animateMotion dur="1.9s" repeatCount="indefinite"><mpath href="#path-fog-mcu-2" /></animateMotion></circle>
+              <circle r="4.5" fill="#ef4444" filter="url(#glow-orange)"><animateMotion dur="2.3s" repeatCount="indefinite"><mpath href="#path-fog-mcu-3" /></animateMotion></circle>
+              <circle r="4.5" fill="#ef4444" filter="url(#glow-orange)"><animateMotion dur="2.7s" repeatCount="indefinite"><mpath href="#path-fog-mcu-4" /></animateMotion></circle>
 
               <circle r="4.5" fill="#f97316" filter="url(#glow-orange)"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#path-fog-cloud" /></animateMotion></circle>
 
               <circle r="3.5" fill="#c084fc" filter="url(#glow-purple)"><animateMotion dur="2.3s" repeatCount="indefinite"><mpath href="#path-cloud-dash-0" /></animateMotion></circle>
               <circle r="3.5" fill="#c084fc" filter="url(#glow-purple)"><animateMotion dur="1.9s" repeatCount="indefinite"><mpath href="#path-cloud-dash-1" /></animateMotion></circle>
               <circle r="3.5" fill="#c084fc" filter="url(#glow-purple)"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#path-cloud-dash-2" /></animateMotion></circle>
+              <circle r="3.5" fill="#c084fc" filter="url(#glow-purple)"><animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#path-cloud-dash-3" /></animateMotion></circle>
+              <circle r="3.5" fill="#c084fc" filter="url(#glow-purple)"><animateMotion dur="2.8s" repeatCount="indefinite"><mpath href="#path-cloud-dash-4" /></animateMotion></circle>
 
               <circle r="4.5" fill="#34d399" filter="url(#glow-emerald)"><animateMotion dur="1.9s" repeatCount="indefinite"><mpath href="#path-fog-dash-0" /></animateMotion></circle>
               <circle r="4.5" fill="#34d399" filter="url(#glow-emerald)"><animateMotion dur="2.3s" repeatCount="indefinite"><mpath href="#path-fog-dash-1" /></animateMotion></circle>
               <circle r="4.5" fill="#34d399" filter="url(#glow-emerald)"><animateMotion dur="1.6s" repeatCount="indefinite"><mpath href="#path-fog-dash-2" /></animateMotion></circle>
+              <circle r="4.5" fill="#34d399" filter="url(#glow-emerald)"><animateMotion dur="2.1s" repeatCount="indefinite"><mpath href="#path-fog-dash-3" /></animateMotion></circle>
+              <circle r="4.5" fill="#34d399" filter="url(#glow-emerald)"><animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#path-fog-dash-4" /></animateMotion></circle>
             </g>
           )}
         </svg>
 
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-0 relative min-h-[320px]">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-0 relative min-h-[400px]">
           {dataNodes.map((node, i) => {
             const isMultiplied = isScaled && (node.id === "edge" || node.id === "esp" || node.id === "dashboard");
-            const items = isMultiplied ? [0, 1, 2] : [0];
+            const items = isMultiplied ? [0, 1, 2, 3, 4] : [0];
 
             return (
               <div key={node.id} className="flex flex-col items-center w-full lg:w-52 relative z-10">
-                <div className={`flex flex-col gap-3 items-center justify-center ${isScaled ? "h-[260px]" : "h-[112px]"} transition-all duration-500`}>
+                <div className={`flex flex-col gap-2 items-center justify-center ${isScaled ? "h-[352px]" : "h-[112px]"} transition-all duration-500`}>
                   {items.map((idx) => {
                     const itemId = `${node.id}-${idx}`;
                     const itemTitle = isMultiplied 
@@ -285,16 +305,16 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
                         whileHover={{ scale: 1.08, y: -2 }}
                         onMouseEnter={() => setHoveredNode(node.id)}
                         onMouseLeave={() => setHoveredNode(null)}
-                        className={`${isScaled ? "w-16 h-16 md:w-20 md:h-20 rounded-2xl" : "w-24 h-24 md:w-28 md:h-28 rounded-[1.5rem]"} flex items-center justify-center border-2 backdrop-blur-md bg-black/60 ${node.bg} ${node.border} ${node.glow && !isScaled ? 'shadow-[0_0_40px_rgba(var(--primary),0.3)] border-primary/50' : 'border-white/10'} relative transition-all duration-500 hover:border-white/30 overflow-hidden cursor-pointer`}
+                        className={`${isScaled ? "w-16 h-16 rounded-2xl" : "w-24 h-24 md:w-28 md:h-28 rounded-[1.5rem]"} flex items-center justify-center border-2 backdrop-blur-md bg-black/60 ${node.bg} ${node.border} ${node.glow && !isScaled ? 'shadow-[0_0_40px_rgba(var(--primary),0.3)] border-primary/50' : 'border-white/10'} relative transition-all duration-500 hover:border-white/30 overflow-hidden cursor-pointer`}
                       >
                         {node.image ? (
                           <img 
                             src={node.image} 
                             alt={itemTitle} 
-                            className={`${isScaled ? "w-8 h-8 md:w-10 md:h-10 -translate-y-1.5" : "w-11 h-11 md:w-14 md:h-14 -translate-y-2"} object-contain relative z-10 transition-transform duration-500 group-hover:scale-105`} 
+                            className={`${isScaled ? "w-8 h-8 -translate-y-1.5" : "w-11 h-11 md:w-14 md:h-14 -translate-y-2"} object-contain relative z-10 transition-transform duration-500 group-hover:scale-105`} 
                           />
                         ) : (
-                          <node.icon className={`${isScaled ? "w-7 h-7 md:w-9 md:h-9 -translate-y-1.5" : "w-9 h-9 md:w-11 md:h-11 -translate-y-2"} ${node.color} relative z-10`} />
+                          <node.icon className={`${isScaled ? "w-7 h-7 -translate-y-1.5" : "w-9 h-9 md:w-11 md:h-11 -translate-y-2"} ${node.color} relative z-10`} />
                         )}
                         
                         <motion.div 
@@ -312,7 +332,7 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
 
                         {/* Glassy Title Banner inside the Box */}
                         <div className={`absolute bottom-0 left-0 right-0 bg-neutral-900/90 border-t border-white/5 ${isScaled ? "min-h-[22px] py-0.5" : "min-h-[30px] py-1"} px-1 flex items-center justify-center z-20`}>
-                          <span className={`text-white font-bold ${isScaled ? "text-[7.5px] md:text-[8.5px]" : "text-[9px] md:text-[10px]"} leading-tight tracking-wide uppercase text-center block max-w-full truncate`}>
+                          <span className={`text-white font-bold ${isScaled ? "text-[7.5px]" : "text-[9px] md:text-[10px]"} leading-tight tracking-wide uppercase text-center block max-w-full truncate`}>
                             {itemTitle}
                           </span>
                         </div>
