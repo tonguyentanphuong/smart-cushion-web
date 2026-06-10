@@ -185,13 +185,15 @@ export const SolutionsScroll = () => {
                   className="absolute inset-0 flex flex-col lg:flex-row items-center gap-12 lg:gap-20"
                 >
                   {/* Left Side: Cinematic Illustration */}
-                  <div className="flex-1 w-full h-[40vh] lg:h-[60vh] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative group">
+                  <div className={`flex-1 w-full h-[40vh] lg:h-[60vh] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative group ${(index === 0 || index === 2) ? 'bg-white' : 'bg-neutral-950'}`}>
                     <img 
                       src={item.image} 
                       alt={item.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      className={`w-full h-full transition-transform duration-700 group-hover:scale-110 ${(index === 0 || index === 2) ? 'object-contain' : 'object-cover'}`} 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                    {index === 1 && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                    )}
                     <div className="absolute bottom-8 left-8">
                        <div className={`p-4 rounded-2xl bg-black/50 backdrop-blur-md border border-white/10 ${item.color}`}>
                          <item.icon size={32} />
