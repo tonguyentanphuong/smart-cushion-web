@@ -34,7 +34,7 @@ export const SensorToScreen = () => {
 
       <div className="relative w-full max-w-6xl mx-auto mt-12 lg:mt-24">
         {/* SVG Flow Connections (Desktop Only) */}
-        <svg className="hidden lg:block absolute top-[56px] left-0 w-full pointer-events-none z-0 -translate-y-1/2 overflow-visible" viewBox="0 -95 1000 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className="hidden lg:block absolute top-[56px] left-0 w-full pointer-events-none z-0 -translate-y-1/2 overflow-visible" viewBox="0 -115 1000 215" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             {/* Glow filters */}
             <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
@@ -94,66 +94,57 @@ export const SensorToScreen = () => {
           </defs>
 
           {/* 1. Cushion to MCU */}
-          <path id="path-cushion-mcu" d="M 100,0 L 300,0" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="6 4" />
+          <path id="path-cushion-mcu" d="M 100,0 L 300,0" stroke="url(#grad-cushion-mcu)" strokeWidth="3.5" strokeDasharray="6 4" />
           
           {/* 2. MCU to Fog */}
-          <path id="path-mcu-fog" d="M 300,0 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="6 4" />
+          <path id="path-mcu-fog" d="M 300,0 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3.5" strokeDasharray="6 4" />
           
-          {/* 3. Fog to MCU (Reverse Alert) - Orthogonal Circuit Shape */}
-          <path id="path-fog-mcu" d="M 500,0 L 500,63 Q 500,68 495,68 L 305,68 Q 300,68 300,63 L 300,0" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="4 4" />
+          {/* 3. Fog to MCU (Reverse Alert) - Orthogonal Circuit Shape (made wider and deeper) */}
+          <path id="path-fog-mcu" d="M 500,0 L 500,71 Q 500,76 495,76 L 305,76 Q 300,76 300,71 L 300,0" stroke="url(#grad-fog-mcu)" strokeWidth="3.5" strokeDasharray="4 4" />
           
           {/* 4. Fog to Cloud */}
-          <path id="path-fog-cloud" d="M 500,0 L 700,0" stroke="url(#grad-fog-cloud)" strokeWidth="3" strokeDasharray="6 4" />
+          <path id="path-fog-cloud" d="M 500,0 L 700,0" stroke="url(#grad-fog-cloud)" strokeWidth="3.5" strokeDasharray="6 4" />
           
           {/* 5. Cloud to Dashboard */}
-          <path id="path-cloud-dash" d="M 700,0 L 900,0" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="6 4" />
+          <path id="path-cloud-dash" d="M 700,0 L 900,0" stroke="url(#grad-cloud-dash)" strokeWidth="3.5" strokeDasharray="6 4" />
           
-          {/* 6. Fog to Dashboard Direct (Local WebSockets) - Orthogonal Circuit Shape */}
-          <path id="path-fog-dash" d="M 500,0 L 500,-67 Q 500,-72 505,-72 L 895,-72 Q 900,-72 900,-67 L 900,0" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="4 4" />
-
-          {/* 7. Dashboard to CTA (Dashed line going out) */}
-          <path id="path-dash-cta" d="M 900,0 L 1000,0" stroke="rgba(249, 115, 22, 0.4)" strokeWidth="2" strokeDasharray="4 4" />
+          {/* 6. Fog to Dashboard Direct (Local WebSockets) - Orthogonal Circuit Shape (made wider and higher) */}
+          <path id="path-fog-dash" d="M 500,0 L 500,-80 Q 500,-85 505,-85 L 895,-85 Q 900,-85 900,-80 L 900,0" stroke="url(#grad-fog-dash)" strokeWidth="3.5" strokeDasharray="4 4" />
 
           {/* Animated light pulses */}
-          <circle r="4" fill="#60a5fa" filter="url(#glow-cyan)">
+          <circle r="4.5" fill="#60a5fa" filter="url(#glow-cyan)">
             <animateMotion dur="2.5s" repeatCount="indefinite">
               <mpath href="#path-cushion-mcu" />
             </animateMotion>
           </circle>
           
-          <circle r="4" fill="#22d3ee" filter="url(#glow-cyan)">
+          <circle r="4.5" fill="#22d3ee" filter="url(#glow-cyan)">
             <animateMotion dur="2s" repeatCount="indefinite">
               <mpath href="#path-mcu-fog" />
             </animateMotion>
           </circle>
           
-          <circle r="4" fill="#ef4444" filter="url(#glow-orange)">
+          <circle r="5.5" fill="#ef4444" filter="url(#glow-orange)">
             <animateMotion dur="2.2s" repeatCount="indefinite">
               <mpath href="#path-fog-mcu" />
             </animateMotion>
           </circle>
           
-          <circle r="4" fill="#f97316" filter="url(#glow-orange)">
+          <circle r="4.5" fill="#f97316" filter="url(#glow-orange)">
             <animateMotion dur="3s" repeatCount="indefinite">
               <mpath href="#path-fog-cloud" />
             </animateMotion>
           </circle>
           
-          <circle r="4" fill="#c084fc" filter="url(#glow-purple)">
+          <circle r="4.5" fill="#c084fc" filter="url(#glow-purple)">
             <animateMotion dur="2.5s" repeatCount="indefinite">
               <mpath href="#path-cloud-dash" />
             </animateMotion>
           </circle>
           
-          <circle r="4" fill="#34d399" filter="url(#glow-emerald)">
+          <circle r="5.5" fill="#34d399" filter="url(#glow-emerald)">
             <animateMotion dur="1.8s" repeatCount="indefinite">
               <mpath href="#path-fog-dash" />
-            </animateMotion>
-          </circle>
-
-          <circle r="3" fill="#f97316" filter="url(#glow-orange)">
-            <animateMotion dur="2s" repeatCount="indefinite">
-              <mpath href="#path-dash-cta" />
             </animateMotion>
           </circle>
 
@@ -168,8 +159,8 @@ export const SensorToScreen = () => {
             <text x="400" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Pressure JSON</text>
             
             {/* Fog to MCU (Reverse) */}
-            <text x="400" y="44" fill="#fca5a5" textAnchor="middle">Haptic Alert Trigger</text>
-            <text x="400" y="55" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Vibration Command</text>
+            <text x="400" y="52" fill="#fca5a5" textAnchor="middle">Haptic Alert Trigger</text>
+            <text x="400" y="63" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Vibration Command</text>
             
             {/* Fog to Cloud */}
             <text x="600" y="-12" fill="#fdba74" textAnchor="middle">AWS IoT Core</text>
@@ -180,8 +171,8 @@ export const SensorToScreen = () => {
             <text x="800" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">WebSockets / REST</text>
             
             {/* Fog to Dashboard Direct */}
-            <text x="700" y="-84" fill="#6ee7b7" textAnchor="middle">Local WebSockets</text>
-            <text x="700" y="-76" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Live Telemetry (&lt;100ms)</text>
+            <text x="700" y="-98" fill="#6ee7b7" textAnchor="middle">Local WebSockets</text>
+            <text x="700" y="-89" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Live Telemetry (&lt;100ms)</text>
           </g>
         </svg>
 
@@ -192,7 +183,7 @@ export const SensorToScreen = () => {
               initial="initial"
               animate="animate"
               variants={itemVariants}
-              whileHover={{ scale: 1.1, y: -5 }}
+              whileHover={{ scale: 1.08, y: -4 }}
               onMouseEnter={() => setHoveredNode(node.id)}
               onMouseLeave={() => setHoveredNode(null)}
               className="flex flex-col items-center w-full lg:w-52 group relative z-10 cursor-pointer"
@@ -202,10 +193,10 @@ export const SensorToScreen = () => {
                   <img 
                     src={node.image} 
                     alt={node.title} 
-                    className="w-16 h-16 md:w-20 md:h-20 object-contain relative z-10 transition-transform duration-500 group-hover:scale-110" 
+                    className="w-11 h-11 md:w-14 md:h-14 object-contain relative z-10 transition-transform duration-500 group-hover:scale-105 -translate-y-2" 
                   />
                 ) : (
-                  <node.icon className={`w-12 h-12 md:w-14 md:h-14 ${node.color} relative z-10`} />
+                  <node.icon className={`w-9 h-9 md:w-11 md:h-11 ${node.color} relative z-10 -translate-y-2`} />
                 )}
                 
                 <motion.div 
@@ -215,21 +206,27 @@ export const SensorToScreen = () => {
                 />
 
                 {node.glow && (
-                  <div className="absolute -top-1 -right-1 flex h-4 w-4">
+                  <div className="absolute top-2 right-2 flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-4 w-4 bg-primary"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                   </div>
                 )}
+
+                {/* Glassy Title Banner inside the Box */}
+                <div className="absolute bottom-0 left-0 right-0 bg-neutral-900/90 border-t border-white/5 py-1 px-1.5 flex items-center justify-center min-h-[30px] z-20">
+                  <span className="text-white font-bold text-[9px] md:text-[10px] leading-tight tracking-wide uppercase text-center block max-w-full group-hover:text-primary transition-colors duration-300">
+                    {node.title}
+                  </span>
+                </div>
               </div>
-              <div className="mt-6 text-center h-28 flex flex-col items-center relative w-full px-2">
-                <h4 className="text-white font-bold text-lg md:text-xl tracking-wide mb-1 transition-colors group-hover:text-primary">{node.title}</h4>
-                
-                <div className="relative w-full h-16 flex justify-center items-start overflow-hidden">
-                  <span className={`text-neutral-500 text-xs md:text-sm font-medium leading-tight transition-all duration-300 block w-full ${hoveredNode === node.id ? 'opacity-0 scale-95 pointer-events-none absolute' : 'opacity-100 scale-100'}`}>
+              
+              <div className="mt-4 text-center h-14 flex flex-col items-center relative w-full px-2 justify-start">
+                <div className="relative w-full flex justify-center items-start">
+                  <span className={`text-neutral-400 text-xs md:text-sm font-semibold leading-relaxed transition-all duration-300 block w-full ${hoveredNode === node.id ? 'opacity-0 scale-95 pointer-events-none absolute' : 'opacity-100 scale-100'}`}>
                     {node.desc}
                   </span>
                   
-                  <span className={`${node.color} text-[11px] md:text-xs font-semibold leading-snug transition-all duration-300 block w-full px-1 ${hoveredNode === node.id ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none absolute'}`}>
+                  <span className={`${node.color} text-[11px] md:text-xs font-semibold leading-relaxed transition-all duration-300 block w-full px-1 ${hoveredNode === node.id ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none absolute'}`}>
                     {node.details}
                   </span>
                 </div>
