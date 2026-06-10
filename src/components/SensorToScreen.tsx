@@ -59,7 +59,7 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
 
       <div className="relative w-full max-w-6xl mx-auto mt-12 lg:mt-24">
         {/* SVG Flow Connections (Desktop Only) */}
-        <svg className={`hidden lg:block absolute ${isScaled ? "top-[176px]" : "top-[56px]"} left-0 w-full pointer-events-none z-0 -translate-y-1/2 overflow-visible`} viewBox="0 -175 1000 345" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className={`hidden lg:block absolute ${isScaled ? "top-[176px]" : "top-[56px]"} left-0 w-full pointer-events-none z-0 -translate-y-1/2 overflow-visible`} viewBox="0 -200 1000 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             {/* Glow filters */}
             <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
@@ -187,8 +187,8 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
                 <text x="400" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Pressure JSON</text>
                 
                 {/* Fog to MCU (Reverse) */}
-                <text x="400" y="28" fill="#fca5a5" className="font-bold text-[8.5px] tracking-tight" textAnchor="middle">Haptic Alert Trigger</text>
-                <text x="400" y="39" fill="#a3a3a3" className="font-normal text-[7.5px] tracking-tight" textAnchor="middle">Vibration Command</text>
+                <text x="400" y="58" fill="#fca5a5" className="font-bold text-[8.5px] tracking-tight" textAnchor="middle">Haptic Alert Trigger</text>
+                <text x="400" y="69" fill="#a3a3a3" className="font-normal text-[7.5px] tracking-tight" textAnchor="middle">Vibration Command</text>
                 
                 {/* Fog to Cloud */}
                 <text x="600" y="-12" fill="#fdba74" textAnchor="middle">AWS IoT Core</text>
@@ -223,7 +223,7 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
               {/* Fog Node to ESP32 Haptic Alert warning reverse paths (5 lines) */}
               <path id="path-fog-mcu-0" d="M 500,0 L 300,-144" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
               <path id="path-fog-mcu-1" d="M 500,0 L 300,-72" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
-              <path id="path-fog-mcu-2" d="M 500,0 L 500,158 L 305,158 Q 300,158 300,153 L 300,0" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
+              <path id="path-fog-mcu-2" d="M 500,0 L 300,0" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
               <path id="path-fog-mcu-3" d="M 500,0 L 300,72" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
               <path id="path-fog-mcu-4" d="M 500,0 L 300,144" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
 
@@ -237,12 +237,12 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
               <path id="path-cloud-dash-3" d="M 700,0 L 900,72" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
               <path id="path-cloud-dash-4" d="M 700,0 L 900,144" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
 
-              {/* Fog Node to Dashboards Direct Local WS (5 fanning trunk bypass lines at Y = -158) */}
-              <path id="path-fog-dash-0" d="M 500,0 L 500,-158 L 950,-158 L 950,-144 L 900,-144" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
-              <path id="path-fog-dash-1" d="M 500,0 L 500,-158 L 950,-158 L 950,-72 L 900,-72" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
-              <path id="path-fog-dash-2" d="M 500,0 L 500,-158 L 950,-158 L 950,0 L 900,0" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
-              <path id="path-fog-dash-3" d="M 500,0 L 500,-158 L 950,-158 L 950,72 L 900,72" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
-              <path id="path-fog-dash-4" d="M 500,0 L 500,-158 L 950,-158 L 950,144 L 900,144" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              {/* Fog Node to Dashboards Direct Local WS (5 fanning trunk bypass lines at Y = -185) */}
+              <path id="path-fog-dash-0" d="M 500,0 L 500,-185 L 950,-185 L 950,-144 L 900,-144" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              <path id="path-fog-dash-1" d="M 500,0 L 500,-185 L 950,-185 L 950,-72 L 900,-72" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              <path id="path-fog-dash-2" d="M 500,0 L 500,-185 L 950,-185 L 950,0 L 900,0" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              <path id="path-fog-dash-3" d="M 500,0 L 500,-185 L 950,-185 L 950,72 L 900,72" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              <path id="path-fog-dash-4" d="M 500,0 L 500,-185 L 950,-185 L 950,144 L 900,144" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
 
               {/* Light Pulses */}
               <circle r="3.5" fill="#60a5fa" filter="url(#glow-cyan)"><animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#path-cushion-mcu-0" /></animateMotion></circle>
