@@ -8,11 +8,11 @@ interface SensorToScreenProps {
 }
 
 const dataNodes = [
-  { id: "edge", title: "Smart Cushion", desc: "FSR Sensor Matrix", details: "9 high-precision FSR pressure sensors + MPU6050 gyroscope with 50Hz polling rate.", image: "/cushion-slate.png", icon: Activity, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+  { id: "edge", title: "Smart Cushion", desc: "FSR Sensor Matrix", details: "9 high-precision FSR pressure sensors + temperature sensor with 50Hz polling rate.", image: "/cushion-slate.png", icon: Activity, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
   { id: "esp", title: "Edge MCU", desc: "ESP32 Pre-processing", details: "ADC noise filtering, local calibration, WiFi connection, and MQTT JSON packaging.", image: "/esp32-node.png", icon: Cpu, color: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20" },
   { id: "fog", title: "Fog Node", desc: "AI Inference Model", details: "Local AI model, posture inference under 100ms, and MQTT feedback trigger.", image: "/fog-node-pc.png", icon: BrainCircuit, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20", glow: true },
   { id: "cloud", title: "AWS Cloud", desc: "IoT Core & Lambda", details: "AWS IoT Core broker, database logging in DynamoDB Tables, and serverless logic.", image: "/aws-logo-neon.png", icon: Cloud, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
-  { id: "dashboard", title: "Live Dashboard", desc: "Analytics & Gamification", details: "Astro & React WebApp, real-time 3D posture visualizer, and gamified Capybara passport.", image: "/app.png", icon: Smartphone, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+  { id: "dashboard", title: "Live Dashboard", desc: "Analytics & Gamification", details: "React WebApp, real-time posture detection, and health analytics.", image: "/app.png", icon: Smartphone, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
 ];
 
 export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
@@ -187,8 +187,8 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
                 <text x="400" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Pressure JSON</text>
                 
                 {/* Fog to MCU (Reverse) */}
-                <text x="400" y="52" fill="#fca5a5" textAnchor="middle">Haptic Alert Trigger</text>
-                <text x="400" y="63" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Vibration Command</text>
+                <text x="400" y="28" fill="#fca5a5" className="font-bold text-[8.5px] tracking-tight" textAnchor="middle">Haptic Alert Trigger</text>
+                <text x="400" y="39" fill="#a3a3a3" className="font-normal text-[7.5px] tracking-tight" textAnchor="middle">Vibration Command</text>
                 
                 {/* Fog to Cloud */}
                 <text x="600" y="-12" fill="#fdba74" textAnchor="middle">AWS IoT Core</text>
