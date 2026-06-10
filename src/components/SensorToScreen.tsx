@@ -59,7 +59,7 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
 
       <div className="relative w-full max-w-6xl mx-auto mt-12 lg:mt-24">
         {/* SVG Flow Connections (Desktop Only) */}
-        <svg className="hidden lg:block absolute top-1/2 left-0 w-full pointer-events-none z-0 -translate-y-1/2 overflow-visible" viewBox="0 -175 1000 345" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className={`hidden lg:block absolute ${isScaled ? "top-[176px]" : "top-[56px]"} left-0 w-full pointer-events-none z-0 -translate-y-1/2 overflow-visible`} viewBox="0 -175 1000 345" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             {/* Glow filters */}
             <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
@@ -280,7 +280,7 @@ export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
           )}
         </svg>
 
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-0 relative min-h-[400px]">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 relative min-h-[400px]">
           {dataNodes.map((node, i) => {
             const isMultiplied = isScaled && (node.id === "edge" || node.id === "esp" || node.id === "dashboard");
             const items = isMultiplied ? [0, 1, 2, 3, 4] : [0];
