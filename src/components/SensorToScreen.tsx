@@ -1,7 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, Cpu, Cloud, Smartphone, Activity, BrainCircuit } from "lucide-react";
+
+interface SensorToScreenProps {
+  mode?: "standard" | "future-work";
+}
 
 const dataNodes = [
   { id: "edge", title: "Smart Cushion", desc: "FSR Sensor Matrix", details: "9 high-precision FSR pressure sensors + MPU6050 gyroscope with 50Hz polling rate.", image: "/cushion-slate.png", icon: Activity, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
@@ -11,8 +15,9 @@ const dataNodes = [
   { id: "dashboard", title: "Live Dashboard", desc: "Analytics & Gamification", details: "Astro & React WebApp, real-time 3D posture visualizer, and gamified Capybara passport.", image: "/app.png", icon: Smartphone, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
 ];
 
-export const SensorToScreen = () => {
+export const SensorToScreen = ({ mode = "standard" }: SensorToScreenProps) => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [isScaled, setIsScaled] = useState(false);
 
   const itemVariants = {
     initial: { y: 15, opacity: 0, scale: 0.98 },
@@ -23,13 +28,33 @@ export const SensorToScreen = () => {
     <div className="w-full h-full flex flex-col bg-white/5 border border-white/10 rounded-[3rem] pt-8 pb-8 px-8 md:pt-10 md:pb-10 md:px-12 backdrop-blur-md justify-center overflow-visible relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(var(--primary),0.1)_0%,transparent_70%)] pointer-events-none rounded-[3rem]" />
       
-      <div className="text-center mb-6 relative z-10">
+      <div className="text-center mb-6 relative z-10 flex flex-col items-center">
         <motion.div initial="initial" animate="animate" variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-mono tracking-widest mb-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" /> PRACTICAL IMPLEMENTATION
+          <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" /> 
+          {mode === "future-work" ? "SCALABLE ARCHITECTURE" : "PRACTICAL IMPLEMENTATION"}
         </motion.div>
         <motion.h2 initial="initial" animate="animate" variants={itemVariants} className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight drop-shadow-[0_4px_15px_rgba(255,255,255,0.05)]">
-          From <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400 drop-shadow-[0_2px_8px_rgba(249,115,22,0.3)] italic">Sensor</span> to <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-teal-300 drop-shadow-[0_2px_8px_rgba(6,182,212,0.3)] italic">Screen</span>
+          {isScaled ? (
+            <>
+              Scale <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400 drop-shadow-[0_2px_8px_rgba(249,115,22,0.3)] italic">Edge Clusters</span> to <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-teal-300 drop-shadow-[0_2px_8px_rgba(6,182,212,0.3)] italic">Dashboards</span>
+            </>
+          ) : (
+            <>
+              From <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-400 drop-shadow-[0_2px_8px_rgba(249,115,22,0.3)] italic">Sensor</span> to <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-teal-300 drop-shadow-[0_2px_8px_rgba(6,182,212,0.3)] italic">Screen</span>
+            </>
+          )}
         </motion.h2>
+
+        {mode === "future-work" && (
+          <motion.button
+            onClick={() => setIsScaled(!isScaled)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="mt-4 inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-orange-500 text-white font-mono text-xs font-black uppercase tracking-widest shadow-[0_8px_25px_rgba(249,115,22,0.3)] hover:shadow-[0_8px_35px_rgba(249,115,22,0.55)] border border-white/10 cursor-pointer transition-all duration-300 relative z-50"
+          >
+            {isScaled ? "↵ Reset to Standard View" : "⤢ Scale System Architecture ➔"}
+          </motion.button>
+        )}
       </div>
 
       <div className="relative w-full max-w-6xl mx-auto mt-12 lg:mt-24">
@@ -93,149 +118,236 @@ export const SensorToScreen = () => {
             </linearGradient>
           </defs>
 
-          {/* 1. Cushion to MCU */}
-          <path id="path-cushion-mcu" d="M 100,0 L 300,0" stroke="url(#grad-cushion-mcu)" strokeWidth="3.5" strokeDasharray="6 4" />
-          
-          {/* 2. MCU to Fog */}
-          <path id="path-mcu-fog" d="M 300,0 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3.5" strokeDasharray="6 4" />
-          
-          {/* 3. Fog to MCU (Reverse Alert) - Orthogonal Circuit Shape (made wider and deeper) */}
-          <path id="path-fog-mcu" d="M 500,0 L 500,71 Q 500,76 495,76 L 305,76 Q 300,76 300,71 L 300,0" stroke="url(#grad-fog-mcu)" strokeWidth="3.5" strokeDasharray="4 4" />
-          
-          {/* 4. Fog to Cloud */}
-          <path id="path-fog-cloud" d="M 500,0 L 700,0" stroke="url(#grad-fog-cloud)" strokeWidth="3.5" strokeDasharray="6 4" />
-          
-          {/* 5. Cloud to Dashboard */}
-          <path id="path-cloud-dash" d="M 700,0 L 900,0" stroke="url(#grad-cloud-dash)" strokeWidth="3.5" strokeDasharray="6 4" />
-          
-          {/* 6. Fog to Dashboard Direct (Local WebSockets) - Orthogonal Circuit Shape (made wider and higher) */}
-          <path id="path-fog-dash" d="M 500,0 L 500,-80 Q 500,-85 505,-85 L 895,-85 Q 900,-85 900,-80 L 900,0" stroke="url(#grad-fog-dash)" strokeWidth="3.5" strokeDasharray="4 4" />
+          {!isScaled ? (
+            /* Standard View Connections */
+            <g>
+              {/* 1. Cushion to MCU */}
+              <path id="path-cushion-mcu" d="M 100,0 L 300,0" stroke="url(#grad-cushion-mcu)" strokeWidth="3.5" strokeDasharray="6 4" />
+              
+              {/* 2. MCU to Fog */}
+              <path id="path-mcu-fog" d="M 300,0 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3.5" strokeDasharray="6 4" />
+              
+              {/* 3. Fog to MCU (Reverse Alert) - Orthogonal Circuit Shape */}
+              <path id="path-fog-mcu" d="M 500,0 L 500,71 Q 500,76 495,76 L 305,76 Q 300,76 300,71 L 300,0" stroke="url(#grad-fog-mcu)" strokeWidth="3.5" strokeDasharray="4 4" />
+              
+              {/* 4. Fog to Cloud */}
+              <path id="path-fog-cloud" d="M 500,0 L 700,0" stroke="url(#grad-fog-cloud)" strokeWidth="3.5" strokeDasharray="6 4" />
+              
+              {/* 5. Cloud to Dashboard */}
+              <path id="path-cloud-dash" d="M 700,0 L 900,0" stroke="url(#grad-cloud-dash)" strokeWidth="3.5" strokeDasharray="6 4" />
+              
+              {/* 6. Fog to Dashboard Direct (Local WebSockets) - Orthogonal Circuit Shape */}
+              <path id="path-fog-dash" d="M 500,0 L 500,-80 Q 500,-85 505,-85 L 895,-85 Q 900,-85 900,-80 L 900,0" stroke="url(#grad-fog-dash)" strokeWidth="3.5" strokeDasharray="4 4" />
 
-          {/* Animated light pulses */}
-          <circle r="4.5" fill="#60a5fa" filter="url(#glow-cyan)">
-            <animateMotion dur="2.5s" repeatCount="indefinite">
-              <mpath href="#path-cushion-mcu" />
-            </animateMotion>
-          </circle>
-          
-          <circle r="4.5" fill="#22d3ee" filter="url(#glow-cyan)">
-            <animateMotion dur="2s" repeatCount="indefinite">
-              <mpath href="#path-mcu-fog" />
-            </animateMotion>
-          </circle>
-          
-          <circle r="5.5" fill="#ef4444" filter="url(#glow-orange)">
-            <animateMotion dur="2.2s" repeatCount="indefinite">
-              <mpath href="#path-fog-mcu" />
-            </animateMotion>
-          </circle>
-          
-          <circle r="4.5" fill="#f97316" filter="url(#glow-orange)">
-            <animateMotion dur="3s" repeatCount="indefinite">
-              <mpath href="#path-fog-cloud" />
-            </animateMotion>
-          </circle>
-          
-          <circle r="4.5" fill="#c084fc" filter="url(#glow-purple)">
-            <animateMotion dur="2.5s" repeatCount="indefinite">
-              <mpath href="#path-cloud-dash" />
-            </animateMotion>
-          </circle>
-          
-          <circle r="5.5" fill="#34d399" filter="url(#glow-emerald)">
-            <animateMotion dur="1.8s" repeatCount="indefinite">
-              <mpath href="#path-fog-dash" />
-            </animateMotion>
-          </circle>
+              {/* Animated light pulses */}
+              <circle r="4.5" fill="#60a5fa" filter="url(#glow-cyan)">
+                <animateMotion dur="2.5s" repeatCount="indefinite">
+                  <mpath href="#path-cushion-mcu" />
+                </animateMotion>
+              </circle>
+              
+              <circle r="4.5" fill="#22d3ee" filter="url(#glow-cyan)">
+                <animateMotion dur="2s" repeatCount="indefinite">
+                  <mpath href="#path-mcu-fog" />
+                </animateMotion>
+              </circle>
+              
+              <circle r="5.5" fill="#ef4444" filter="url(#glow-orange)">
+                <animateMotion dur="2.2s" repeatCount="indefinite">
+                  <mpath href="#path-fog-mcu" />
+                </animateMotion>
+              </circle>
+              
+              <circle r="4.5" fill="#f97316" filter="url(#glow-orange)">
+                <animateMotion dur="3s" repeatCount="indefinite">
+                  <mpath href="#path-fog-cloud" />
+                </animateMotion>
+              </circle>
+              
+              <circle r="4.5" fill="#c084fc" filter="url(#glow-purple)">
+                <animateMotion dur="2.5s" repeatCount="indefinite">
+                  <mpath href="#path-cloud-dash" />
+                </animateMotion>
+              </circle>
+              
+              <circle r="5.5" fill="#34d399" filter="url(#glow-emerald)">
+                <animateMotion dur="1.8s" repeatCount="indefinite">
+                  <mpath href="#path-fog-dash" />
+                </animateMotion>
+              </circle>
 
-          {/* Text Labels with drop-shadow effects */}
-          <g className="text-[10px] font-mono font-bold">
-            {/* Cushion to MCU */}
-            <text x="200" y="-12" fill="#93c5fd" textAnchor="middle">Analog Signals</text>
-            <text x="200" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">ADC Sampling</text>
-            
-            {/* MCU to Fog */}
-            <text x="400" y="-12" fill="#67e8f9" textAnchor="middle">MQTT (Local)</text>
-            <text x="400" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Pressure JSON</text>
-            
-            {/* Fog to MCU (Reverse) */}
-            <text x="400" y="52" fill="#fca5a5" textAnchor="middle">Haptic Alert Trigger</text>
-            <text x="400" y="63" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Vibration Command</text>
-            
-            {/* Fog to Cloud */}
-            <text x="600" y="-12" fill="#fdba74" textAnchor="middle">AWS IoT Core</text>
-            <text x="600" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Secure MQTT (TLS)</text>
-            
-            {/* Cloud to Dashboard */}
-            <text x="800" y="-12" fill="#d8b4fe" textAnchor="middle">API Gateway</text>
-            <text x="800" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">WebSockets / REST</text>
-            
-            {/* Fog to Dashboard Direct */}
-            <text x="700" y="-98" fill="#6ee7b7" textAnchor="middle">Local WebSockets</text>
-            <text x="700" y="-89" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Live Telemetry (&lt;100ms)</text>
-          </g>
+              {/* Text Labels with drop-shadow effects */}
+              <g className="text-[10px] font-mono font-bold">
+                {/* Cushion to MCU */}
+                <text x="200" y="-12" fill="#93c5fd" textAnchor="middle">Analog Signals</text>
+                <text x="200" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">ADC Sampling</text>
+                
+                {/* MCU to Fog */}
+                <text x="400" y="-12" fill="#67e8f9" textAnchor="middle">MQTT (Local)</text>
+                <text x="400" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Pressure JSON</text>
+                
+                {/* Fog to MCU (Reverse) */}
+                <text x="400" y="52" fill="#fca5a5" textAnchor="middle">Haptic Alert Trigger</text>
+                <text x="400" y="63" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Vibration Command</text>
+                
+                {/* Fog to Cloud */}
+                <text x="600" y="-12" fill="#fdba74" textAnchor="middle">AWS IoT Core</text>
+                <text x="600" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Secure MQTT (TLS)</text>
+                
+                {/* Cloud to Dashboard */}
+                <text x="800" y="-12" fill="#d8b4fe" textAnchor="middle">API Gateway</text>
+                <text x="800" y="12" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">WebSockets / REST</text>
+                
+                {/* Fog to Dashboard Direct */}
+                <text x="700" y="-98" fill="#6ee7b7" textAnchor="middle">Local WebSockets</text>
+                <text x="700" y="-89" fill="#a3a3a3" className="font-normal text-[8.5px]" textAnchor="middle">Live Telemetry (&lt;100ms)</text>
+              </g>
+            </g>
+          ) : (
+            /* Scaled Future Work View Connections (No Labels, Clean Clustered Flow Visuals) */
+            <g>
+              {/* Cushions to ESP32s (3 lines) */}
+              <path id="path-cushion-mcu-0" d="M 100,-68 L 300,-68" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cushion-mcu-1" d="M 100,0 L 300,0" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cushion-mcu-2" d="M 100,68 L 300,68" stroke="url(#grad-cushion-mcu)" strokeWidth="3" strokeDasharray="5 3" />
+
+              {/* ESP32s to Fog Node (3 fanning lines) */}
+              <path id="path-mcu-fog-0" d="M 300,-68 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-mcu-fog-1" d="M 300,0 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-mcu-fog-2" d="M 300,68 L 500,0" stroke="url(#grad-mcu-fog)" strokeWidth="3" strokeDasharray="5 3" />
+
+              {/* Fog Node to ESP32 Haptic Alert warning reverse paths (3 lines) */}
+              <path id="path-fog-mcu-0" d="M 500,0 L 300,-68" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
+              <path id="path-fog-mcu-1" d="M 500,0 L 500,88 L 305,88 Q 300,88 300,83 L 300,0" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
+              <path id="path-fog-mcu-2" d="M 500,0 L 300,68" stroke="url(#grad-fog-mcu)" strokeWidth="2" strokeDasharray="3 3" opacity="0.8" />
+
+              {/* Fog Node to AWS Cloud (1 line) */}
+              <path id="path-fog-cloud" d="M 500,0 L 700,0" stroke="url(#grad-fog-cloud)" strokeWidth="3.5" strokeDasharray="6 4" />
+
+              {/* Cloud to Dashboards (3 fanning lines) */}
+              <path id="path-cloud-dash-0" d="M 700,0 L 900,-68" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cloud-dash-1" d="M 700,0 L 900,0" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
+              <path id="path-cloud-dash-2" d="M 700,0 L 900,68" stroke="url(#grad-cloud-dash)" strokeWidth="3" strokeDasharray="5 3" />
+
+              {/* Fog Node to Dashboards Direct Local WS (3 fanning trunk bypass lines) */}
+              <path id="path-fog-dash-0" d="M 500,0 L 500,-95 L 900,-95 L 900,-68" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              <path id="path-fog-dash-1" d="M 500,0 L 500,-95 L 860,-95 L 860,0 L 900,0" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+              <path id="path-fog-dash-2" d="M 500,0 L 500,-95 L 830,-95 L 830,68 L 900,68" stroke="url(#grad-fog-dash)" strokeWidth="2" strokeDasharray="3 3" />
+
+              {/* Light Pulses */}
+              <circle r="3.5" fill="#60a5fa" filter="url(#glow-cyan)"><animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#path-cushion-mcu-0" /></animateMotion></circle>
+              <circle r="3.5" fill="#60a5fa" filter="url(#glow-cyan)"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#path-cushion-mcu-1" /></animateMotion></circle>
+              <circle r="3.5" fill="#60a5fa" filter="url(#glow-cyan)"><animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#path-cushion-mcu-2" /></animateMotion></circle>
+
+              <circle r="3.5" fill="#22d3ee" filter="url(#glow-cyan)"><animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#path-mcu-fog-0" /></animateMotion></circle>
+              <circle r="3.5" fill="#22d3ee" filter="url(#glow-cyan)"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#path-mcu-fog-1" /></animateMotion></circle>
+              <circle r="3.5" fill="#22d3ee" filter="url(#glow-cyan)"><animateMotion dur="2.1s" repeatCount="indefinite"><mpath href="#path-mcu-fog-2" /></animateMotion></circle>
+
+              <circle r="4.5" fill="#ef4444" filter="url(#glow-orange)"><animateMotion dur="2.1s" repeatCount="indefinite"><mpath href="#path-fog-mcu-0" /></animateMotion></circle>
+              <circle r="4.5" fill="#ef4444" filter="url(#glow-orange)"><animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#path-fog-mcu-1" /></animateMotion></circle>
+              <circle r="4.5" fill="#ef4444" filter="url(#glow-orange)"><animateMotion dur="1.9s" repeatCount="indefinite"><mpath href="#path-fog-mcu-2" /></animateMotion></circle>
+
+              <circle r="4.5" fill="#f97316" filter="url(#glow-orange)"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#path-fog-cloud" /></animateMotion></circle>
+
+              <circle r="3.5" fill="#c084fc" filter="url(#glow-purple)"><animateMotion dur="2.3s" repeatCount="indefinite"><mpath href="#path-cloud-dash-0" /></animateMotion></circle>
+              <circle r="3.5" fill="#c084fc" filter="url(#glow-purple)"><animateMotion dur="1.9s" repeatCount="indefinite"><mpath href="#path-cloud-dash-1" /></animateMotion></circle>
+              <circle r="3.5" fill="#c084fc" filter="url(#glow-purple)"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#path-cloud-dash-2" /></animateMotion></circle>
+
+              <circle r="4.5" fill="#34d399" filter="url(#glow-emerald)"><animateMotion dur="1.9s" repeatCount="indefinite"><mpath href="#path-fog-dash-0" /></animateMotion></circle>
+              <circle r="4.5" fill="#34d399" filter="url(#glow-emerald)"><animateMotion dur="2.3s" repeatCount="indefinite"><mpath href="#path-fog-dash-1" /></animateMotion></circle>
+              <circle r="4.5" fill="#34d399" filter="url(#glow-emerald)"><animateMotion dur="1.6s" repeatCount="indefinite"><mpath href="#path-fog-dash-2" /></animateMotion></circle>
+            </g>
+          )}
         </svg>
 
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-0 relative">
-          {dataNodes.map((node, i) => (
-            <motion.div 
-              key={node.id} 
-              initial="initial"
-              animate="animate"
-              variants={itemVariants}
-              whileHover={{ scale: 1.08, y: -4 }}
-              onMouseEnter={() => setHoveredNode(node.id)}
-              onMouseLeave={() => setHoveredNode(null)}
-              className="flex flex-col items-center w-full lg:w-52 group relative z-10 cursor-pointer"
-            >
-              <div className={`w-24 h-24 md:w-28 md:h-28 rounded-[1.5rem] flex items-center justify-center border-2 backdrop-blur-md bg-black/60 ${node.bg} ${node.border} ${node.glow ? 'shadow-[0_0_40px_rgba(var(--primary),0.3)] border-primary/50' : 'border-white/10'} relative transition-all duration-500 group-hover:border-white/30 overflow-hidden`}>
-                {node.image ? (
-                  <img 
-                    src={node.image} 
-                    alt={node.title} 
-                    className="w-11 h-11 md:w-14 md:h-14 object-contain relative z-10 transition-transform duration-500 group-hover:scale-105 -translate-y-2" 
-                  />
-                ) : (
-                  <node.icon className={`w-9 h-9 md:w-11 md:h-11 ${node.color} relative z-10 -translate-y-2`} />
-                )}
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-0 relative min-h-[320px]">
+          {dataNodes.map((node, i) => {
+            const isMultiplied = isScaled && (node.id === "edge" || node.id === "esp" || node.id === "dashboard");
+            const items = isMultiplied ? [0, 1, 2] : [0];
+
+            return (
+              <div key={node.id} className="flex flex-col items-center w-full lg:w-52 relative z-10">
+                <div className={`flex flex-col gap-3 items-center justify-center ${isScaled ? "h-[260px]" : "h-[112px]"} transition-all duration-500`}>
+                  {items.map((idx) => {
+                    const itemId = `${node.id}-${idx}`;
+                    const itemTitle = isMultiplied 
+                      ? node.id === "edge" 
+                        ? `Cushion ${idx + 1}` 
+                        : node.id === "esp" 
+                          ? `ESP32-${idx + 1}` 
+                          : `User ${idx + 1}`
+                      : node.title;
+
+                    return (
+                      <motion.div
+                        key={itemId}
+                        layoutId={`box-${node.id}-${idx}`}
+                        whileHover={{ scale: 1.08, y: -2 }}
+                        onMouseEnter={() => setHoveredNode(node.id)}
+                        onMouseLeave={() => setHoveredNode(null)}
+                        className={`${isScaled ? "w-16 h-16 md:w-20 md:h-20 rounded-2xl" : "w-24 h-24 md:w-28 md:h-28 rounded-[1.5rem]"} flex items-center justify-center border-2 backdrop-blur-md bg-black/60 ${node.bg} ${node.border} ${node.glow && !isScaled ? 'shadow-[0_0_40px_rgba(var(--primary),0.3)] border-primary/50' : 'border-white/10'} relative transition-all duration-500 hover:border-white/30 overflow-hidden cursor-pointer`}
+                      >
+                        {node.image ? (
+                          <img 
+                            src={node.image} 
+                            alt={itemTitle} 
+                            className={`${isScaled ? "w-8 h-8 md:w-10 md:h-10 -translate-y-1.5" : "w-11 h-11 md:w-14 md:h-14 -translate-y-2"} object-contain relative z-10 transition-transform duration-500 group-hover:scale-105`} 
+                          />
+                        ) : (
+                          <node.icon className={`${isScaled ? "w-7 h-7 md:w-9 md:h-9 -translate-y-1.5" : "w-9 h-9 md:w-11 md:h-11 -translate-y-2"} ${node.color} relative z-10`} />
+                        )}
+                        
+                        <motion.div 
+                          className={`absolute inset-0 ${isScaled ? "rounded-2xl" : "rounded-[1.5rem]"} ${node.bg} opacity-20`}
+                          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: (i + idx) * 0.4 }}
+                        />
+
+                        {node.glow && !isScaled && (
+                          <div className="absolute top-2 right-2 flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                          </div>
+                        )}
+
+                        {/* Glassy Title Banner inside the Box */}
+                        <div className={`absolute bottom-0 left-0 right-0 bg-neutral-900/90 border-t border-white/5 ${isScaled ? "min-h-[22px] py-0.5" : "min-h-[30px] py-1"} px-1 flex items-center justify-center z-20`}>
+                          <span className={`text-white font-bold ${isScaled ? "text-[7.5px] md:text-[8.5px]" : "text-[9px] md:text-[10px]"} leading-tight tracking-wide uppercase text-center block max-w-full truncate`}>
+                            {itemTitle}
+                          </span>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
                 
-                <motion.div 
-                  className={`absolute inset-0 rounded-[1.5rem] ${node.bg} opacity-20`}
-                  animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
-                />
-
-                {node.glow && (
-                  <div className="absolute top-2 right-2 flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                  </div>
-                )}
-
-                {/* Glassy Title Banner inside the Box */}
-                <div className="absolute bottom-0 left-0 right-0 bg-neutral-900/90 border-t border-white/5 py-1 px-1.5 flex items-center justify-center min-h-[30px] z-20">
-                  <span className="text-white font-bold text-[9px] md:text-[10px] leading-tight tracking-wide uppercase text-center block max-w-full group-hover:text-primary transition-colors duration-300">
-                    {node.title}
-                  </span>
-                </div>
+                {/* Bottom labels (Only visible in standard view / when NOT scaled) */}
+                <AnimatePresence>
+                  {!isScaled && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-12 text-center flex flex-col items-center relative w-full px-2 justify-start min-h-[100px] overflow-hidden"
+                    >
+                      <span className="text-white font-bold text-xs md:text-sm leading-relaxed block w-full mb-1">
+                        {node.desc}
+                      </span>
+                      <span className="text-neutral-400 text-[11px] md:text-xs leading-normal block w-full px-1">
+                        {node.details}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              
-              <div className="mt-12 text-center h-14 flex flex-col items-center relative w-full px-2 justify-start">
-                <div className="relative w-full flex justify-center items-start">
-                  <span className={`text-neutral-400 text-xs md:text-sm font-semibold leading-relaxed transition-all duration-300 block w-full ${hoveredNode === node.id ? 'opacity-0 scale-95 pointer-events-none absolute' : 'opacity-100 scale-100'}`}>
-                    {node.desc}
-                  </span>
-                  
-                  <span className={`${node.color} text-[11px] md:text-xs font-semibold leading-relaxed transition-all duration-300 block w-full px-1 ${hoveredNode === node.id ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none absolute'}`}>
-                    {node.details}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
+      </div>
 
-        {/* Desktop Floating CTA connected by line */}
+      {/* Desktop Floating CTA connected by line (Only in standard mode) */}
+      {!isScaled && (
         <div className="absolute top-[56px] -translate-y-1/2 z-50 hidden lg:flex lg:right-[-140px] xl:right-[-240px] 2xl:right-[-350px]">
           <motion.a
             href="/cloud"
@@ -255,22 +367,24 @@ export const SensorToScreen = () => {
             </span>
           </motion.a>
         </div>
-      </div>
+      )}
 
       {/* Mobile Fallback CTA below the nodes */}
-      <div className="mt-4 flex justify-center lg:hidden">
-        <motion.a
-          href="/cloud"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="group flex items-center gap-4 pl-6 pr-5 py-3.5 rounded-2xl bg-neutral-950/80 border border-white/10 active:border-primary/50 active:bg-neutral-900 transition-all duration-300 shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
-        >
-          <span className="text-white font-bold text-sm">Explore Cloud Engine</span>
-          <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
-            <ChevronRight size={16} className="text-white stroke-[3px]" />
-          </span>
-        </motion.a>
-      </div>
+      {!isScaled && (
+        <div className="mt-4 flex justify-center lg:hidden">
+          <motion.a
+            href="/cloud"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="group flex items-center gap-4 pl-6 pr-5 py-3.5 rounded-2xl bg-neutral-950/80 border border-white/10 active:border-primary/50 active:bg-neutral-900 transition-all duration-300 shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
+          >
+            <span className="text-white font-bold text-sm">Explore Cloud Engine</span>
+            <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+              <ChevronRight size={16} className="text-white stroke-[3px]" />
+            </span>
+          </motion.a>
+        </div>
+      )}
     </div>
   );
 };
